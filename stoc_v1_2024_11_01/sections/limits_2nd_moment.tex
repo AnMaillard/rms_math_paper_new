@@ -1,0 +1,160 @@
+We present here a derivation of the sharp asymptotics of $(1/d^2) \log \EE[Z_\kappa^2]$.
+We need to introduce so-called spherical HCIZ (Harish-Chandra-Itzykson-Zuber) integral \citep{harish1957differential,itzykson1980planar}. 
+These objects have a long history of study in random matrix theory, 
+both in the physics
+\citep{matytsin1994large,matytsin1997kosterlitz,bun2014instanton,maillard2021perturbative} 
+and mathematics \citep{guionnet2002large,collins2003moments,guionnet2004first,guionnet2022rare} 
+literature, as they are a key component in understanding matrix models in mathematical physics.
+We introduce them rigorously thanks to the seminal result of \cite{guionnet2002large}.
+\begin{theorem}[Corollary of \cite{guionnet2002large}, Theorem~1.1]
+    \label{thm:hciz}
+    Let $m_d$ be the Haar measure on the orthogonal group $\mcO(d)$. Assume that $\bA, \bB$ are symmetric $d \times d$ matrices such that 
+    \begin{itemize}
+        \item[$(i)$] $\Sp(\bA) \subseteq K$ and $(1/d) \Tr[\bB^2] \leq C$, for a compact $K \subseteq \bbR$ and a constant $C > 0$, and all $d \geq 1$.
+        \item[$(ii)$] The empirical eigenvalue distributions of $\bA$ and $\bB$ weakly converge respectively to two compactly supported probability distributions $\mu$ and $\nu$ as $d \to \infty$.
+    \end{itemize}
+    Then, for any $\theta \geq 0$, the following limit is well-defined and only depends on $(\theta, \mu, \nu)$:
+    \begin{align}\label{eq:def_hciz}
+        I_\HCIZ(\theta, \mu, \nu) &\coloneqq \lim_{d \to \infty} \frac{2}{d^2} \log \int_{\mcO(d)} e^{\frac{\theta d}{2} \Tr[\bO \bA \bO^\T \bB]} \, \rd m_d(\bO),
+    \end{align}
+\end{theorem}
+\noindent
+We further introduce, for $\mu \in \mcM_1^+(\bbR)$ and any $\sigma > 0$:
+    \begin{equation}
+        \label{eq:def_I_sigma}
+        I_{\sigma^2}(\mu) \coloneqq -\frac{1}{2} \Sigma(\mu) + \frac{1}{4 \sigma^2} \int \mu(\rd x) \, x^2 - \frac{3}{8} + \frac{1}{4} \log \sigma^2.
+    \end{equation}
+Note that $I_1(\mu) = I(\mu)$ as defined in eq.~\eqref{eq:def_I}.
+We can now state our conjecture for the sharp asymptotics of $(1/d^2) \log \EE[Z_\kappa^2]$.
+\begin{conjecture}[Sharp asymptotics for the second moment]\label{conj:sharp_second_moment}
+    Let $\kappa \in (0,2]$, and $\bW_1, \cdots, \bW_n \iid \GOE(d)$.
+    Assume $n/d^2 \to \tau \in [0, \infty)$ as $n, d\to \infty$. 
+    Then
+    \begin{align}
+        \label{eq:limit_2nd_moment}
+    &\lim_{d \to \infty}\frac{1}{d^2} \log \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} = 
+   \sup_{q \in (-1,1)} \Phi(q),
+    \end{align}
+    where 
+    \begin{align}\label{eq:def_Phiq}
+    \Phi(q) \coloneqq &\kappa \left\{- \frac{1+q}{2} \log (1+q) - \frac{1-q}{2} \log (1-q) \right\} + \frac{1}{4} \log (1-q^2) \\ 
+    \nonumber
+    &- \inf_{\mu_1, \mu_2 \in \mathcal{M}_1^+([-\kappa, \kappa])}
+        \Bigg( \sum_{a \in \{1,2\}} I_{1-q^2}(\mu_a)
+        - \frac{1}{2} I_\HCIZ\left(\frac{q}{1-q^2}, \mu_1, \mu_2\right)\Bigg)
+        + 2 \inf_{\mu \in \mathcal{M}_1^+([-\kappa, \kappa])}
+        I(\mu).
+\end{align}
+\end{conjecture}
+\noindent
+Note that the term $\inf_{\mu \in \mcM_1^+([-\kappa,\kappa])} I(\mu)$ is precisely characterized by our first-moment analysis, cf.\ the proof of Proposition~\ref{prop:ldp_Wop}.
+
+\myskip
+\textbf{Organization of this section --}
+In Section~\ref{subsec:sharp_second_moment} we give a derivation of Conjecture~\ref{conj:sharp_second_moment}.
+While our approach is mathematically sound, we do not provide a rigorous proof of all steps of our derivation, and detail which steps would need a more careful mathematical analysis to establish them as theorems. 
+For this reason, we state our result as a conjecture, and leave for future work a rigorous establishment of Conjecture~\ref{conj:sharp_second_moment}.
+In Section~\ref{subsec:fail_second_moment} we then use a local stability analysis of $\Phi(q)$ around $q = 0$ 
+to characterize regimes in which the second moment method fails, in the sense that $\EE[Z_\kappa^2]$ is exponentially larger than $\EE[Z_\kappa]^2$. This characterization is summarized in Conjecture~\ref{conj:fail_second_moment}.
+
+\subsection{Heuristic derivation of sharp asymptotics}\label{subsec:sharp_second_moment}
+
+We perform here the non-rigorous derivation of the second moment asymptotics.
+We start again from eq.~\eqref{eq:2nd_moment_2}, which we rewrite as:
+\begin{align*}
+    \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} &= \frac{1}{2^n} \sum_{l=0}^n \binom{n}{l} \exp\{d F_d(q_l)\}, 
+\end{align*}
+where for $q \in [-1,1]$:
+\begin{align}\label{eq:def_Fd}
+    F_d(q) \coloneqq&  
+    \frac{1}{d^2} \log \frac{\bbP\left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q \bW + \sqrt{1-q^2} \bZ\|_\op \leq \kappa\right]}{\bbP[\|\bW\|_\op \leq \kappa]^2}.
+\end{align}
+Using the Laplace's method (similarly to what we did for the first moment method), 
+we see that if $F(q) \coloneqq \lim_{d \to \infty} F_d(q)$, one can conjecture that in the limit:
+\begin{align}\label{eq:asympt_2nd_moment_1}
+    \lim_{d \to \infty} \frac{1}{d^2} \log \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} &= \sup_{q \in (-1,1)} \left[\kappa \left\{- \frac{1+q}{2} \log (1+q) - \frac{1-q}{2} \log (1-q) \right\}+ F(q)\right].
+\end{align}
+Notice that proving this step rigorously would require a good understanding of the convergence properties of $F_d(q)$ to its limit.
+%TODO Rephrase this.
+It remains to compute $F(q)$ from eq.~\eqref{eq:def_Fd}.
+Using eq.~\eqref{eq:P_W_Z} we have:
+\begin{align*}
+    F_d(q) &= \frac{1}{d^2} \log \frac{\int \indi\{\|\bW_1\|_\op, \|\bW_2\|_\op \leq \kappa\} e^{-\frac{d}{4(1-q^2)} (\Tr[\bW_1^2] + \Tr[\bW_2^2]) + \frac{dq}{2(1-q^2)} \Tr[\bW_1 \bW_2]} \rd \bW_1 \rd \bW_2}{\left(\int \rd \bW \, \indi\{\|\bW \|_\op \leq \kappa\} \, e^{-\frac{d}{4}\Tr[\bW^2]}\right)^2 (1-q^2)^{d(d+1)/4}}.
+\end{align*}
+We then change variables to the eigenvalues and eigenvectors of $\bW_1, \bW_2$. 
+We denote $\bLambda_a \coloneqq (\lambda_i^{(a)})_{i=1}^d$ the eigenvalues of $\bW_a$.
+This change of variables induces a Jacobian given by the Vandermonde determinant 
+$\Delta(\bLambda) \coloneqq \prod_{i < j} |\lambda_i - \lambda_j|$ (see e.g.\ \cite{anderson2010introduction}), and we 
+obtain:
+\begin{align}\label{eq:Fd_HCIZ}
+    F_d(q) &= \frac{\int_{[- \kappa, \kappa]^d} \prod_{a \in \{1, 2\}} \rd \bLambda_a \Delta(\bLambda_a) e^{-\frac{d}{4(1-q^2)} \sum_{a,i} (\lambda_i^{(a)})^2} \int_{\mcO(d)} \rd m_d (\bO) e^{\frac{dq}{2(1-q^2)} \Tr[\bO \bLambda_1 \bO^\T \bLambda_2]}}{\left(\int_{[-\kappa,\kappa]^d} \rd \bLambda \, \Delta(\bLambda) \, e^{-\frac{d}{4}\sum_i \lambda_i^2}\right)^2 (1-q^2)^{d(d+1)/4}}.
+\end{align}
+In the last term, we identified $\bLambda_a$ with the diagonal matrix $\Diag(\bLambda_a)$.
+We see appearing in eq.~\eqref{eq:Fd_HCIZ} the HCIZ spherical integrals of Theorem~\ref{thm:hciz}.
+We now take the last crucial step in our derivation. While a full rigorous justification of it would require proving the large deviations properties of the law of 
+$(\|\bW_1\|_\op, \|\bW_2\|_\op)$ in the scale $d^2$, a heuristic argument can be given as follows.
+
+\myskip
+Importantly, one can see that the integrand in eq.~\eqref{eq:Fd_HCIZ} is only a function of the empirical distributions of $\bLambda_1$ and $\bLambda_2$. 
+Indeed, $\mu_\bLambda \coloneqq (1/d)\sum_i \delta_{\lambda_i}$, then
+\begin{align*}
+    \Delta(\bLambda) = \exp\left\{\frac{1}{2} \sum_{i\neq j} \log |\lambda_i - \lambda_j| \right\} 
+    = \exp\left\{\frac{d^2}{2} \int_{x \neq y} \mu_\bLambda(\rd x) \mu_\bLambda(\rd y) \log |x - y|\right\}.
+\end{align*}
+And clearly, by permutation invariance,
+the term $\int_{\mcO(d)} \rd m_d (\bO) \exp\{\frac{dq}{2(1-q^2)} \Tr[\bO \bLambda_1 \bO^\T \bLambda_2]\}$ 
+is also a function of the empirical distributions $\mu_{\bLambda_1}, \mu_{\bLambda_2}$.
+We then change variables in the integration to the empirical distributions:
+in the large-$d$ limit the Jacobian of this change only introduces a term in the exponential scale $\exp(\Theta(d))$
+(which is related to the entropy of the empirical distribution) which we therefore neglect\footnote{
+A description of this from the point of view of theoretical physics can be found in \cite{vivo2007large}.
+}.
+We can then perform Laplace's method in the space of probability distributions, the constraints $|\lambda_i| \leq \kappa$ becoming constraints on the support of the empirical measure. 
+This allows to conjecture the following asymptotic formula from eq.~\eqref{eq:Fd_HCIZ} (and recall the definition of $I_\HCIZ$ in Theorem~\ref{thm:hciz}, and of $\Sigma(\mu) \coloneqq \int \mu(\rd x) \mu(\rd y) \log |x-y|$):
+\begin{align}\label{eq:F_HCIZ}
+    F(q) &= \sup_{\mu_1, \mu_2 \in \mathcal{M}_1^+([-\kappa, \kappa])} \left[ \sum_{a \in \{1,2\}} \left(-\frac{1}{4(1-q^2)} \int \mu_a(\rd x) \, x^2 + \frac{1}{2} \Sigma(\mu_a)\right)+ \frac{1}{2} I_\HCIZ\left(\frac{q}{1-q^2}, \mu_1, \mu_2\right)\right] 
+    \nonumber
+    \\ &- 2 \sup_{\mu \in \mathcal{M}_1^+([-\kappa, \kappa])} \left[-\frac{1}{4} \int \mu(\rd x) \, x^2 + \frac{1}{2} \Sigma(\mu)\right] - \frac{1}{4} \log(1-q^2).
+\end{align}
+Notice that the non-rigorous argument described above (and that gave eq.~\eqref{eq:F_HCIZ} from eq.~\eqref{eq:Fd_HCIZ}) would directly conjecture the large deviations result of \cite{arous1997large} (see Proposition~\ref{prop:ldp_emeasure}) 
+from the joint law of eigenvalues of a $\GOE(d)$ matrix. As such, we expect eq.~\eqref{eq:F_HCIZ} to be amenable to a rigorous treatment by generalizing the approach 
+of \cite{arous1997large} (see also Section~\ref{sec:1st_moment}), which we leave for future work.
+
+\myskip 
+Recalling now the definition of $I_\sigma^2$ in eq.~\eqref{eq:def_I_sigma}, we obtain from eq.~\eqref{eq:asympt_2nd_moment_1} 
+and eq.~\eqref{eq:F_HCIZ} the statement of Conjecture~\ref{conj:sharp_second_moment}.
+
+\subsection{Local stability and failure of the second moment method}\label{subsec:fail_second_moment}
+
+Unfortunately, we are not able to numerically evaluate the result of Conjecture~\ref{conj:sharp_second_moment} 
+for arbitrary values of $(\tau, \kappa)$, as the variational problem over measures in eq.~\eqref{eq:limit_2nd_moment} is very involved. 
+While \cite{matytsin1994large,guionnet2002large} provide an asymptotic formula for $I_\HCIZ(\theta, \mu, \nu)$, it involves the solution of a control problem interpolating between 
+$\mu$ and $\nu$, and is not easily amenable to theoretical analysis. 
+In a future work we plan to study further these objects, as well as to study average-case matrix discrepancy using non-rigorous but exact methods from statistical physics.
+
+\myskip 
+Nevertheless, note that $\Phi(0) = 0$ in eq.~\eqref{eq:def_Phiq}: 
+if $\Phi(q)$ reaches its global maximum instead in a value $q^\star \neq 0$ with $\Phi(q^\star) > 0$ 
+this implies that the second moment method fails, in the sense that 
+\begin{equation}\label{eq:2nd_moment_fails}
+    \lim_{d \to \infty}\frac{1}{d^2} \log \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} > 0.
+\end{equation} 
+It is easy to see that $\Phi(q)$ is an even function of $q$, so that $\Phi'(0) = 0$.
+In particular, a sufficient condition for eq.~\eqref{eq:2nd_moment_fails} to hold is 
+that $\Phi''(0) > 0$.
+Moreover, we are able to obtain from eq.~\eqref{eq:def_Phiq} the value of $\Phi''(0)$.
+In line with the non-rigorous nature of Conjecture~\ref{conj:sharp_second_moment}, we give 
+a heuristic derivation of this result, leaving a rigorous justification for future work.
+\begin{result}\label{res:Phisecond_0}
+    For the function $\Phi$ of eq.~\eqref{eq:def_Phiq}: 
+    \begin{equation}\label{eq:Phisecond_0}
+        \Phi''(0) = - \tau + \frac{1}{2} \left(\frac{\kappa^2}{4} - 1\right)^4.
+    \end{equation}
+\end{result}
+%TODO DIscuss consequences of the results.
+
+
+\todo{Add a remark that this is only local stability, there could also be other regions where $q > 0$ is still global maximum, and so second moment fails there as well.}
+
+\myskip 
+\textbf{Derivation of Result~\ref{res:Phisecond_0} --}

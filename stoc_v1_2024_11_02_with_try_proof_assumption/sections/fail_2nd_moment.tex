@@ -1,0 +1,235 @@
+We prove here Theorem~\ref{thm:fail_second_moment}.
+Let $\kappa \in (0, 2]$ and $\tau > 0$. We start again from the second moment computation detailed in Section~\ref{subsec:proof_2nd_moment}, 
+and more precisely from eq.~\eqref{eq:2nd_moment_2}, which we recall here:
+\begin{align}\label{eq:2nd_moment_recall}
+    \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} &= \frac{1}{2^n} \sum_{l=0}^n \binom{n}{l} \exp\{n G_d(q_l)\}, 
+\end{align}
+where for $q \in [-1,1]$:
+\begin{align*}
+    G_d(q) \coloneqq&  
+    \frac{1}{n} \log \frac{\bbP\left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q \bW + \sqrt{1-q^2} \bZ\|_\op \leq \kappa\right]}{\bbP[\|\bW\|_\op \leq \kappa]^2}.
+\end{align*}
+Using eq.~\eqref{eq:P_W_Z} we further have, for any $q \in (-1,1)$:
+\begin{align}\label{eq:Gd_integral}
+    G_d(q) &= \frac{1}{n} \log \frac{\int \indi\{\|\bW_1\|_\op, \|\bW_2\|_\op \leq \kappa\} e^{-\frac{d}{4(1-q^2)} (\Tr[\bW_1^2] + \Tr[\bW_2^2]) + \frac{dq}{2(1-q^2)} \Tr[\bW_1 \bW_2]} \rd \bW_1 \rd \bW_2}{\left(\int \rd \bW \, \indi\{\|\bW \|_\op \leq \kappa\} \, e^{-\frac{d}{4}\Tr[\bW^2]}\right)^2 (1-q^2)^{d(d+1)/4}}.
+\end{align}
+Our proof of Theorem~\ref{thm:fail_second_moment} uses then the following two technical lemmas, which will allow to control 
+$G_d(q)$ close to $q = 0$.
+\begin{lemma}\label{lemma:limit_Gsecond}
+    Recall the definition of $\tau_\f(\kappa)$ in eq.~\eqref{eq:tau_f}. We have
+    \begin{equation*}
+        \lim_{d \to \infty} G_d''(0) = \frac{\tau_\f(\kappa)}{\tau}.
+    \end{equation*}
+\end{lemma}
+\fixme{I have an issue: with my current results I am not sure that I can show the following lemma. Worst case scenario I can always assume it (or assume a weaker version where I just assume the second derivative is continuous uniformly in $d$ -- at fixed $d$ it is trivial), 
+and mention that I prove the last result under a technical assumption.}
+\begin{lemma}\label{lemma:control_Gthird}
+    For any $\eps \in (0,1)$, we have:
+    \begin{equation*}
+        \limsup_{d \to \infty} \sup_{|q| \leq \eps} |G_d^{(3)}(q)| \leq \frac{C(\eps, \kappa)}{\tau}.
+    \end{equation*}
+\end{lemma}
+\noindent
+Lemmas~\ref{lemma:limit_Gsecond} and \ref{lemma:control_Gthird} are proven respectively in Sections~\ref{subsec:proof_limit_Gsecond} and \ref{subsec:proof_control_Gthird}.
+Their proofs crucially rely on the limiting theorem for spectral distributions we established in Theorem~\ref{thm:lsd_constrained_GOE}, as well as on 
+the concentration properties we established for the moments of correlated $\GOE(d)$ matrices under spectral norm constraints, see Lemma~\ref{lemma:conc_moments_Pqkappa}.
+
+\myskip
+If we assume that $\tau < \tau_\f(\kappa)$, by  Lemmas~\ref{lemma:limit_Gsecond} and \ref{lemma:control_Gthird}, there exists 
+$\delta > 0$ and $\eps > 0$ (depending on $\tau, \kappa$) such that, for $d$ large enough: 
+\begin{equation}\label{eq:lb_Gd2}
+    \inf_{|q| \leq \eps} G_d''(q) \geq (1+\delta).
+\end{equation}
+Recall that $H(p) \coloneqq - p \log p - (1-p)\log (1-p)$ is the ``binary entropy'' function. We define $S(q) \coloneqq H[(1+q)/2] - \log 2$, 
+and
+\begin{align}\label{eq:def_Phid}
+    \Phi_d(q) \coloneqq G_d(q) + S(q).
+\end{align}
+Since $S$ is clearly a smooth function of $q$, and $S''(0) = -1$, from eq.~\eqref{eq:lb_Gd2} there exists new constants $(\eps, \delta) > 0$ 
+such that
+\begin{equation}\label{eq:lb_Phid2}
+    \inf_{|q| \leq \eps} \Phi_d''(q) \geq \delta.
+\end{equation}
+Notice that $\Phi_d(0) = 0$ and that $\Phi_d'(0) = 0$ (since $\Phi_d$ is clearly an even function of $q$), so eq.~\eqref{eq:lb_Phid2} directly implies 
+that for $d$ large enough: 
+\begin{equation}\label{eq:lb_Phi}
+     \inf_{|q| \leq \eps}\left[\Phi_d(q) - \frac{\delta q^2}{2}\right] \geq 0.
+\end{equation}
+Using the classical inequality that for any $l \in \{0, \cdots, n\}$:
+\begin{equation*}
+   \binom{n}{l} \geq \frac{1}{n+1} 2^{n H(l/n)},
+\end{equation*}
+we obtain from eq.~\eqref{eq:2nd_moment_recall}:
+\begin{align*}
+    \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} &\geq \frac{1}{n+1} \sum_{l=0}^n \exp\{n \Phi_d(q_l)\} \ageq \frac{1}{n+1} \sum_{\substack{0 \leq l \leq n \\ |q_l| \leq \eps}} \exp\left\{\frac{n\delta q_l^2}{2}\right\},
+\end{align*}
+where recall $q_l = 2 (l/n) - 1$, and we used eq.~\eqref{eq:lb_Phi} in $(\rm a)$.
+Choosing $l \in \{0, \cdots, n\}$ such that $\eps/2 \leq |q_l| \leq \eps$, we reach (recall that $n/d^2 \to \tau$):
+\begin{align*}
+    \liminf_{d \to \infty} \frac{1}{d^2} \log \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} &\geq \frac{\delta \tau \eps^2}{8} > 0, 
+\end{align*}
+which ends the proof of Theorem~\ref{thm:fail_second_moment}. $\qed$
+
+\myskip 
+\textbf{Remark --} Notice that a statement akin to Theorem~\ref{thm:fail_second_moment} might still hold even if $\Phi_d''(0) < 0$ for large $d$, as long 
+as $\Phi_d$ reaches its global maximum in a value $q$ which is far from $0$ as $d \to \infty$, as our proof can then be straightforwardly applied under this assumption.
+As such, we do not know if $\tau_\f(\kappa)$ (which 
+comes out of our local analysis around $q = 0$) is a sharp threshold for the concentration of the random variable $Z_\kappa$ around its expectation.
+
+\subsection{Proof of Lemma~\ref{lemma:limit_Gsecond}}\label{subsec:proof_limit_Gsecond}
+
+We start from eq.~\eqref{eq:d2G_dq2_1}, which for $q = 0$ gives:
+\begin{align}\label{eq:G20}
+    G_d''(0) &= \frac{d(d+1)}{2n} - \frac{d}{n} \EE[\Tr \bW^2] + \frac{d^2}{4n} \textrm{Var}[\Tr[\bW \bW']].
+\end{align}
+In eq.~\eqref{eq:G20}, $\bW$ and $\bW'$ are sampled independently according to the law 
+$\bbP_\kappa$ of $\bZ \sim \GOE(d)$ conditioned on $\|\bZ\|_\op \leq \kappa$, i.e.\
+for any test function $\varphi$:
+\begin{align}\label{eq:law_conditioned_GOE}
+    \EE_{\bbP_\kappa}[\varphi(\bZ)] &= \frac{\int \, \varphi(\bZ) \, \indi\{\|\bZ\|_\op \leq \kappa\} e^{-\frac{d}{4} \Tr[\bZ^2]} \rd \bZ}{\int \, \indi\{\|\bZ\|_\op \leq \kappa\} e^{-\frac{d}{4} \Tr[\bZ^2]} \rd \bZ}.
+\end{align}
+We know that for $\bW \sim \bbP_\kappa$, $\mu_\bW$ weakly converges (a.s.) to $\mu_\kappa^\star$ given by Theorem~\ref{thm:lsd_constrained_GOE}.
+Since $\int \mu_\bW(\rd x) x^2 = \int \mu_\bW(\rd x) x^2 \indi\{|x| \leq \kappa\}$, we have by the Portmanteau theorem 
+and dominated convergence: 
+\begin{align}\label{eq:term_1_G20}
+    \lim_{d \to \infty} \frac{1}{d}\EE[\Tr \bW^2] &= \int \mu_\kappa^\star(\rd x) \, x^2 \, \indi\{|x| \leq \kappa\} = \int \mu_\kappa^\star(\rd x) \, x^2.
+\end{align}
+We now focus on the last term of eq.~\eqref{eq:G20}.
+Notice that $\EE[\Tr[\bW \bW']] = \Tr[(\EE \bW)^2] = 0$, since $\EE \bW$ because $\bbP_\kappa$ is symmetric under $\bW \leftrightarrow - \bW$.
+Using that, for any orthogonal matrix $\bO \in \mcO(d)$, $\bW \deq \bO \bW \bO^\T$ (as is directly seen from eq.~\eqref{eq:law_conditioned_GOE}), we further have:
+\begin{align}\label{eq:variance_Haar_measure}
+   \textrm{Var}[\Tr[\bW \bW']] = \EE[\Tr[\bW \bW']^2]= \EE_{\bO, \bLambda, \bLambda'}[\Tr[\bO \bLambda \bO^\T \bLambda']^2].
+\end{align}
+In eq.~\eqref{eq:variance_Haar_measure}, $\bLambda = \Diag(\{\lambda_i\})$ is a diagonal matrix containing the eigenvalues of $\bW$ (and similarly for $\bLambda'$). 
+and $\bO$ is an orthogonal matrix sampled from the Haar measure on $\mcO(d)$, independently of $\bW, \bW'$.
+Thus:
+\begin{align}\label{eq:variance_Haar_measure_2}
+   \textrm{Var}[\Tr[\bW \bW']] = \sum_{i,j,k,l} \EE[\lambda_i \lambda_k] \EE[\lambda_j \lambda_l] \EE[O_{ij}^2 O_{kl}^2].
+\end{align}
+The terms involving $\lambda_i$ eq.~\eqref{eq:variance_Haar_measure_2} can be computed using the permutation invariance of the law of $\{\lambda_i\}$ as well as the invariance under $\bLambda \leftrightarrow - \bLambda$, so that 
+for all $i \in [d]$:
+\begin{align}\label{eq:EE_lambdai2}
+    \EE[\lambda_i^2] = \EE[\lambda_1^2] = \frac{1}{d} \sum_{j=1}^d \EE[\lambda_i^2] = \frac{1}{d} \EE[\Tr \bW^2],
+\end{align}
+and for $i \neq j$:
+\begin{align}\label{eq:EE_lambdailambdaj}
+    \EE[\lambda_i \lambda_j] &= \EE[\lambda_1 \lambda_2] = \frac{1}{d-1} \EE\left[\lambda_1 \sum_{k \geq 2} \lambda_k\right]
+    = \frac{1}{d(d-1)} \EE[(\Tr \bW)^2 - \Tr(\bW^2)].
+\end{align}
+The first moments of the matrix elements of a Haar-sampled orthogonal matrix are elementary, see e.g.\ \cite{banica2011polynomial} for general results, 
+which prove: 
+\begin{align}\label{eq:moments_Haar}
+    \EE[O_{ij}^2 O_{kl}^2] &= \begin{dcases}
+        \frac{3}{d(d+2)} &(i = k \textrm{ and } j = l), \\
+        \frac{1}{d(d+2)} &(i = k \textrm{ and } j \neq l, \textrm{ or } i \neq k \textrm{ and } j = l), \\
+        \frac{d+1}{d(d-1)(d+2)} &(i \neq k \textrm{ and } j \neq l).
+    \end{dcases}
+\end{align}
+Using eq.~\eqref{eq:moments_Haar} in eq.~\eqref{eq:variance_Haar_measure_2}, separating 
+cases in the sum, we get:
+\begin{align}\label{eq:variance_Haar_measure_3}
+    \nonumber
+   \textrm{Var}[\Tr[\bW \bW']] &= 
+   \frac{3}{d(d+2)} \cdot d^2 \cdot \EE[\lambda_1^2]^2 + 
+   \frac{1}{d(d+1)} \cdot 2 d^2 (d-1) \cdot \EE[\lambda_1^2] \EE[\lambda_1 \lambda_2] \\ 
+    \nonumber
+   &+ \frac{d+1}{d(d-1)(d+2)} \cdot d^2(d-1)^2 \cdot \EE[\lambda_1 \lambda_2]^2, \\ 
+   &= [1 +\smallO_d(1)] \left(3\EE[\lambda_1^2]^2 + 2d \EE[\lambda_1 \lambda_2] \EE[\lambda_1^2] + d^2 \EE[\lambda_1 \lambda_2]^2 \right).
+\end{align}
+From eqs.~\eqref{eq:term_1_G20} and \eqref{eq:EE_lambdai2}, we have $\EE[\lambda_1^2] \to \EE_{\mu_\kappa^\star}[X^2]$ as $d \to \infty$.
+Furthermore, by Lemma~\ref{lemma:conc_moments_Pqkappa}, $\EE[(\Tr \bW)^2] = \Var[\Tr \bW] = \mcO(1)$ as $d \to \infty$, 
+so eq.~\eqref{eq:EE_lambdailambdaj} gives that $d \EE[\lambda_1 \lambda_2] \to - \EE_{\mu_\kappa^\star}[X^2]$ as $d \to \infty$.
+Plugging these limits in eq.~\eqref{eq:variance_Haar_measure_3} we get:
+\begin{align}\label{eq:term_2_G20}
+   \textrm{Var}[\Tr[\bW \bW']] &= 2 \left(\int \mu_\kappa^\star(\rd x) \, x^2 \right)^2 + \smallO_{d\to \infty}(1).
+\end{align}
+Finally, combining eqs.~\eqref{eq:G20}, \eqref{eq:term_1_G20} and \eqref{eq:term_2_G20} we obtain (recall $n/d^2 \to \tau$):
+\begin{align}\label{eq:limit_G20}
+    \lim_{d \to \infty} G_d''(0) &= \frac{1}{\tau} \left[\frac{1}{2} - \int \mu_\kappa^\star(\rd x) \, x^2 + \frac{1}{2}\left(- \frac{1}{2} \int \mu_\kappa^\star(\rd x) \, x^2\right)^2 \right].
+\end{align}
+The integral in eq.~\eqref{eq:limit_G20} was already computed in eq.~\eqref{eq:int_mukappa_x2}: plugging its value in eq.~\eqref{eq:limit_G20} 
+shows that $  \lim_{d \to \infty} G_d''(0) = \tau_\f(\kappa)/\tau$, which ends the proof of Lemma~\ref{lemma:limit_Gsecond}.
+
+\subsection{Proof of Lemma~\ref{lemma:control_Gthird}}\label{subsec:proof_control_Gthird}
+
+We start from eq.~\eqref{eq:Gd_integral}, which we rewrite as:
+\begin{align}\label{eq:Gd_Zd}
+    G_d(q) &= \frac{1}{n} \log \mcZ_d(q) - \frac{d(d+1)}{4n} \log(1-q^2) - \frac{2}{n} \log \int \rd \bW \, \indi\{\|\bW \|_\op \leq \kappa\} \, e^{-\frac{d}{4}\Tr[\bW^2]},
+\end{align}
+where 
+\begin{align}\label{eq:def_Zd}
+    \mcZ_d(q) \coloneqq \int \indi\{\|\bW_1\|_\op, \|\bW_2\|_\op \leq \kappa\} e^{-\frac{d}{4(1-q^2)}(\Tr[\bW_1^2] + \Tr[\bW_2^2]) + \frac{dq}{2(1-q^2)} \Tr[\bW_1 \bW_2]} \rd \bW_1 \rd \bW_2.
+\end{align}
+The last term in eq.~\eqref{eq:Gd_Zd} is independent of $q$, and the second term is clearly smooth around $q = 0$, and is independent of $n,d$ up to a multiplicative factor.
+Recalling that $n/d^2 \to \tau$, it is clear that to prove Lemma~\ref{lemma:control_Gthird} it is sufficient to show:
+\begin{equation}\label{eq:to_show_Zd}
+    \limsup_{d \to \infty} \sup_{|q| \leq \eps} \left| \frac{\partial^3}{\partial q^3}\left[ \frac{1}{d^2}\log \mcZ_d(q)\right]\right| \leq C(\eps, \kappa),
+\end{equation}
+We define 
+\begin{align}\label{eq:def_Hd}
+    H_d(q, \bW_1, \bW_2) &\coloneqq -\frac{d(\Tr[\bW_1^2] + \Tr[\bW_2^2])}{4(1-q^2)} + \frac{dq}{2(1-q^2)} \Tr[\bW_1 \bW_2],
+\end{align}
+so that
+\begin{align*}
+    \mcZ_d(q) &= \int \indi\{\|\bW_1\|_\op, \|\bW_2\|_\op \leq \kappa\} e^{H_d(q, \bW_1, \bW_2)} \rd \bW_1 \rd \bW_2.
+\end{align*}
+And finally, recall that we defined in eq.~\eqref{eq:gibbs_q}:
+\begin{align*}
+    \langle \cdot \rangle_{q,\kappa} &\coloneqq 
+    \frac{\int (\cdot) \indi\{\|\bW_1\|_\op, \|\bW_2\|_\op \leq \kappa\} e^{H_d(q, \bW_1, \bW_2)} \rd \bW_1 \rd \bW_2}{\int \indi\{\|\bW_1\|_\op, \|\bW_2\|_\op \leq \kappa\} e^{H_d(q, \bW_1, \bW_2)} \rd \bW_1 \rd \bW_2}.
+\end{align*}
+To lighten notations, we use in what follows the notation $\langle \cdot \rangle$ rather than $\langle \cdot \rangle_{q,\kappa}$.
+With these notations, we obtain successively:
+\begin{align}\label{eq:d3logZ}
+    \nonumber
+    \frac{\partial}{\partial q}\log \mcZ_d(q) &= \langle \partial_q H_d \rangle, \\
+    \nonumber
+    \frac{\partial^2}{\partial q^2}\log \mcZ_d(q) &= \langle \partial^2_q H_d \rangle + \langle (\partial_q H_d)^2 \rangle - \langle \partial_q H_d \rangle^2, \\
+    \frac{\partial^3}{\partial q^3}\log \mcZ_d(q) &= \underbrace{\langle \partial^3_q H_d \rangle}_{\eqqcolon I_1(q)}
+    + \underbrace{3\left[\langle (\partial^2_q H_d)(\partial_q H_d) \rangle - \langle \partial^2_q H_d\rangle \langle\partial_q H_d \rangle\right]}_{\eqqcolon I_2(q)} \\
+    \nonumber
+    &
+    + \underbrace{\langle (\partial_q H_d)^3 \rangle - 3 \langle (\partial_q H_d)^2 \rangle \langle \partial_q H_d \rangle
+    + 2 \langle \partial_q H_d \rangle^3}_{\eqqcolon I_3(q)}.
+\end{align}
+We will control all terms $\{I_a\}_{a=1}^4$ in eq.~\eqref{eq:d3logZ}.
+We achieve this by noting that 
+for any $p \geq 0$, the derivative $\partial_q^p H_d$ can be written as $d\Tr[P_q(\bW_1, \bW_2)]$, 
+where $P$ is a polynomial of degree $2$ in non-commutative random variables which is independent of $d$, and whose coefficients are bounded and smooth functions of $q$ around $q = 0$.
+This has the following two consequences.
+\begin{itemize}
+    \item[$(i)$] Since $\Tr[\bW_1^2] \leq d \kappa^2$ and $\Tr[\bW_1 \bW_2] \leq d \kappa^2$ 
+    on the support of $\langle \cdot \rangle$, 
+    it is clear that for any $\eps \in (0,1)$, any $p, k \geq 0$, and $d \geq 1$:
+    \begin{align}\label{eq:boundedness_dHp}
+        \sup_{|q| \leq \eps} |\partial_q^p H_d|^k \leq C_1(k, p, \eps, \kappa) \cdot d^{2k},
+        \hspace{10pt}
+         \langle \cdot \rangle-\textrm{almost surely.}
+    \end{align}
+    \item[$(ii)$] 
+    As a consequence of Lemma~\ref{lemma:conc_moments_Pqkappa}, we further have
+    for any $\eps \in (0,1)$, any $p \geq 0$, and $d \geq 1$:
+    \begin{align}\label{eq:boundedness_var_dHp_psi2}
+        \sup_{|q| \leq \eps} \left\|\partial_q^p H_d - \langle \partial_q^p H_d \rangle\right\|_{\psi_2} \leq C_2(k, p, \eps, \kappa) \cdot d,
+    \end{align}
+    and in particular:
+    \begin{align}\label{eq:boundedness_var_dHp}
+        \sup_{|q| \leq \eps} \left[\langle (\partial_q^p H_d)^2 \rangle - \langle \partial_q^p H_d \rangle^2\right] \leq C_3(k, p, \eps, \kappa) \cdot d^2.
+    \end{align}
+\end{itemize}
+Eq.~\eqref{eq:boundedness_dHp} implies that 
+\begin{align}\label{eq:I1_bound}
+    \sup_{|q| \leq \eps} |I_1(q)| \leq C_1(\eps, \kappa) \cdot d^2.
+\end{align}
+We further have
+\begin{align*}
+    I_2(q) &= 
+    3\langle(\partial^2_q H_d - \langle \partial^2_q H_d\rangle )(\partial_q H_d - \langle \partial_q H_d\rangle )\rangle.
+\end{align*}
+Using the Cauchy-Schwarz inequality and \eqref{eq:boundedness_var_dHp}, this yields
+\begin{align}\label{eq:I2_bound}
+    \sup_{|q| \leq \eps} |I_2(q)| &\leq C_2(\eps, \kappa) \cdot d^2.
+\end{align}
+\fixme{How to control $I_3$? It is the third cumulant of $\partial_q H_d$ (which is also the third central moment), but my bound only shows that it is $\mcO(d^3)$, which is not enough...
+Maybe some symmetry can help me? I am not sure...
+}

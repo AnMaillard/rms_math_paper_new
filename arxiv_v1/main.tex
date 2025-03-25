@@ -1,0 +1,51 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{settings_custom}
+\addbibresource{refs.bib}
+\allowdisplaybreaks
+
+
+\begin{document}
+\title{Average-case matrix discrepancy: satisfiability bounds}
+\date{}
+
+\author{Antoine Maillard\thanks{\texttt{antoine.maillard@math.ethz.ch}.}}
+\affil{Department of Mathematics, ETH Z\"urich, Switzerland.}
+\maketitle
+
+\begin{abstract}
+    Given a sequence of $d \times d$ symmetric matrices $\{\bW_i\}_{i=1}^n$, and a margin $\Delta > 0$, we investigate whether it is possible to find signs $(\eps_1, \dots, \eps_n) \in \{\pm 1\}^n$ such that the operator norm of the signed sum satisfies $\|\sum_{i=1}^n \eps_i \bW_i\|_\op \leq \Delta$.
+    \cite{kunisky2023online} recently introduced a random version of this problem, where the matrices $\{\bW_i\}_{i=1}^n$ are drawn from the Gaussian orthogonal ensemble. 
+    This model can be seen as a random variant of the celebrated Matrix Spencer conjecture, and as a matrix-valued analog of the symmetric binary perceptron in statistical physics.
+%
+    In this work, we establish a satisfiability transition in this problem as $n, d \to \infty$ with $n / d^2 \to \tau > 0$.
+    Our contributions are twofold. 
+    First, we prove that the expected number of solutions with margin $\Delta = \kappa \sqrt{n}$ has a sharp threshold at a critical $\tau_1(\kappa)$: 
+    for $\tau < \tau_1(\kappa)$ the problem is typically unsatisfiable, while for $\tau > \tau_1(\kappa)$ the average number of solutions becomes exponentially large.
+    Second, combining a second-moment method with recent results from \cite{altschuler2023zero} on margin concentration in perceptron-type problems, we identify a second threshold $\tau_2(\kappa)$, 
+    such that for $\tau > \tau_2(\kappa)$ the problem admits solutions with high probability.
+%
+    In particular, we establish for the first time that a system of $n = \Theta(d^2)$ Gaussian random matrices can be balanced so that the spectrum of the resulting matrix macroscopically shrinks compared to the typical semicircle law.
+    Our proofs rely on deriving concentration inequalities and large deviation properties for the law of correlated Gaussian matrices under spectral norm constraints, extending results in the literature and offering insights of independent interest.
+\end{abstract}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\section{Introduction and main results}\label{sec:intro}
+\input{sections/introduction.tex}
+
+\subsection*{Acknowledgements}
+The author wants to thank Dylan Altschuler for discussions and a careful reading of the manuscript, 
+as well as
+Tim Kunisky and Afonso S.\ Bandeira for insightful discussions about the early stages of this work.
+
+\section{Sharp asymptotics of the first moment}\label{sec:1st_moment}
+\input{sections/first_moment.tex}
+
+\section{The satisfiability region}\label{sec:2nd_moment}
+\input{sections/second_moment.tex}
+
+\printbibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

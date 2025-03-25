@@ -1,0 +1,97 @@
+STOC 2025 Paper #474 Reviews and Comments
+===========================================================================
+Paper #474 Average-case matrix discrepancy: satisfiability bounds
+
+
+Review #474A
+===========================================================================
+
+Overall merit
+-------------
+3. Weak reject -- I tend towards rejection, but accepting it won't be that
+   bad
+
+Paper summary
+-------------
+This paper studies a problem of average-case matrix discrepancy, of minimizing the discrepancy in operator norm of a family of i.i.d. matrices drawn from the Gaussian orthogonal ensemble. As the paper discusses, this may be viewed both as a relative of the matrix Spencer conjecture---which makes a claim about the discrepancy of worst-case matrices under a norm bound---as well as of results about the discrepancy of random vectors, and of the binary perceptron, a kind of continuous constraint satisfaction problem. I think that the last motivation, in the context of this conference, is the most compelling, and that this problem should be viewed essentially as a version of something like random k-SAT for the purposes of a theoretical computer science audience. The results here then concern when "formulas" with a given "density" of randomly chosen "clauses" are "approximately satisfiable", or in this setting when a given number of i.i.d. random matrices can be balanced within a certain operator norm tolerance. As with random SAT, the arguments here study the first and second moment methods. The results show upper and lower bounds (which do not match) on the points where the relevant transition from satisfiability to unsatisfiability happens. It is also shown that the direct second moment method alone cannot be sufficient to solve this problem.
+
+I think that these results are interesting and much more precise than similar ones derived in prior work of Kunisky and Zhang (2023). They are also an interesting contribution to the study of the second moment method as a combinatorial technique, bringing in analytic and probabilistic tools involving random matrix large deviations principles that are quite different from the kinds of purely combinatorial calculations that appear for, e.g., random SAT and similar problems. However, I worry that these results are several steps removed from the kinds of problems that would be of interest for this conference: there are no algorithmic upper or lower bounds whatsoever appearing in this paper, and while this problem can be viewed as a relative of more conventional constraint satisfaction problems, the more analytic flavor of both the problem and the calculations, together with the incremental progress towards understanding the "phase diagram" of the problem, probably means that the typical STOC participant would have a difficult time following or finding interesting the details of these results. So, I can weakly recommend accepting the paper, but I suspect that the authors could find a more appropriate venue.
+
+Comments for authors
+--------------------
+- p2: The stated version of Spencer's theorem is often given but not actually tight for n >> d: in this case, the correct scaling is sqrt(d), not sqrt(n) (by the technique of "iterated rounding").
+
+- p2: Bandeira--Boedihardjo--van Handel, while a wonderful paper, seems strange to give as the only reference about random matrix theory (especially since it itself does say anything about discrepancy problems).
+
+- p2: There is a long line of work on the discrepancy of random vectors which would also be good to mention as part of the motivation for this question. One representative paper is Turner, Meka, Rigollet (2020) "Balancing Gaussian vectors in high dimension", and its introduction gives a good overview.
+
+- p5: I would mention that the argument at the bottom of the page about the regime kappa > 2 also implies that the matrix Spencer conjecture itself is proved straightforwardly for the case of i.i.d. GOE matrices, so this is not the reason for the interest in this problem, but rather the CSP interpretation I mention above (as far as I understand) and its more fine-grained details.
+
+- p7: It would be helpful to give a little more context about this phenomenon of the second moment method failing. How would one repair this issue / has it been addressed in other work before? If I understand the issue correctly, the problem is not the same as that addressed by the conditional second moment method of the second moment "spuriously" being large because of a rare bad event. Rather, here what is needed would seem to be a second moment method restricted to counting some special, better-behaved subset of solutions?
+
+- p11: Regarding Theorem 2.2: is there any reason to expect that, maybe only for certain values of kappa, typical solutions achieving that discrepancy should have the signed sum of W_i having eigenvalue density close to this conditional one of the GOE? (Going off of the intuition that for random signs the signed sum is again a GOE.) This would be intriguing and would make the Theorem maybe more relevant to the other results.
+
+Reviewer expertise
+------------------
+3. Knowledgeable -- I am fairly familiar with the area and understand the
+   work reasonably well.
+
+
+
+Review #474B
+===========================================================================
+
+Overall merit
+-------------
+3. Weak reject -- I tend towards rejection, but accepting it won't be that
+   bad
+
+Paper summary
+-------------
+For $d \times d$ matrices $A_1,\ldots,A_n$ we define the discrepancy as $disc(A_1,\ldots,A_n) := \min_{\varepsilon \in \{ -1,1\}^n} \|\sum_{i=1}^n \varepsilon_i A_i\|_{op}$. 
+A problem that has received a lot of attention in the last few years is the matrix spencer conjecture which suggests that if $\|A_i\|_{op} \leq 1$ for all $i=1,\ldots,n$, then $disc(A_1,\ldots,A_n) \leq O(\sqrt{n \max\{ 1,\log(d/n)\}})$. In particular this suggests that asymptotically diagonal matrices (for which the result is known by the classical Spencer's theorem) form already the worst case.
+The paper under consideration studies the discrepancy of Gaussian random matrices. The classic distribution to study is called $GOE(d)$ (Gaussian Orthogonal Ensemble) which is a $d \times d$ symmetric random matrix $Y$ with $Y_{ij} \sim N(0,\frac{1}{d})$ for off-diagonal entries and $N(0,\frac{2}{d})$ on the diagonal.
+The semicircle law by Wigner says that for $d$ large one has $\|Y\|_{op}= 2 \pm o(1)$ with high probability.
+
+So, we draw $W_1,\ldots,W_n \sim GOE(d)$ independently. For a parameter $\kappa>0$, let $Z_{\kappa} := |\{ \varepsilon \in \{ -1,1\}^n : \|\sum_{i=1}^n \varepsilon_i W_i\|_{op} \leq \kappa \sqrt{n} \}|$ be the number of colorings that give a discrepancy of $\kappa \sqrt{n}$. Clearly for $\kappa>2$, one has $Z_{\kappa} \geq 1$ with high probability as by Wigner's result one can just pick any fixed coloring, say $\varepsilon = (1,\ldots,1)$. The main result under consideration is that in the regime of $n \gg d^2$, the $2^n$ many colors give enough choice so that one can send $\kappa \to 0$.
+
+Theorem. For any $0<\kappa \leq 2$ there is a $\tau$ so that with $n = \tau \cdot d^2$ and $d$ large enough one has $\Pr[Z_{\kappa} \geq 1] \geq 1-o(1)$.
+
+The proof uses the second moment method which is the fact that $\Pr[Z_{\kappa} \geq 1] \geq \frac{\E[Z_{\kappa}]^2}{\E[Z_{\kappa}^2]}$. The remainder of the proof then boils down to finding an accurate lower bound on $\E[Z_{}\kappa]$ and a good upper bound on $\E[Z_{\kappa}^2]$. The proof is based on some seminal result in probability theory.
+
+Opinion:
+I find this is a very competent probability paper. However, the TCS motivation falls short in my opinion. It is true that matrix spencer has received a lot of attention in the community. But for example for ``classical'' discrepancy there has been a long sequence of papers analyzing random matrices/set systems using various method from Fourier analysis over second moment method to spectral methods. And it does seem that none of those techniques apply to worst case discrepancy. In particular GOE(d) provides very special matrices for which a simple union bound argument shows that $disc(A_1,\ldots,A_n) \leq O(\sqrt{n})$ say if $n=d$, again by picking any fixed coloring. So it was known that GOE(d) matrices would not be a counterexample to matrix spencer. Again, this is a good probability paper and there is a lot of non-trivial work that needs to be done to make the analysis work but I am not convinced that this is enough.
+
+Reviewer expertise
+------------------
+3. Knowledgeable -- I am fairly familiar with the area and understand the
+   work reasonably well.
+
+
+
+Review #474C
+===========================================================================
+
+Overall merit
+-------------
+3. Weak reject -- I tend towards rejection, but accepting it won't be that
+   bad
+
+Paper summary
+-------------
+This paper studies the balancing of symmetric random matrices by considering the input of an i.i.d. sequence of $n$ GOE matrices of dimension $d$. This is seen as an average-case analysis of the famous matrix discrepancy conjecture, a novel study initiated by the recent work of Kunisky and Zhang (2023). Specifically, it considers the regime $\tau = n / d^2$ and investigates the satisfiability of achieving a discrepancy of $\kappa\sqrt{n}$, where $\kappa \geq 0$ controls the strength of the margin. With tools from random matrix theory and large-deviation theory, the authors use the first-moment method to provide a sharp and high-probability upper bound $\tau < \tau_1(\kappa)$ for the region of unsatisfiability. Additionally, a second-moment computation shows that a discrepancy of $\kappa\sqrt{n}$ is achieved when $\tau > \tau_2(\kappa)$. The result extends and answers an open question raised in Kunisky and Zhang (2023), as the previous paper was tight only for $\kappa \to 0$.
+
+Strength: The techniques in this paper are mathematically nice and advanced. The introduction of many tools from random matrix theory and large-deviation theory will be very beneficial to the TCS community. Also, I believe many of the intermediate lemmas and results have independent interest beyond the application to the Matrix Spencer conjecture.
+
+Weakness: Despite being mathematically fascinating, this paper is not very helpful in advancing the study of matrix discrepancy: it does not provide key insights in addressing the non-commutative hardness. The regime of n = d^2 is also not the crucial regime for matrix Spencer -- for d = \sqrt{n}, a \sqrt{n} discrepancy bound for matrix Spencer was already known. The mathematical focus limits its relevance to TCS and narrows its audience in the area. In this regard, STOC is perhaps not a perfect venue for this result, as a journal in the applied probability or random structures would be a better fit.
+
+In summary, although I like this work for its mathematical depth, I still tend to reject it as it is not well-suited to the TCS conference like STOC.
+
+Comments for authors
+--------------------
+1. Theorem 1.7 establishes a lower bound for the region where a discrepancy of $\kappa\sqrt{n} is secured. However, the proof is non-constructive. It would be more fascinating if the authors could provide some intuition or insights from an algorithmic perspective for this result.
+
+Reviewer expertise
+------------------
+2. Some familiarity -- I am moderately familiar with the area and have some
+   understanding of the work.

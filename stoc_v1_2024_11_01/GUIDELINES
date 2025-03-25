@@ -1,0 +1,38 @@
+Submission format: 
+- Submissions should start with a title page consisting of the title of the paper, no author information 
+    (see below), and an abstract of a few paragraphs summarizing the paper's contributions. 
+- There is no page limit and authors are encouraged to use the "full version" of their paper as the submission.
+- Each submission should contain within the initial ten pages following the title page a clear presentation
+    of the merits of the paper, including a discussion of the paper's importance within the context of prior 
+    work and a description of the key technical and conceptual ideas used to achieve its main claims. 
+- This part of the submission should be addressed to a broad spectrum of theoretical computer science
+     researchers, not solely to experts in the subarea. 
+- Proofs must be provided that can enable the main mathematical claims of the paper to be fully verified.
+
+Although there is no bound on the length of a submission, material other than the abstract, table of contents,
+and the first ten pages will be read at the committee's discretion.
+Authors are encouraged to put the references at the very end of the submission.
+The submission should be typeset using 11-point or larger fonts, in a single-column, single-space 
+(between lines) format with ample spacing throughout and 1-inch margins all around, 
+on letter-size (8 1/2 x 11 inch) paper.
+Submissions deviating significantly from these guidelines risk rejection without consideration of their merits.
+
+STOC 2025 will use double-blind reviewing, and as such, submissions should not reveal the identity
+of the authors in any way. In particular, authors' names, affiliations, and email addresses should not 
+appear at the beginning or in the body of the submission. Authors should not include obvious references 
+that reveal their own identity, and should ensure that any references to their own related work are in 
+the third person (e.g., not "We build on our previous work…" but rather "We build on the work of…").
+
+The purpose of this double-blind process is to help PC members and external reviewers come to an initial 
+judgment about the paper without bias, and not to make it impossible for them to discover who the authors
+are if they were to try. (In particular, to manage Conflicts Of Interests, author information will be 
+available to the PC Chair, and possibly to a small set of PC Members on an as-needed basis.) 
+Nothing should be done in the name of anonymity that weakens the submission or makes the job of 
+reviewing the paper more difficult. In particular, important references should not be omitted or anonymized. 
+In addition, authors should feel free to disseminate their ideas or draft versions of their paper 
+as they normally would. For example, authors may post drafts of their papers on the web, submit them to arXiv,
+and give talks on their research ideas.
+
+All submissions will be treated as confidential, and will only be disclosed to the committee and their 
+chosen sub-referees. In addition, the program committee may consult with journal editors and program 
+chairs of other conferences about controversial issues such as parallel submissions. 
