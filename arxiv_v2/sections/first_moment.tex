@@ -25,20 +25,22 @@ The second result of Theorem~\ref{thm:first_moment} is a direct consequence of M
 Notice that Markov's inequality even shows that $\bbP[Z_\kappa > 0]$ goes to zero exponentially fast in $d^2$ for $\tau < \tau_1(\kappa)$.
 
 \myskip 
-%FIXME I am here in rewriting-reordering this part
 In the remainder of Section~\ref{sec:1st_moment}, we focus on proving Proposition~\ref{prop:ldp_Wop}.
 We note first that for $\kappa > 2$ we have $\log \bbP[\|\bW\|_\op \leq \kappa] = \smallO_d(1)$ as a consequence of Theorem~\ref{thm:wigner}. 
 We thus focus on the case $\kappa \in (0,2]$ in what follows.
 
 \myskip 
 \textbf{Sketch of proof and important related work --}
-Our proof of Proposition~\ref{prop:ldp_Wop} builds upon the seminal results and proof techniques of \cite{arous1997large}, which established the large deviations of the 
-empirical spectral measure of $\bW \sim \GOE(d)$, with respect to the weak topology.
-Our approach yields the value of the limit in eq.~\eqref{eq:ldp_Wop} as a variational principle over probability measures supported in $[-\kappa,\kappa]$, 
-which we can solve using the theory of logarithmic potentials~\citep{saff2013logarithmic} and Tricomi's theorem~\citep{tricomi1985integral}, similarly to the alternative proof of Wigner's semicircle law obtained by \cite{arous1997large} from their large deviations result.
+\change{
+The proof of Proposition~\ref{prop:ldp_Wop} builds upon a large deviation principle (with respect to the weak topology) for the empirical spectral measure of $\bW$, a matrix drawn from $\GOE(d)$, \emph{conditioned} on $\|\bW\|_\op \leq \kappa$, 
+which is stated as Proposition~\ref{prop:ldp_empirical_measure_conditioned}, and follows from classical results of large deviations theory~\citep{arous1997large,anderson2010introduction}. 
+As a direct consequence, we obtain in Corollary~\ref{cor:ldp_Wop_var_principle} the asymptotics of eq.~\eqref{eq:ldp_Wop} as a variational principle over probability measures supported in $[-\kappa,\kappa]$,
+For completeness, we also provide a proof of Corollary~\ref{cor:ldp_Wop_var_principle} that appeared in an earlier version of this work, and which only uses the large deviations of the spectral measure of a $\GOE(d)$ matrix, as proven in~\cite{arous1997large}.
+This yields the value of the limit in eq.~\eqref{eq:ldp_Wop} as a variational principle over probability measures supported in $[-\kappa,\kappa]$, 
+which we solve using the theory of logarithmic potentials~\citep{saff2013logarithmic} and Tricomi's theorem~\citep{tricomi1985integral}, similarly to the alternative proof of Wigner's semicircle law obtained by \cite{arous1997large} from their large deviations result.
+}
 Similar arguments also appeared in the theoretical physics literature~\citep{dean2006large,vivo2007large,dean2008extreme,majumdar2014top}. 
 We refer to \cite{anderson2010introduction,guionnet2022rare} for more background and open problems in the theory of large deviations for random matrices.
-\todo{This needs to be changed as well, mentioning the other works below.}
 
 \myskip
 \textbf{Remark --}
@@ -75,12 +77,11 @@ For this reason, we leave the establishment of the limiting spectral density of 
 with $\rho_\kappa$ a natural conjecture.
 }
 
-\subsection{Background on large deviations}
+\change{
+\subsection{Large deviations results}
 
-\myskip 
-Our proof leverages the main result of \cite{arous1997large}, which is a large deviation principle for the empirical eigenvalue distribution of $\GOE(d)$ matrices\footnote{
-    Notice that~\cite{arous1997large} use a convention where $\GOE(d)$ matrices have off-diagonal entries with variance $1/(2d)$. We state their result adapted to our conventions.
-}.
+Our proof leverages a large deviation principle for the empirical eigenvalue distribution of matrix models.
+Such results were initiated in the mathematics literature by~\cite{arous1997large}, and have been then extended, see e.g.~\cite{guionnet2022rare}.
 The space $\mcM_1^+(\bbR)$ of probability measures on $\bbR$ is endowed with its usual weak topology. 
 It is metrizable by the Dudley metric~\citep{bogachev2007measure}:
 \begin{equation}
@@ -88,69 +89,81 @@ It is metrizable by the Dudley metric~\citep{bogachev2007measure}:
     d(\mu, \nu) \coloneqq \left\{\left|\int f \rd \mu - \int f \rd v\right| \, : \, |f(x)| \leq 1 \textrm{ and } |f(x) - f(y)| \leq |x - y|, \, \forall (x, y) \in \bbR^2\right\}.
 \end{equation}
 Recall that $\Sigma(\mu) \coloneqq \int \mu(\rd x) \mu(\rd y) \log |x-y|$.
-\begin{proposition}[\cite{arous1997large}]\label{prop:ldp_emeasure}
-    Let $\bW \sim \GOE(d)$. 
-    We denote $\mu_{\bW} \coloneqq (1/d) \sum_{i=1}^d \delta_{\lambda_i(\bW)}$ its empirical spectral distribution. 
-    For $\mu \in \mcM_1^+(\bbR)$, we define: 
-    \begin{equation}
-        \label{eq:def_I}
-        I(\mu) \coloneqq -\frac{1}{2} \Sigma(\mu) + \frac{1}{4} \int \mu(\rd x) \, x^2 - \frac{3}{8}.
-    \end{equation}
-    Then: 
+The following statement is borrowed from~\cite{fan2015convergence} (see also~\cite{arous1997large,anderson2010introduction}).
+\begin{proposition}[\cite{fan2015convergence}]
+    \label{prop:ldp_empirical_measure_conditioned}
+    Let $B \subseteq \bbR$ an interval, and $V : B \to \bbR$ a continuous function, that goes to infinity faster than $2 \log |x|$ (if $B$ is not bounded).
+    For $\blambda \in \bbR^d$, let
+    \begin{align}\label{eq:coulomb_gas_constraint}
+        \mu_{d}^{V,B}(\rd \blambda) \coloneqq \frac{1}{Z_{d}^{V,B}} \prod_{i=1}^d \left(\rd \lambda_i \, \indi\{\lambda_i \in B\} \right) \, e^{-\frac{d}{2} \sum_{i=1}^d V(\lambda_i)} \, \prod_{i < j} |\lambda_i - \lambda_j|,
+    \end{align}
+    with $Z_d^{V,B}$ a normalization factor, to ensure that $\int \mu_d^{V, B}(\rd \blambda) = 1$.
+    Denote $\nu_\blambda \coloneqq (1/d) \sum_{i=1}^d \delta_{\lambda_i}$ the empirical measure of $\blambda$.
+    Then the law of $\nu_\blambda$ satisfies a large deviation principle, in the scale $d^2$, with good rate function $I_{V,B}(\nu) \coloneqq \mcE_V(\nu) - \inf_{\nu \in \mcM_1^+(B)}[\mcE_V(\nu)]$, where 
+    \begin{align}\label{eq:E_V}
+        \mcE_V(\nu) \coloneqq - \frac{1}{2} \Sigma(\nu) + \frac{1}{2} \int V(x) \, \nu(\rd x).
+    \end{align}
+    In particular: 
     \begin{itemize}
-        \item[$(i)$] $I : \mcM_1^+(\bbR) \to [0, \infty]$ is a strictly convex function and a good rate function, i.e.\  
-        $\{I_1 \leq M\}$ is a compact subset of $\mcM_1^+(\bbR)$ for any $M > 0$.
-        \item[$(ii)$]
-        The law of $\mu_\bW$ satisfies a large deviation principle, in the scale $d^2$, with rate function $I$, that is for any 
-        open (respectively closed) subset $O \subseteq \mcM_1^+(\bbR)$ (respectively $F \subseteq \mcM_1^+(\bbR)$): 
+        \item[$(i)$] For any $M > 0$, $\{I_{V, B} \leq M\}$ is a compact subset of $\mcM_1^+(B)$.
+        \item[$(ii)$]  
+        For any open (respectively closed) subset $O \subseteq \mcM_1^+(B)$ (respectively $F \subseteq \mcM_1^+(B)$): 
         \begin{equation*}
             \begin{dcases}
-                \liminf_{d\to\infty} \frac{1}{d^2} \log \bbP[\mu_\bW \in O] \geq - \inf_{\mu \in O} I(\mu), \\
-                \limsup_{d\to\infty} \frac{1}{d^2} \log \bbP[\mu_\bW \in F] \leq - \inf_{\mu \in F} I(\mu).
+                \liminf_{d\to\infty} \frac{1}{d^2} \log \mu_d^{V,B}[\nu_\blambda \in O] \geq - \inf_{\nu \in O} I_{V,B}(\nu), \\
+                \limsup_{d\to\infty} \frac{1}{d^2} \log \mu_d^{V,B}[\nu_\blambda \in F] \leq - \inf_{\nu \in F} I_{V,B}(\nu).
             \end{dcases}
+        \end{equation*}
+        \item[$(iii)$] 
+        \begin{equation*}
+            \lim_{d \to \infty} \frac{1}{d^2} \log Z_d^{V,B} = - \inf_{\nu \in \mcM_1^+(B)}[\mcE_V(\nu)].
         \end{equation*}
     \end{itemize}
 \end{proposition}
-
-\myskip
-\textbf{More general large deviations results --}
-\cite{arous1997large} also prove large deviations results for the empirical measure of $\bW$ sampled under more general distributions, with density 
-proportional to $\exp\{-\Tr[V(\bW)]\}$, for a continuous potential $V$ growing fast enough at infinity, see also Section~2.6 of \cite{anderson2010introduction}. 
-One could approach Proposition~\ref{prop:ldp_Wop} by noticing that
-the law of $\bW \sim \GOE(d)$ constrained to $\|\bW\|_\op \leq \kappa$ can be written in this form, with a discontinuous potential
-$V(x) = x^2 + \indi\{|x| > \kappa\} \times \infty$.
-However, we will see that the large deviations of the empirical measure is only used to prove the upper bound in Proposition~\ref{prop:ldp_Wop}, 
-and the particular form of the operator norm constraint allows us to rely solely on Proposition~\ref{prop:ldp_emeasure}, rather than 
-adapting the general results of \cite{arous1997large,anderson2010introduction} to this discontinuous potential. 
-\todo{
-    Without aiming at being exhaustive (in particular I will not mention~\cite{chafai2021coulomb}), ...
-\begin{itemize}
-    \item \cite{borot2013asymptotic}:
-    Its theorem~1.1 basically says that we have the large deviation principle for the measure $\bW \sim \GOE(d) | \|\bW\|_\op \leq \kappa$. In particular we must also have the asymptotics of the partition function (cf.\ e.g.\ the conclusion of the proof of Theorem~2.6.1 of~\cite{anderson2010introduction}), 
-    and the fact that it converges to a minimizer of the functional. 
-    Here say that we reproduce it for completeness, and solve the variational principle, but change the narrative, move the proof of the LDP to appendix, make the paper shorter.
-    \item \cite{fan2015convergence}: Theorem~1.1 is the same as~\cite{borot2024asymptotic}.
-     Also Remark~1.3 for my Theorem~\ref{thm:lsd_constrained_GOE} -- at least for the fact that it converges to the minimizer, like I said above.
-\end{itemize}
-}
-
-\subsection{Large deviation upper bound for the operator norm}\label{subsec:ldp_Wop_ub}
-
-We prove here the upper bound for $(1/d^2) \log \bbP[\|\bW\|_\op \leq \kappa]$ in Proposition~\ref{prop:ldp_Wop}.
-
-\myskip
-Let $Q \coloneqq \{\mu \in \mcM_1^+(\bbR) \, : \, \mu([-\kappa, \kappa]) = 1\}$. 
-By the Portmanteau theorem, $Q$ is sequentially closed under weak convergence, and thus closed since the weak topology on $\mcM_1^+(\bbR)$ is metrizable.
-We apply Proposition~\ref{prop:ldp_Wop} to get:
-\begin{align}
-    \label{eq:ub_ldp_Wop}
-    \nonumber
-     \limsup_{d \to \infty} \frac{1}{d^2} \log \bbP[\|\bW\|_\op \leq \kappa] &=  \limsup_{d \to \infty} \frac{1}{d^2} \log \bbP[\mu_\bW \in Q] , \\ 
-    \nonumber
-     &\leq - \inf_{\mu \in Q} I(\mu), \\ 
-     &= - \inf_{\mu \in \mcM_1^+([-\kappa,\kappa])} I(\mu).
+\noindent
+ Proposition~\ref{prop:ldp_empirical_measure_conditioned} directly applies to $\bbP_\kappa$, the law of $\bW \sim \GOE(d)$ conditioned on $\|\bW\|_\op \leq \kappa$, 
+ with $V(x) = x^2/2$. We obtain from it the following variational formulation for the limit of the left-hand side of eq.~\eqref{eq:ldp_Wop}.
+ \begin{corollary}\label{cor:ldp_Wop_var_principle}
+    Let $V(x) = x^2/2$, and recall eq.~\eqref{eq:E_V}. Then, for any $\kappa > 0$, with $\bW \sim \GOE(d)$:
+    \begin{equation*}
+        \lim_{d \to \infty} \frac{1}{d^2} \log \bbP[\|\bW\|_\op \leq \kappa] = \frac{3}{8} - \inf_{\nu \in \mcM_1^+([-\kappa,\kappa])} \mcE_{V}(\nu).
+    \end{equation*}
+ \end{corollary}
+ \begin{proof}[Proof of Corollary~\ref{cor:ldp_Wop_var_principle}]
+    The joint law of the eigenvalues $(\lambda_1, \cdots, \lambda_d)$ of $\bW$ is well-known thanks to the rotation invariance of the law of $\bW$. 
+We have (see e.g.\ Theorem~2.5.2 of \cite{anderson2010introduction}):
+\begin{align}\label{eq:joint_law_evalues}
+    \bbP[\|\bW\|_\op \leq \kappa] &= \frac{\int_{[-\kappa,\kappa]^d} \prod_{i < j} |\lambda_i - \lambda_j| e^{-\frac{d}{4} \sum_{i=1}^d \lambda_i^2} \prod_{i=1}^d \rd \lambda_i}{\int_{\bbR^d} \prod_{i < j} |\lambda_i - \lambda_j| e^{-\frac{d}{4} \sum_{i=1}^d \lambda_i^2} \prod_{i=1}^d \rd \lambda_i}.
 \end{align}
-The last equality follows since $I(\mu_{|[-\kappa,\kappa]}) = I(\mu)$ for all $\mu \in Q$, see eq.~\eqref{eq:def_I}.
+The denominator (or partition function) can be computed from Selberg's integrals~\citep{mehta2014random}.
+Its limit is given by
+\begin{align}\label{eq:part_function_selberg}
+    \lim_{d \to \infty} \frac{1}{d^2} \log \int_{\bbR^d} \prod_{i < j} |\lambda_i - \lambda_j| e^{-\frac{d}{4} \sum_{i=1}^d \lambda_i^2} \prod_{i=1}^d \rd \lambda_i 
+    &= - \frac{3}{8}.
+\end{align}
+The result follows then from Proposition~\ref{prop:ldp_empirical_measure_conditioned}-$(iii)$.
+ \end{proof}
+
+ \myskip
+ \textbf{Alternative proof --}
+ For reasons of completeness, and as a first version of this manuscript contained it, we detail in Appendix~\ref{sec:appendix_ldp} a proof of Corollary~\ref{cor:ldp_Wop_var_principle} 
+ that does not rely on Proposition~\ref{prop:ldp_empirical_measure_conditioned}, but only on its particular case $B = \bbR$ and $V(x) = x^2/2$, i.e.\ the case of a $\GOE(d)$ matrix, which was 
+ tackled in the seminal work of~\cite{arous1997large}.
+ 
+ \subsection{Solving the variational principle: proof of Proposition~\ref{prop:ldp_Wop}}\label{subsec:var_principle_1st_mom}
+
+ For $\mu \in \mcM_1^+(\bbR)$, let 
+\begin{equation}\label{eq:def_I}
+    I(\mu) \coloneqq -\frac{1}{2} \Sigma(\mu) + \frac{1}{4} \int \mu(\rd x) \, x^2 - \frac{3}{8}.
+\end{equation}
+ We establish here the following equation, for $\kappa \leq 2$: 
+ \begin{align}\label{eq:to_prove_var_1st_mom}
+    E_\kappa \coloneqq \inf_{\mu \in \mcM_1^+([-\kappa, \kappa])} I(\mu) = 
+    - \frac{\kappa^4}{128} + \frac{\kappa^2}{8} - \frac{1}{2} \log \frac{\kappa}{2} - \frac{3}{8}.
+ \end{align}
+ Combining eq.~\eqref{eq:to_prove_var_1st_mom} with Corollary~\ref{cor:ldp_Wop_var_principle} yields then Proposition~\ref{prop:ldp_Wop}.
+
+ \myskip 
 In order to characterize the minimizer of $I(\mu)$ for $\mu \in \mcM_1^+([-\kappa,\kappa])$, we
 rely on classical results of logarithmic potential theory, such as Theorem~1.3 of Chapter~I of \cite{saff2013logarithmic}, see also \cite{mhaskar1985does} and Theorem~2.4 of \cite{arous1997large}.
 In our context, the ``admissible weight function'' of~\cite{saff2013logarithmic} reads
@@ -212,7 +225,7 @@ We give here a short proof for the sake of completeness.
     This shows that $I(\mu) \leq I(\mu_\kappa^\star) = \inf_{\mu \in \mcM_1^+([-\kappa,\kappa])} I(\mu)$. By $(ii)$ of Theorem~\ref{thm:properties_inf_I}, $\mu = \mu_\kappa^\star$.
 \end{proof}
 \noindent
-Thanks to Lemma~\ref{lemma:log_pot_mukappa}, we can give an exact formula for $\mu_\kappa^\star$ by exhibiting a candidate measure satisfying eq.~\eqref{eq:log_pot_mukappa_hyp}, which in turns implies an exact formula for $E_\kappa$.
+Thanks to Lemma~\ref{lemma:log_pot_mukappa}, we can give an exact formula for $\mu_\kappa^\star$ by exhibiting a candidate measure satisfying eq.~\eqref{eq:log_pot_mukappa_hyp}, which in turns implies the exact formula~\eqref{eq:to_prove_var_1st_mom} for $E_\kappa$.
 \begin{proposition}
     \label{prop:mukappa_value}
     Let $\kappa \in (0,2]$.
@@ -221,19 +234,12 @@ Thanks to Lemma~\ref{lemma:log_pot_mukappa}, we can give an exact formula for $\
     \begin{equation}\label{eq:def_rhokappa}
         \rho_\kappa(x) \coloneqq \frac{4+\kappa^2-2x^2}{4 \pi \sqrt{\kappa^2 - x^2}}. 
     \end{equation}
-    Then $\mu_\kappa = \mu_\kappa^\star$, and 
+    Then $\mu_\kappa = \mu_\kappa^\star$, and we have eq.~\eqref{eq:to_prove_var_1st_mom}:
     \begin{equation*}
         E_\kappa = I(\mu_\kappa^\star) = - \frac{\kappa^4}{128} + \frac{\kappa^2}{8} - \frac{1}{2} \log \frac{\kappa}{2} - \frac{3}{8}.
     \end{equation*}
 \end{proposition}
 \noindent
-Combining Proposition~\ref{prop:mukappa_value} with eq.~\eqref{eq:ub_ldp_Wop}, we obtain the upper bound, 
-for $\kappa \in (0,2]$:
-\begin{equation}
-        \limsup_{d \to \infty} \frac{1}{d^2} \log \bbP[\|\bW\|_\op \leq \kappa] 
-        \leq \frac{\kappa^4}{128} - \frac{\kappa^2}{8} + \frac{1}{2} \log \frac{\kappa}{2} + \frac{3}{8}.
-\end{equation}
-It therefore just remains to prove Proposition~\ref{prop:mukappa_value}.
 \begin{proof}[Proof of Proposition~\ref{prop:mukappa_value}] 
     By Lemma~\ref{lemma:log_pot_mukappa}, to show that $\mu_\kappa = \mu_\kappa^\star$ it is enough to show that eq.~\eqref{eq:log_pot_mukappa_hyp} 
     holds for $\mu_\kappa$. 
@@ -310,154 +316,27 @@ and $\rho_\kappa$ is supported on $[-\kappa,\kappa]$, then
 for some constant $C$ chosen to ensure $\int_{-\kappa}^\kappa \rho_\kappa(x) \rd x = 1$.
 A careful evaluation of eq.~\eqref{eq:tricomi} based on the residue theorem yields eq.~\eqref{eq:def_rhokappa}.
 
-\subsection{Large deviation lower bound for the operator norm}
 
-We focus now on the lower bound for $(1/d^2) \log \bbP[\|\bW\|_\op \leq \kappa]$ in Proposition~\ref{prop:ldp_Wop}.
-
-\myskip
-Unfortunately the large deviation statement of Proposition~\ref{prop:ldp_emeasure} is not enough to obtain the corresponding lower bound to eq.~\eqref{eq:ub_ldp_Wop}, 
-because the set of probability measures supported in $[-\kappa,\kappa]$ has empty interior under the weak topology\footnote{For any $\mu \in \mcM_1^+(\bbR)$, there is a sequence $\mu_n$ weakly converging to $\mu$ while $ \supp(\mu_n) \nsubseteq [-\kappa,\kappa]$.}. 
-Instead, we come back to the joint law of the eigenvalues of a $\GOE(d)$ matrix, and 
-restrict the integration domain to a small neighborhood of the quantiles of $\mu_\kappa^\star$.
-This strategy is similar to the one used in the proof of the large deviation lower bound in \cite{arous1997large}.
-
-\myskip 
-The joint law of the eigenvalues $(\lambda_1, \cdots, \lambda_d)$ of $\bW$ is well-known thanks to the rotation invariance of the law of $\bW$. 
-We have (see e.g.\ Theorem~2.5.2 of \cite{anderson2010introduction}):
-\begin{align}\label{eq:joint_law_evalues}
-    \bbP[\|\bW\|_\op \leq \kappa] &= \frac{\int_{[-\kappa,\kappa]^d} \prod_{i < j} |\lambda_i - \lambda_j| e^{-\frac{d}{4} \sum_{i=1}^d \lambda_i^2} \prod_{i=1}^d \rd \lambda_i}{\int_{\bbR^d} \prod_{i < j} |\lambda_i - \lambda_j| e^{-\frac{d}{4} \sum_{i=1}^d \lambda_i^2} \prod_{i=1}^d \rd \lambda_i}.
-\end{align}
-The denominator (or partition function) can be computed from Selberg's integrals~\citep{mehta2014random}.
-Its limit is given by
-\begin{align}\label{eq:part_function_selberg}
-    \lim_{d \to \infty} \frac{1}{d^2} \log \int_{\bbR^d} \prod_{i < j} |\lambda_i - \lambda_j| e^{-\frac{d}{4} \sum_{i=1}^d \lambda_i^2} \prod_{i=1}^d \rd \lambda_i 
-    &= - \frac{3}{8}.
-\end{align}
-Let $\delta \in (0,\kappa)$, and recall the definition of $\rho_\kappa$ in eq.~\eqref{eq:def_rhokappa}.
-In what follows, we let $\nu_\delta \coloneqq \rho_{\kappa - \delta}$.
-We define the quantiles of $\nu_\delta$ as 
-\begin{equation*}
-    -(\kappa-\delta) = x_0^{(d)} < x_1^{(d)} < \cdots < x_d^{(d)} < x_{d+1}^{(d)} = \kappa - \delta, 
-\end{equation*}
-with, for all $i \in \{0, \cdots, d\}$:
-\begin{equation*}
-    \int_{x_i^{(d)}}^{x_{i+1}^{(d)}} \nu_\delta(u) \, \rd u = \frac{1}{d+1}. 
-\end{equation*}
-We will drop the subscript and write $x_i$ for $x_i^{(d)}$ to lighten notations.
-
-\myskip
-Clearly, the empirical measure $(1/d)\sum_{i=1}^d \delta_{x_i}$ weakly converges to $\nu_\delta$ as $d \to \infty$.
-Notice that $\{(\lambda_i)_{i=1}^d \, : \, |\lambda_i - x_i| \leq \delta, \, \, \forall i \in [1,d]\} \subseteq [-\kappa,\kappa]^d$, 
-so that from eqs.~\eqref{eq:joint_law_evalues} and \eqref{eq:part_function_selberg}:
-\begin{align}
-    \label{eq:lb_Wop_1}
-   &e^{-\frac{3d^2}{8} + \smallO(d^2)} \bbP[\|\bW\|_\op \leq \kappa] \\ 
-    \nonumber
-   &\geq \int_{[-\delta,\delta]^d} \prod_{i < j} |u_i - u_j + x_i - x_j| e^{-\frac{d}{4} \sum_{i=1}^d (u_i + x_i)^2} \prod_{i=1}^d \rd u_i,\\ 
-    \nonumber
-   &\ageq \int_{[-\delta,\delta]^d \cap \Delta_d} \prod_{i < j} (u_j - u_i + x_j - x_i) e^{-\frac{d}{4} \sum_{i=1}^d (u_i + x_i)^2} \prod_{i=1}^d \rd u_i, \\
-    \nonumber
-   &\bgeq \int_{[-\delta,\delta]^d \cap \Delta_d} \prod_{i + 1< j} (x_j - x_i) \prod_{i=1}^{d-1} [x_{i+1} - x_{i}]^{1/2} [u_{i+1} - u_i]^{1/2} e^{-\frac{d}{4} \sum_{i=1}^d (\delta + |x_i|)^2} \prod_{i=1}^d \rd u_i,
-\end{align}
-where we defined in $(\rm a)$ the set $\Delta_d \coloneqq \{u_1 < \cdots < u_d\}$, and used 
-in $(\rm b)$ that $u_i \leq u_j$ and $x_i \leq x_j$, as well as the inequality $A+B \geq \sqrt{AB}$ for $A, B \geq 0$.
-The integral on the variables $u_i$ can be lower-bounded as follows:
-\begin{align}\label{eq:volume_u}
-    \nonumber
-    \int_{[-\delta,\delta]^d \cap \Delta_d} \prod_{i=1}^{d-1} \sqrt{u_{i+1} - u_i} \prod_{i=1}^d \rd u_i 
-    &= \delta^{(3d-1)/2} \int_{[-1,1]^d \cap \Delta_d} \prod_{i=1}^{d-1} \sqrt{u_{i+1} - u_i} \prod_{i=1}^d \rd u_i , \\ 
-    \nonumber
-    &\geq \delta^{(3d-1)/2} \prod_{i=1}^{d} \int_{-1 + \frac{2(i-1)}{d}}^{-1 + \frac{2i-1}{d}} \rd u_i \, \left(\prod_{i=1}^{d-1} \sqrt{u_{i+1} - u_i}\right) , \\ 
-    &\geq \left(\frac{\delta}{d}\right)^{(3d-1)/2}.
-\end{align}
-Combining eqs.~\eqref{eq:lb_Wop_1} and \eqref{eq:volume_u}: 
-\begin{align*}
-    \liminf_{d \to \infty} \frac{1}{d^2} \log \bbP[\|\bW\|_\op \leq \kappa]  
-    &\geq \frac{3}{8} - \frac{\delta^2}{4}
-    + \liminf_{d \to \infty} \left[-\frac{\delta}{2d} \sum_{i=1}^d |x_i| -\frac{1}{4d} \sum_{i=1}^d x_i^2\right. \\ 
-    &\left.+ \frac{1}{2d^2} \sum_{i=1}^{d-1} \log (x_{i+1} - x_i) + \frac{1}{d^2} \sum_{i,j=1}^d \log(x_j - x_i) \indi\{j > i+1\}
-    \right].
-\end{align*}
-By the weak convergence described above, and since $\sum_{i=1}^d x_i^2 = \sum_{i=1}^d x_i^2 \indi\{|x_i| \leq \kappa\}$, we get by the Portmanteau theorem:
-\begin{align}\label{eq:lb_Wop_2}
-    \liminf_{d \to \infty} \frac{1}{d^2} \log \bbP[\|\bW\|_\op \leq \kappa]  
-    &\geq \frac{3}{8} - \frac{\delta^2}{4} - \frac{\delta}{2} \int |x| \nu_\delta(\rd x) - \frac{1}{4} \int x^2 \nu_\delta(\rd x) \\
-    \nonumber
-    &\hspace{-9pt}+ \liminf_{d \to \infty}\left[\frac{1}{2d^2} \sum_{i=1}^{d-1} \log (x_{i+1} - x_i) + \frac{1}{d^2} \sum_{i,j=1}^d \log(x_j - x_i) \indi\{j > i+1\}
-    \right].
-\end{align}
-Finally, notice that 
-\begin{align*}
-    \Sigma(\nu_\delta) &= 2 \sum_{0 \leq i,j \leq d} \int_{x_i}^{x_{i+1}} \nu_\delta(\rd x) \int_{x_j}^{x_{j+1}} \nu_\delta(\rd y) \, \log (y-x) \, \indi\{x < y\}, \\ 
-    &\leq \sum_{i=0}^d \int_{x_i}^{x_{i+1}} \nu_\delta(\rd x) \int_{x_i}^{x_{i+1}} \nu_\delta(\rd y) \, \log |y-x| + 2 \sum_{0 \leq i < j \leq d} \frac{\log(x_{j+1} - x_i)}{(d+1)^2}, \\
-    &\leq \frac{1}{(d+1)^2} \left[\sum_{i=0}^d \log(x_{i+1}-x_i) + 2 \sum_{0 \leq i < j \leq d} \log(x_{j+1} - x_i)\right], \\ 
-    &\aleq \frac{1}{(d+1)^2} \left[\sum_{i=1}^{d-1} \log(x_{i+1}-x_i) + 2 \sum_{i,j=1}^d \log(x_j - x_i) \indi\{j > i+1\} \right] + \frac{2d+1}{(d+1)^2} \log 2 \kappa.
-\end{align*}
-We used in $(\rm a)$ that $|x_i - x_j| \leq 2 (\kappa-\delta) \leq 2\kappa$ for all $i,j$.
-Using this in eq.~\eqref{eq:lb_Wop_2} gives:
-\begin{align*}
-    \liminf_{d \to \infty} \frac{1}{d^2} \log \bbP[\|\bW\|_\op \leq \kappa]  
-    &\geq \frac{3}{8} - \frac{\delta^2}{4} - \frac{\delta}{2} \int |x| \nu_\delta(\rd x) - \frac{1}{4} \int x^2 \nu_\delta(\rd x) + \frac{1}{2} \Sigma(\nu_\delta), \\
-    &\geq - \frac{\delta}{2} \int |x| \nu_\delta(\rd x)  - \frac{\delta^2}{4} - I(\nu_\delta).
-\end{align*}
-Recall that $\nu_\delta = \rho_{\kappa - \delta}$, so that taking the limit $\delta \to 0$, we get:
-\begin{align*}
-    \liminf_{d \to \infty} \frac{1}{d^2} \log\bbP[\|\bW\|_\op \leq \kappa] 
-    &\geq - I(\rho_\kappa),
-\end{align*}
-Proposition~\ref{prop:mukappa_value} gives the value of $I(\rho_\kappa)$, which implies the lower bound
-\begin{align}\label{eq:lb_ldp_Wop}
-        \liminf_{d \to \infty} \frac{1}{d^2} \log \bbP[\|\bW\|_\op \leq \kappa] 
-        \geq \frac{\kappa^4}{128} - \frac{\kappa^2}{8} + \frac{1}{2} \log \frac{\kappa}{2} + \frac{3}{8}.
-\end{align}
-Combining eqs.~\eqref{eq:ub_ldp_Wop} and \eqref{eq:lb_ldp_Wop} ends the proof of Proposition~\ref{prop:ldp_Wop}.
-$\qed$
 
 \subsection{Limiting spectral distribution of a norm-constrained Gaussian matrix}\label{subsec:proof_lsd_constrained_GOE}
 
-We prove here Theorem~\ref{thm:lsd_constrained_GOE}.
-A large deviations upper bound for the law of $\mu_\bW$ can be obtained by combining Proposition~\ref{prop:ldp_emeasure} 
-and Proposition~\ref{prop:ldp_Wop}, as we state in the following corollary.
-\begin{corollary}
-    \label{cor:ldp_ub}
-    Let $\kappa \in (0,2]$ and $\bW \sim \bbP_\kappa$. 
-    We denote $\mu_{\bW} \coloneqq (1/d) \sum_{i=1}^d \delta_{\lambda_i(\bW)}$ its empirical spectral distribution. 
-    Recall the definition of $I(\mu)$ in eq.~\eqref{eq:def_I}, and of $\mu_\kappa^\star(\rd x) =\rho_\kappa(x) \rd x$ in eq.~\eqref{eq:def_rhokappa}.
-    Then the law of $\mu_\bW$ satisfies a large deviation upper bound, in the scale $d^2$, with rate function 
-    $J_\kappa(\mu) \coloneqq I(\mu) - I(\mu_\kappa^\star)$,
-    that is for any closed subset $F \subseteq \mcM_1^+([-\kappa,\kappa])$: 
-    \begin{align*}
-            \limsup_{d\to\infty} \frac{1}{d^2} \log \bbP_\kappa[\mu_\bW \in F] \leq - \inf_{\mu \in F} J_\kappa(\mu).
-    \end{align*}
-\end{corollary}
-\begin{proof}[Proof of Corollary~\ref{cor:ldp_ub}]
-    Because $\mu_\bW \in F \Rightarrow \|\bW\|_\op \leq \kappa$, we have 
-    \begin{align*}
-       \bbP_\kappa[\mu_\bW \in F] &= \bbP_{\bW \sim \GOE(d)}[\mu_\bW \in F \, | \, \|\bW\|_\op \leq \kappa], \\
-       &= \frac{\bbP_{\bW \sim \GOE(d)}[\mu_\bW \in F]}{\bbP_{\bW \sim \GOE(d)}[\|\bW\|_\op \leq \kappa]}.
-    \end{align*}
-    Since $F$ is closed in $\mcM_1^+([-\kappa,\kappa])$ under the weak topology, it is closed as well in $\mcM_1^+(\bbR)$.
-    Thus:
-    \begin{align*}
-       \limsup_{d \to \infty} \frac{1}{d^2} \log \bbP_\kappa[\mu_\bW \in F] &\aeq \limsup_{d \to \infty} \frac{1}{d^2} \log \bbP_{\bW \sim \GOE(d)}[\mu_\bW \in F] + I(\mu_\kappa^\star), \\ 
-       &\bleq - \inf_{\mu \in F} J_\kappa(\mu),
-    \end{align*}
-    using Proposition~\ref{prop:ldp_Wop} in $(\rm a)$, and Proposition~\ref{prop:ldp_emeasure} in $(\rm b)$.
-\end{proof}
-\noindent
-\fixme{Indeed, isn't it what is shown in~\cite{fan2015convergence}? See also~Theorem~3.1 of \cite{chafai2021coulomb}. And Theorem~1.1. of \cite{borot2013asymptotic}, mention as well~\cite{borot2024asymptotic} for more complicated potentials. All of those imply this result, at least the limit being given by a minimizer of the rate function in 
-the considered set.}
-While we surely anticipate that one can obtain a corresponding large deviation lower bound for $\mu_\bW$ (and thus a full large deviation principle), 
-Corollary~\ref{cor:ldp_ub} is enough to imply Theorem~\ref{thm:lsd_constrained_GOE}.
-Indeed, for any $\delta > 0$, if $B(\mu_\kappa^\star,\delta) \subseteq \mcM_1^+([-\kappa,\kappa])$ is the open ball of radius $\delta$ centered in $\mu_\kappa^\star$ for the distance of eq.~\eqref{eq:dudley}, 
-then 
+Theorem~\ref{thm:lsd_constrained_GOE} follows as a direct consequence of Proposition~\ref{prop:ldp_empirical_measure_conditioned} and Proposition~\ref{prop:mukappa_value}.
+Indeed, let $\bbP_\kappa$ be the law of $\bW \sim \GOE(d)$ conditioned on $\|\bW\|_\op \leq \kappa$, and denote $\mu_\bW$ the empirical spectral distribution of $\bW$.
+Then for any $\delta > 0$, if $B(\mu_\kappa^\star,\delta) \subseteq \mcM_1^+([-\kappa,\kappa])$ is the open ball of radius $\delta$ centered in $\mu_\kappa^\star$ for the distance of eq.~\eqref{eq:dudley}, 
 \begin{align*}
-    \limsup_{d \to \infty} \frac{1}{d^2} \log \bbP_\kappa[\mu_\bW \notin B(\mu_\kappa^\star, \delta)] \leq - \inf_{\mu \in B(\mu_\kappa^\star, \delta)^c} [J_\kappa(\mu)].
+    \limsup_{d \to \infty} \frac{1}{d^2} \log \bbP_\kappa[\mu_\bW \notin B(\mu_\kappa^\star, \delta)] \leq - \inf_{\mu \in B(\mu_\kappa^\star, \delta)^c} [J_\kappa(\mu)],
 \end{align*}
-Since $J_\kappa$ is a good rate function (see Proposition~\ref{prop:ldp_emeasure}) and has a unique minimizer (cf.\ $(ii)$ of Theorem~\ref{thm:properties_inf_I}), 
+with 
+\begin{align*}
+    J_\kappa(\mu) \coloneqq I(\mu) - I(\mu_\kappa^\star),
+\end{align*}
+for $I$ given in eq.~\eqref{eq:def_I}.
+Since $J_\kappa$ is a good rate function (see Proposition~\ref{prop:ldp_empirical_measure_conditioned}) and has a unique minimizer (cf.\ $(ii)$ of Theorem~\ref{thm:properties_inf_I}), 
 $\inf_{\mu \in B(\mu_\kappa^\star, \delta)^c} [J_\kappa(\mu)] > 0$. Therefore, by the Borel-Cantelli lemma,
 \begin{align*}
     \bbP[\limsup_{d \to \infty} d(\mu_\bW, \mu_\kappa^\star) \leq \delta] = 1,
 \end{align*}
 which ends the proof by taking the limit $\delta \to 0$.
 $\qed$
+
+}

@@ -45,12 +45,7 @@ we aim to characterize the following discrepancy objective ($\|\cdot\|_\op$ is t
 \change{
 As already mentioned, a foundational question in discrepancy is how the discrepancy objective compares to the one achieved by a \emph{random} choice of the 
 signings $\eps_i \iid \Unif(\{\pm 1\})$: matrix discrepancy is thus intimately connected to the study of large random matrices.}
-%~\change{(cf e.g.\ the discussion in 
-%%\citep{levy2017deterministic,hopkins2022matrix,dadush2022new,bansal2023resolving}}. 
-%\cite{bansal2023resolving}}).
 \change{Matrix discrepancy has also}
-%Since many problems related to the spectra of large matrices can be viewed as questions on matrix discrepancy, 
-%it has also
 been shown to have implications in the theory of quantum random access codes~\citep{hopkins2022matrix,bansal2023resolving}, 
 in generalizations of the Kadison-Singer problem~\citep{marcus2015interlacing,kyng2020four}, as well as 
 graph sparsification~\citep{batson2014twice} to name a few.
@@ -75,10 +70,6 @@ $\rk(\bA_i) \lesssim n / \log^3 n$~\citep{bansal2023resolving}, and is based on 
 In this work, we consider an average-case version of Conjecture~\ref{conj:mspencer}, introduced in Section~\ref{subsubsec:average_mdiscrepancy}.
 
 \subsubsection{\change{Random vector discrepancy, and the symmetric binary perceptron}}\label{subsubsec:sbp}
-
-%\todo{Emphasize more that SBP is usually studied in the proportional scaling regime. 
-%The structure of this paragraph is now not clear, since the blue parts already use that this question is a random version of Spencer's theorem.
-%}
 
 \change{
     \noindent
@@ -127,17 +118,8 @@ solving algorithms,
 which can then guide the theory of more complex statistical models,
 see e.g.\ \cite{aubin2019storage,perkins2021frozen,abbe2022proof,gamarnik2022algorithms,kizildag2023symmetric,barbier2024atypical,alaoui2024hardness,barbier2024escape}.
 \change{
-%Letting $(\bu_i)_k \coloneqq (\bg_k)_i$ so that $(\bu_i)_{i=1}^n \iid \mcN(0, \Id_d)$, the question above can be reformulated 
-%as whether the set 
-%\begin{equation}
-%    \label{eq:def_SK_SBP}
-%    S_K \coloneqq \left\{\eps \in \{\pm 1\}^n \, : \, \left\|\sum_{i=1}^n \eps_i \bu_i \right\|_\infty \leq K \sqrt{n}\right\}
-%\end{equation}
-%is non-empty.
 Concretely, it is shown in \cite{aubin2019storage,abbe2022proof,gamarnik2022algorithms} (among other results) that 
 the SBP undergoes the following sharp satisfiability/unsatisfiability transition.
-%Concretely,
-%the SBP undergoes the following sharp satisfiability/unsatisfiability transition.
 }
 \begin{theorem}[Sharp threshold for the SBP~\citep{aubin2019storage,abbe2022proof}]\label{thm:trans_SBP}
     \change{
@@ -441,12 +423,8 @@ Improving the estimates we obtain in Section~\ref{sec:2nd_moment} to obtain a sh
 it requires a precise understanding of the large deviation properties of the law of $(\|\bW_1\|_\op, \|\bW_2\|_\op)$, where $\bW_1, \bW_2$ are two correlated $\GOE(d)$ matrices, both conditioned on having small spectral norm (see eq.~\eqref{eq:def_Gd}). 
 \change{
     A rate function for this law can be obtained in a variational form (see e.g.\ Theorem~3.3 of \cite{guionnet2004first}), however a numerical analysis of this variational formula 
-    is a very challenging problem, which we leave it as a future direction.
+    is a very challenging problem, which we leave as a future direction.
 }
-%This is an involved problem of large deviations theory applied to random matrices~\citep{guionnet2022rare}, and we leave it as a future direction. 
-%\todo{Also change things here, with the papers mentioned below, the rate function is known but computing it is hard.}
-%As a first step, we plan to address the computation of the resulting large deviations rate function and, more broadly, the asymptotic behavior of the typical value of \( Z_\kappa \), using advanced but non-rigorous tools from statistical physics~\citep{mezard1987spin,talagrand2011mean,charbonneau2023spin} in future work.
-
 
 \myskip
 Furthermore, and very interestingly, we show in Theorem~\ref{thm:fail_second_moment} that 
