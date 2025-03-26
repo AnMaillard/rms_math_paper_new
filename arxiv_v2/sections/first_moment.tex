@@ -37,11 +37,13 @@ Our approach yields the value of the limit in eq.~\eqref{eq:ldp_Wop} as a variat
 which we can solve using the theory of logarithmic potentials~\citep{saff2013logarithmic} and Tricomi's theorem~\citep{tricomi1985integral}, similarly to the alternative proof of Wigner's semicircle law obtained by \cite{arous1997large} from their large deviations result.
 Similar arguments also appeared in the theoretical physics literature~\citep{dean2006large,vivo2007large,dean2008extreme,majumdar2014top}. 
 We refer to \cite{anderson2010introduction,guionnet2022rare} for more background and open problems in the theory of large deviations for random matrices.
+\todo{This needs to be changed as well, mentioning the other works below.}
 
 \myskip
 \textbf{Remark --}
-The following result is a byproduct of our analysis.
-\todo{Add a note that it was obtained before in a manuscript~\cite{bouali2015constrained}.}
+The following result is a byproduct of our analysis\footnote{\change{
+After the present work appeared online, the author realized that Theorem~\ref{thm:lsd_constrained_GOE} had appeared in an unpublished manuscript~\citep{bouali2015constrained}.
+}}.
 \begin{theorem}[Limiting spectral density of a constrained $\GOE(d)$ matrix]\label{thm:lsd_constrained_GOE}
    For $\kappa \in (0,2]$, denote $\bbP_\kappa$ the law of $\bW \sim \GOE(d)$ conditioned on $\|\bW\|_\op \leq \kappa$. 
     If $\bW \sim \bbP_\kappa$, then its empirical spectral density $\mu_\bW$ converges weakly (as $d \to \infty$, and a.s.) to $\mu_\kappa(\rd x) \coloneqq \rho_\kappa(x) \rd x$ given, for $x \in (-\kappa, \kappa)$, by:
@@ -60,6 +62,8 @@ Theorem~\ref{thm:lsd_constrained_GOE} is proven in Section~\ref{subsec:proof_lsd
 \caption{$\rho_\kappa(x)$ of eq.~\eqref{def:rhokappa_1} for different values of $\kappa$. For $\kappa = 2$ one recovers the semicircle law.\label{fig:rho_kappa}}
 \end{figure}
 \change{
+
+\myskip
 Let us denote
 $S_\kappa \coloneqq \{\eps \in \{\pm 1\}^n \, \textrm{s.t.} \, \|\sum_{i=1}^n \eps_i \bW_i\|_{\op} \leq \kappa \sqrt{n} \}$,
 so that $Z_\kappa = \# S_\kappa$.
@@ -117,15 +121,15 @@ $V(x) = x^2 + \indi\{|x| > \kappa\} \times \infty$.
 However, we will see that the large deviations of the empirical measure is only used to prove the upper bound in Proposition~\ref{prop:ldp_Wop}, 
 and the particular form of the operator norm constraint allows us to rely solely on Proposition~\ref{prop:ldp_emeasure}, rather than 
 adapting the general results of \cite{arous1997large,anderson2010introduction} to this discontinuous potential. 
-\change{
-    Without aiming at being exhaustive, ...
+\todo{
+    Without aiming at being exhaustive (in particular I will not mention~\cite{chafai2021coulomb}), ...
 \begin{itemize}
-    \item \cite{borot2013asymptotic}: \todo, Look.
-    \item \cite{fan2015convergence}: this one really implies what I need actually I think... Cf Theorem~1.1, also Remark~1.3 for my Theorem~\ref{thm:lsd_constrained_GOE} -- at least for the fact that it converges to the minimizer.
-    \fixme{ I should think of how I can mention it, maybe move things to appendices? Since I re-did some of the proofs essentially.
-    I can mention that I add it in appendix for completeness, and since it appeared like this in a first version of this manuscript.
-    }
-    \item \cite{chafai2021coulomb}: Theorem~3.1
+    \item \cite{borot2013asymptotic}:
+    Its theorem~1.1 basically says that we have the large deviation principle for the measure $\bW \sim \GOE(d) | \|\bW\|_\op \leq \kappa$. In particular we must also have the asymptotics of the partition function (cf.\ e.g.\ the conclusion of the proof of Theorem~2.6.1 of~\cite{anderson2010introduction}), 
+    and the fact that it converges to a minimizer of the functional. 
+    Here say that we reproduce it for completeness, and solve the variational principle, but change the narrative, move the proof of the LDP to appendix, make the paper shorter.
+    \item \cite{fan2015convergence}: Theorem~1.1 is the same as~\cite{borot2024asymptotic}.
+     Also Remark~1.3 for my Theorem~\ref{thm:lsd_constrained_GOE} -- at least for the fact that it converges to the minimizer, like I said above.
 \end{itemize}
 }
 
@@ -440,7 +444,7 @@ and Proposition~\ref{prop:ldp_Wop}, as we state in the following corollary.
     using Proposition~\ref{prop:ldp_Wop} in $(\rm a)$, and Proposition~\ref{prop:ldp_emeasure} in $(\rm b)$.
 \end{proof}
 \noindent
-\fixme{Indeed, isn't it what is shown in~\cite{fan2015convergence}? See also~Theorem~3.1 of \cite{chafai2021coulomb}. And Theorem~1.1. of \cite{borot2013asymptotic}. All of those imply this result, at least the limit being given by a minimizer of the rate function in 
+\fixme{Indeed, isn't it what is shown in~\cite{fan2015convergence}? See also~Theorem~3.1 of \cite{chafai2021coulomb}. And Theorem~1.1. of \cite{borot2013asymptotic}, mention as well~\cite{borot2024asymptotic} for more complicated potentials. All of those imply this result, at least the limit being given by a minimizer of the rate function in 
 the considered set.}
 While we surely anticipate that one can obtain a corresponding large deviation lower bound for $\mu_\bW$ (and thus a full large deviation principle), 
 Corollary~\ref{cor:ldp_ub} is enough to imply Theorem~\ref{thm:lsd_constrained_GOE}.
