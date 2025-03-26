@@ -298,16 +298,16 @@ Our first main result is the following sharp asymptotics for the expectation of 
 \noindent
 In Section~\ref{sec:1st_moment} we carry out the proof of Theorem~\ref{thm:first_moment}. 
 It relies on Proposition~\ref{prop:ldp_Wop}, which establishes the large deviations of the operator norm of a 
-$\GOE(d)$ matrix, in the scale $d^2$. \change{This is a consequence of now-classical results on the large deviations of the empirical measure 
-in so-called $\beta$-matrix models~\citep{arous1997large,anderson2010introduction}. This yields the large deviation rate function in a variational form.}. 
-Further, using results of logarithmic potential theory~\citep{saff2013logarithmic} and the Tricomi theorem~\citep{tricomi1985integral}, we are able to then solve \change{this variational principle},
+$\GOE(d)$ matrix, in the scale $d^2$. 
+The existence of such a large deviation principle is not surprising given existing results on the large deviations of the empirical measure 
+of $\GOE(d)$ matrices~\citep{arous1997large}, 
+and we partially build upon these results in the first part of our proof.
+Further, using results of logarithmic potential theory~\citep{saff2013logarithmic} and the Tricomi theorem~\citep{tricomi1985integral}, we are able to then solve the variational principle arising from this large deviations result, 
 and its outcome gives eq.~\eqref{eq:tau_1st_moment}.
-\change{As a byproduct, we obtain the limiting spectral measure of a matrix $\bW~\sim~\GOE(d)$ constrained on the event $\|\bW\|_\op \leq \kappa$, see Theorem~\ref{thm:lsd_constrained_GOE}}.
+Our proof also implies a limiting theorem for the spectral measure of a matrix $\bW~\sim~\GOE(d)$ constrained on the event $\|\bW\|_\op \leq \kappa$, see Theorem~\ref{thm:lsd_constrained_GOE}.
 
 \myskip
-\change{
-\textbf{Relation to results of~\cite{kunisky2023online} --}
-}
+\textbf{Relation to previous results --}
 Theorem~\ref{thm:first_moment} is a refinement of Theorem~1.13 of \cite{kunisky2023online}, 
 which show that $Z_\kappa = 0$ with high probability if $\kappa \leq \delta \cdot 4^{-\tau}$, for an (unspecified) absolute constant $\delta > 0$.
 For instance, the bound of \cite{kunisky2023online} correctly predicts $\tau_1(\kappa) \sim - \log \kappa / \log 4$ for $\kappa \to 0$, but fails to capture that $\tau_1(\kappa) \to 0$ continuously as $\kappa \to 2$. 
@@ -439,12 +439,8 @@ For this reason, the second moment ratio $\EE[Z_\kappa^2]/\EE[Z_\kappa]^2$ might
 For instance, one might conjecture that this includes values of $\tau$ arbitrarily close to $0$ when $\kappa$ approaches $2$, which is not captured by our current bounds.
 Improving the estimates we obtain in Section~\ref{sec:2nd_moment} to obtain a sharp study of the range of parameters $(\tau, \kappa)$ with bounded second moment ratio is significantly more complex than in the SBP setting:
 it requires a precise understanding of the large deviation properties of the law of $(\|\bW_1\|_\op, \|\bW_2\|_\op)$, where $\bW_1, \bW_2$ are two correlated $\GOE(d)$ matrices, both conditioned on having small spectral norm (see eq.~\eqref{eq:def_Gd}). 
-\change{
-    A rate function for this law can be obtained in a variational form (see e.g.\ Theorem~3.3 of \cite{guionnet2004first}), however a numerical analysis of this variational formula 
-    is a very challenging problem, which we leave it as a future direction.
-}
-%This is an involved problem of large deviations theory applied to random matrices~\citep{guionnet2022rare}, and we leave it as a future direction. 
-%\todo{Also change things here, with the papers mentioned below, the rate function is known but computing it is hard.}
+This is an involved problem of large deviations theory applied to random matrices~\citep{guionnet2022rare}, and we leave it as a future direction. 
+\todo{Also change things here, with the papers mentioned below, the rate function is known but computing it is hard.}
 %As a first step, we plan to address the computation of the resulting large deviations rate function and, more broadly, the asymptotic behavior of the typical value of \( Z_\kappa \), using advanced but non-rigorous tools from statistical physics~\citep{mezard1987spin,talagrand2011mean,charbonneau2023spin} in future work.
 
 

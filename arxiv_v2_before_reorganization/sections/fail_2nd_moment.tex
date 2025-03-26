@@ -37,13 +37,11 @@ Hypothesis~\ref{hyp:control_Gsecond} states that $G_d''(q)$ is continuous in $q 
 We make two important remarks related to this hypothesis:
 \begin{itemize}[leftmargin=*]
     \item First, note that $G_d$ in eq.~\eqref{eq:Gd_integral} can be interpreted as a large deviations rate function for the spectral norms of two $q$-correlated $\GOE(d)$ matrices $(\|\bW_1\|_\op, \|\bW_2\|_\op)$, 
-    on the scale $d^2$. 
-    \change{
-    In general, the large deviations rate function (in the weak topology) for the joint law of the spectral measures of two matrices $\bW_1$ and $\bW_2$
-    drawn from a $\beta$-ensemble with an interacting potential proportional to $\Tr[\bW_1 \bW_2]$ has been established in~\cite{guionnet2004first}[Theorem~3.3]. 
-    From these results, one can obtain the existence of $G(q)$, the limit of $G_d(q)$ as $d \to \infty$, as well as a variational formulation for it.
-    Under this framework, Hypothesis~\ref{hyp:control_Gsecond} would follow if $G_d''$ was shown to converge uniformly to $G''$ in a neighborhood of $q = 0$.
-    }
+    on the scale $d^2$. Proving such a large deviation principle (which would extend Proposition~\ref{prop:ldp_Wop}) is a challenging mathematical task, and falls beyond the scope of this work.
+    However, it is plausible to conjecture the existence of a large deviation principle for these random variables, along with a smooth limiting rate function $G(q)$: \change{indeed, the large deviations rate function (in the weak topology) for the joint law of the spectral measures of $\bW_1$ and $\bW_2$ 
+    has been established in~\cite{guionnet2004first}, generalizing Proposition~\ref{prop:ldp_emeasure} from~\cite{arous1997large} for the case of a single Gaussian matrix.}
+    Under this framework, Hypothesis~\ref{hyp:control_Gsecond} would follow if $G_d''$ converges uniformly to $G''$ in a neighborhood of $q = 0$.
+    
     \item A sufficient condition for Hypothesis~\ref{hyp:control_Gsecond} to hold is to establish that $\sup_{|q| \leq \eps} |G_d^{(3)}(q)| \leq C(\eps)$ as $d \to \infty$.
     The third derivative of $G_d$ can be explicitly calculated from eq.~\eqref{eq:Gd_integral}, similar to our computation of the second derivative in Section~\ref{sec:2nd_moment}.
     As discussed there, bounding the second derivative required demonstrating that $\Var_{\langle \cdot \rangle}[\Tr P[\bW_1, \bW_2]] = \mcO(1)$, where $P$ is a polynomial independent of $d$, and $\bW_1, \bW_2$ are two correlated $\GOE(d)$ matrices conditioned to have spectral norm at most $\kappa$ (see eq.~\eqref{eq:gibbs_q}).

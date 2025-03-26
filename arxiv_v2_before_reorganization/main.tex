@@ -28,8 +28,8 @@
     Second, combining a second-moment method with recent results from \cite{altschuler2023zero} on margin concentration in perceptron-type problems, we identify a second threshold $\tau_2(\kappa)$, 
     such that for $\tau > \tau_2(\kappa)$ the problem admits solutions with high probability.
 %
-    In particular, we establish that a system of $n = \Theta(d^2)$ Gaussian random matrices can be balanced so that the spectrum of the resulting matrix macroscopically shrinks compared to the typical semicircle law.
-    Finally, under a technical assumption, we show that there exists values of $(\tau,\kappa)$ for which the \change{number of solutions has large variance}, 
+    In particular, we establish for the first time that a system of $n = \Theta(d^2)$ Gaussian random matrices can be balanced so that the spectrum of the resulting matrix macroscopically shrinks compared to the typical semicircle law.
+    Finally, under a technical assumption, we show that there exists values of $(\tau,\kappa)$ for which the average number of solutions is both exponentially large and does not concentrate around its average, 
     implying the failure of the second moment method and uncovering a richer picture than in the symmetric binary perceptron.
     Our proofs rely on concentration inequalities and large deviation properties for the law of correlated Gaussian matrices under spectral norm constraints.
 \end{abstract}
@@ -52,10 +52,6 @@ as well as Tim Kunisky and Afonso S.\ Bandeira for insightful discussions about 
 
 \section{Limitations of the second moment method}\label{sec:fail_2nd_moment}
 \input{sections/fail_2nd_moment.tex}
-
-\appendix 
-\section{Large deviations for the spectral norm of a Gaussian matrix}\label{sec:appendix_ldp}
-\input{sections/appendix.tex}
 
 \printbibliography
 \end{document}
