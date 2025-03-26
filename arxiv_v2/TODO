@@ -1,8 +1,9 @@
-- Change the structure of the first moment proof to take into account the references I had missed
-- Prove the technical assumption?
-- Submit it to arXiv and to a journal !
-- After, go back to my ''Remarks for resubmission'' notes for good references on limits of matrix models, perturbative expansions of HCIZ integrals, etc...
-
+- Submit it to arXiv and to a journal (applied probability, random structures) !
+	- Random structures and algorithms? Looks like a good fit!
+	- ALEA?
+	- EJP (ECP)? Maybe not goof enough on the proba side, and on the discrepancy side they would not be interested.
+	- Probability Theory and Related Fields (but Springer)
+	- Something else?
 
 DONE:
 - Add a remark on the result of this paper of Wengiel!
@@ -28,3 +29,6 @@ DONE:
 
 - Mention https://arxiv.org/pdf/math/0211131 for the proof of LDP for correlated GOEs with constrained spectral norm
 - Reviews of STOC to take into account
+- After, go back to my ''Remarks for resubmission'' notes for good references on limits of matrix models, perturbative expansions of HCIZ integrals, etc...
+- Prove the technical assumption?
+- Change the structure of the first moment proof to take into account the references I had missed
