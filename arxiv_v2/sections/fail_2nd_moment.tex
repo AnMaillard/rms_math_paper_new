@@ -24,7 +24,7 @@ We can compute explicitly the limit of $G_d''(q)$ for $q$ close to $0$ as follow
 Lemma~\ref{lemma:limit_Gsecond} relies on the limiting spectral distribution theorem we established in Theorem~\ref{thm:lsd_constrained_GOE}, 
 and is proven below. First, we establish how Lemma~\ref{lemma:limit_Gsecond}, 
 alongside the following technical hypothesis,
-end the proof of Theorem~\ref{thm:fail_second_moment}.
+ends the proof of Theorem~\ref{thm:fail_second_moment}.
 \begin{hypothesis}\label{hyp:control_Gsecond}
     We assume that, for $G_d$ given in eq.~\eqref{eq:Gd_integral}:
     \begin{equation*}
@@ -38,12 +38,10 @@ We make two important remarks related to this hypothesis:
 \begin{itemize}[leftmargin=*]
     \item First, note that $G_d$ in eq.~\eqref{eq:Gd_integral} can be interpreted as a large deviations rate function for the spectral norms of two $q$-correlated $\GOE(d)$ matrices $(\|\bW_1\|_\op, \|\bW_2\|_\op)$, 
     on the scale $d^2$. 
-    \change{
     In general, the large deviations rate function (in the weak topology) for the joint law of the spectral measures of two matrices $\bW_1$ and $\bW_2$
     drawn from a $\beta$-ensemble with an interacting potential proportional to $\Tr[\bW_1 \bW_2]$ has been established in~\cite{guionnet2004first}[Theorem~3.3]. 
-    From these results, one can obtain the existence of $G(q)$, the limit of $G_d(q)$ as $d \to \infty$, as well as a variational formulation for it.
+    From these results, one can obtain the existence of the limit of $G_d(q)$ as $d \to \infty$ (which we call $G(q)$), as well as a variational formula for it.
     Under this framework, Hypothesis~\ref{hyp:control_Gsecond} would follow if $G_d''$ was shown to converge uniformly to $G''$ in a neighborhood of $q = 0$.
-    }
     \item A sufficient condition for Hypothesis~\ref{hyp:control_Gsecond} to hold is to establish that $\sup_{|q| \leq \eps} |G_d^{(3)}(q)| \leq C(\eps)$ as $d \to \infty$.
     The third derivative of $G_d$ can be explicitly calculated from eq.~\eqref{eq:Gd_integral}, similar to our computation of the second derivative in Section~\ref{sec:2nd_moment}.
     As discussed there, bounding the second derivative required demonstrating that $\Var_{\langle \cdot \rangle}[\Tr P[\bW_1, \bW_2]] = \mcO(1)$, where $P$ is a polynomial independent of $d$, and $\bW_1, \bW_2$ are two correlated $\GOE(d)$ matrices conditioned to have spectral norm at most $\kappa$ (see eq.~\eqref{eq:gibbs_q}).
@@ -58,10 +56,10 @@ We make two important remarks related to this hypothesis:
     Achieving a sharper bound would require an even more precise control over the statistics of
     $\Tr P[\bW_1, \bW_2]$
     under the law $\langle \cdot \rangle$ of eq.~\eqref{eq:gibbs_q}, 
-    which we have not been able to achieve at present and leave as a direction for future work\footnote{\change{
+    which we have not been able to achieve at present and leave as a direction for future work\footnote{
      A bound $\smallO_d(1)$ for the quantity of eq.~\eqref{eq:required_3rd_moment} can be shown if the joint density of $(\bW_1, \bW_2)$ is proportional to $\exp\{-d \Tr V[\bW_1, \bW_2]\}$, for some strongly convex and polynomial potentials $V$, as a consequence 
-     of a central limit theorem for $\Tr P[\bW_1,\bW_2]$, see~\cite{guionnet2009large}[Chapter 9]. However even achieving this bound here is non-trivial because our potential is singular as a consequence of the constraint $\indi\{\|\bW_a\|_\op \leq \kappa\}$ (see e.g.~\cite{borot2013asymptotic} for the case of single-matrix models).
-    }}.
+     of a central limit theorem for $\Tr P[\bW_1,\bW_2]$, see~\cite{guionnet2009large}[Chapter 9]. However even achieving this bound here appears non-trivial because our potential is singular as a consequence of the constraint $\indi\{\|\bW_a\|_\op \leq \kappa\}$ (see e.g.~\cite{borot2013asymptotic} for the case of single-matrix models).
+    }.
 \end{itemize}
 
 \myskip
@@ -106,7 +104,7 @@ which ends the proof of Theorem~\ref{thm:fail_second_moment}. $\qed$
 as $\Phi_d$ reaches its global maximum in a value $q$ which is far from $0$ as $d \to \infty$, as our 
 argument can then be easily adapted to this setting.
 As such, we do not know if $\tau_\f(\kappa)$ (which 
-comes out of our local analysis around $q = 0$) is a sharp threshold for the concentration of the random variable $Z_\kappa$ around its expectation.
+comes out of our local analysis around $q = 0$) is a sharp threshold for $\EE[Z_\kappa^2] \gg \EE[Z_\kappa]^2$.
 
 \myskip
 \begin{proof}[Proof of Lemma~\ref{lemma:limit_Gsecond} --]
