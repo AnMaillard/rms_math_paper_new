@@ -1,5 +1,5 @@
 We carry out in this section the proof of Theorem~\ref{thm:first_moment}.
-A direct computation from eq.~\eqref{eq:def_Zkappa} using linearity of expectation yields:
+A direct computation from eq.~\eqref{eq:def_Zkappa} using the linearity of expectation yields:
 \begin{equation}
     \label{eq:E_Zr}
     \EE Z_\kappa = \sum_{\eps \in \{\pm 1\}^n} \bbP\left[\left\|\sum_{i=1}^n \eps_i \bW_i\right\|_{\op} \leq \kappa \sqrt{n}\right] = 2^n \, \bbP[\|\bW\|_\op \leq \kappa],
@@ -31,22 +31,19 @@ We thus focus on the case $\kappa \in (0,2]$ in what follows.
 
 \myskip 
 \textbf{Sketch of proof and important related work --}
-\change{
-The proof of Proposition~\ref{prop:ldp_Wop} builds upon a large deviation principle (with respect to the weak topology) for the empirical spectral measure of $\bW$, a matrix drawn from $\GOE(d)$, \emph{conditioned} on $\|\bW\|_\op \leq \kappa$, 
-which is stated as Proposition~\ref{prop:ldp_empirical_measure_conditioned}, and follows from classical results of large deviations theory~\citep{arous1997large,anderson2010introduction}. 
-As a direct consequence, we obtain in Corollary~\ref{cor:ldp_Wop_var_principle} the asymptotics of eq.~\eqref{eq:ldp_Wop} as a variational principle over probability measures supported in $[-\kappa,\kappa]$,
-For completeness, we also provide a proof of Corollary~\ref{cor:ldp_Wop_var_principle} that appeared in an earlier version of this work, and which only uses the large deviations of the spectral measure of a $\GOE(d)$ matrix, as proven in~\cite{arous1997large}.
-This yields the value of the limit in eq.~\eqref{eq:ldp_Wop} as a variational principle over probability measures supported in $[-\kappa,\kappa]$, 
-which we solve using the theory of logarithmic potentials~\citep{saff2013logarithmic} and Tricomi's theorem~\citep{tricomi1985integral}, similarly to the alternative proof of Wigner's semicircle law obtained by \cite{arous1997large} from their large deviations result.
-}
+The proof of Proposition~\ref{prop:ldp_Wop} builds upon a large deviation principle (with respect to the weak topology) for the empirical spectral measure of a matrix $\bW$ drawn from $\GOE(d)$, \emph{conditioned} on $\|\bW\|_\op \leq \kappa$. 
+This large deviation principle is stated as Proposition~\ref{prop:ldp_empirical_measure_conditioned}, and follows from classical results of large deviations theory for so-called $\beta$-ensembles~\citep{arous1997large,anderson2010introduction}. 
+As a direct consequence, we obtain in Corollary~\ref{cor:ldp_Wop_var_principle} the asymptotics of eq.~\eqref{eq:ldp_Wop} as a variational principle over probability measures supported in $[-\kappa,\kappa]$.
+For completeness, we also provide in Appendix~\ref{sec:appendix_ldp} a proof of Corollary~\ref{cor:ldp_Wop_var_principle} that appeared in an earlier version of this work, and which only uses the large deviations of the spectral measure of a $\GOE(d)$ matrix~\citep{arous1997large}.
+We solve the resulting variational principle using the theory of logarithmic potentials~\citep{saff2013logarithmic} and Tricomi's theorem~\citep{tricomi1985integral}, similarly to the alternative proof of Wigner's semicircle law obtained by \cite{arous1997large} from their large deviations result.
 Similar arguments also appeared in the theoretical physics literature~\citep{dean2006large,vivo2007large,dean2008extreme,majumdar2014top}. 
 We refer to \cite{anderson2010introduction,guionnet2022rare} for more background and open problems in the theory of large deviations for random matrices.
 
 \myskip
 \textbf{Remark --}
-The following result is a byproduct of our analysis\footnote{\change{
-After the present work appeared online, the author realized that Theorem~\ref{thm:lsd_constrained_GOE} had appeared in an unpublished manuscript~\citep{bouali2015constrained}.
-}}.
+The following result is a byproduct of our analysis\footnote{
+After the present work was made available as a pre-print, the author realized that another proof of Theorem~\ref{thm:lsd_constrained_GOE} had appeared in an unpublished manuscript~\citep{bouali2015constrained}.
+}.
 \begin{theorem}[Limiting spectral density of a constrained $\GOE(d)$ matrix]\label{thm:lsd_constrained_GOE}
    For $\kappa \in (0,2]$, denote $\bbP_\kappa$ the law of $\bW \sim \GOE(d)$ conditioned on $\|\bW\|_\op \leq \kappa$. 
     If $\bW \sim \bbP_\kappa$, then its empirical spectral density $\mu_\bW$ converges weakly (as $d \to \infty$, and a.s.) to $\mu_\kappa(\rd x) \coloneqq \rho_\kappa(x) \rd x$ given, for $x \in (-\kappa, \kappa)$, by:
@@ -64,24 +61,23 @@ Theorem~\ref{thm:lsd_constrained_GOE} is proven in Section~\ref{subsec:proof_lsd
 \includegraphics[width=0.8\textwidth]{figures/rho_kappa.pdf}
 \caption{$\rho_\kappa(x)$ of eq.~\eqref{def:rhokappa_1} for different values of $\kappa$. For $\kappa = 2$ one recovers the semicircle law.\label{fig:rho_kappa}}
 \end{figure}
-\change{
 
 \myskip
 Let us denote
 $S_\kappa \coloneqq \{\eps \in \{\pm 1\}^n \, \textrm{s.t.} \, \|\sum_{i=1}^n \eps_i \bW_i\|_{\op} \leq \kappa \sqrt{n} \}$,
 so that $Z_\kappa = \# S_\kappa$.
 Anticipating our satisfiability results, we note that even if $\bbP[Z_\kappa \geq 1] = 1 - \smallO_d(1)$ as shown in Theorem~\ref{thm:second_moment} for sufficiently large $\tau = n/d^2$, Theorem~\ref{thm:lsd_constrained_GOE} does not ensure that the asymptotic spectrum of $\sum_i \eps_i \bW_i$ (for $\eps \sim \Unif(S_\kappa)$) equals $\rho_\kappa$.
-This would indeed be implied e.g.\ by the condition $\EE[Z_\kappa]^2 = (1+\smallO_d(1)) \EE[Z_\kappa]^2$, which is strictly stronger than $\bbP[Z_\kappa \geq 1] = 1 - \smallO_d(1)$.
-Unfortunately, the bounds established in Section~\ref{sec:2nd_moment} to prove Theorem~\ref{thm:second_moment} only yield $\EE[Z_\kappa]^2 \leq C \EE[Z_\kappa]^2$ in the satisfiable phase.
+However, one can easily prove that this would be implied e.g.\ by the condition $\EE[Z_\kappa]^2 = (1+\smallO_d(1)) \EE[Z_\kappa]^2$, which is strictly stronger than $\bbP[Z_\kappa \geq 1] = 1 - \smallO_d(1)$.
+Unfortunately, the bounds established in Section~\ref{sec:2nd_moment} to prove Theorem~\ref{thm:second_moment} only yield $\EE[Z_\kappa]^2 \leq C \EE[Z_\kappa]^2$ in the satisfiable phase, for a possibly large $C > 1$.
 For this reason, we leave the establishment of the limiting spectral density of $\sum_i \eps_i \bW_i$ (for $\eps \sim \Unif(S_\kappa)$) as an open question, 
 with $\rho_\kappa$ a natural conjecture.
-}
 
-\change{
 \subsection{Large deviations results}
 
-Our proof leverages a large deviation principle for the empirical eigenvalue distribution of matrix models.
-Such results were initiated in the mathematics literature by~\cite{arous1997large}, and have been then extended, see e.g.~\cite{guionnet2022rare}.
+Our proof leverages a large deviation principle for the empirical eigenvalue distribution in a large class of matrix models.
+Such results were initiated in the mathematics literature by~\cite{arous1997large} in the case of $\GOE(d)$ matrices, and have been then extended, see e.g.~\cite{guionnet2022rare} for a discussion.
+
+\myskip
 The space $\mcM_1^+(\bbR)$ of probability measures on $\bbR$ is endowed with its usual weak topology. 
 It is metrizable by the Dudley metric~\citep{bogachev2007measure}:
 \begin{equation}
@@ -89,15 +85,15 @@ It is metrizable by the Dudley metric~\citep{bogachev2007measure}:
     d(\mu, \nu) \coloneqq \left\{\left|\int f \rd \mu - \int f \rd v\right| \, : \, |f(x)| \leq 1 \textrm{ and } |f(x) - f(y)| \leq |x - y|, \, \forall (x, y) \in \bbR^2\right\}.
 \end{equation}
 Recall that $\Sigma(\mu) \coloneqq \int \mu(\rd x) \mu(\rd y) \log |x-y|$.
-The following statement is borrowed from~\cite{fan2015convergence} (see also~\cite{arous1997large,anderson2010introduction}).
+The following statement is borrowed from~\cite{fan2015convergence} (variants can be found e.g.\ in~\cite{arous1997large,anderson2010introduction}).
 \begin{proposition}[\cite{fan2015convergence}]
     \label{prop:ldp_empirical_measure_conditioned}
-    Let $B \subseteq \bbR$ an interval, and $V : B \to \bbR$ a continuous function, that goes to infinity faster than $2 \log |x|$ (if $B$ is not bounded).
+    Let $B \subseteq \bbR$ an interval, and $V : B \to \bbR$ a continuous function such that $\lim_{x \to \pm \infty} \frac{V(x)}{2 \log |x|} = +\infty$ (if $B$ is not bounded).
     For $\blambda \in \bbR^d$, let
     \begin{align}\label{eq:coulomb_gas_constraint}
         \mu_{d}^{V,B}(\rd \blambda) \coloneqq \frac{1}{Z_{d}^{V,B}} \prod_{i=1}^d \left(\rd \lambda_i \, \indi\{\lambda_i \in B\} \right) \, e^{-\frac{d}{2} \sum_{i=1}^d V(\lambda_i)} \, \prod_{i < j} |\lambda_i - \lambda_j|,
     \end{align}
-    with $Z_d^{V,B}$ a normalization factor, to ensure that $\int \mu_d^{V, B}(\rd \blambda) = 1$.
+    with $Z_d^{V,B}$ a normalization factor, which ensures that $\int \mu_d^{V, B}(\rd \blambda) = 1$.
     Denote $\nu_\blambda \coloneqq (1/d) \sum_{i=1}^d \delta_{\lambda_i}$ the empirical measure of $\blambda$.
     Then the law of $\nu_\blambda$ satisfies a large deviation principle, in the scale $d^2$, with good rate function $I_{V,B}(\nu) \coloneqq \mcE_V(\nu) - \inf_{\nu \in \mcM_1^+(B)}[\mcE_V(\nu)]$, where 
     \begin{align}\label{eq:E_V}
@@ -124,9 +120,9 @@ The following statement is borrowed from~\cite{fan2015convergence} (see also~\ci
  Proposition~\ref{prop:ldp_empirical_measure_conditioned} directly applies to $\bbP_\kappa$, the law of $\bW \sim \GOE(d)$ conditioned on $\|\bW\|_\op \leq \kappa$, 
  with $V(x) = x^2/2$. We obtain from it the following variational formulation for the limit of the left-hand side of eq.~\eqref{eq:ldp_Wop}.
  \begin{corollary}\label{cor:ldp_Wop_var_principle}
-    Let $V(x) = x^2/2$, and recall eq.~\eqref{eq:E_V}. Then, for any $\kappa > 0$, with $\bW \sim \GOE(d)$:
+    For any $\kappa > 0$, with $\bW \sim \GOE(d)$:
     \begin{equation*}
-        \lim_{d \to \infty} \frac{1}{d^2} \log \bbP[\|\bW\|_\op \leq \kappa] = \frac{3}{8} - \inf_{\nu \in \mcM_1^+([-\kappa,\kappa])} \mcE_{V}(\nu).
+        \lim_{d \to \infty} \frac{1}{d^2} \log \bbP[\|\bW\|_\op \leq \kappa] = \frac{3}{8} - \inf_{\nu \in \mcM_1^+([-\kappa,\kappa])} \left[-\frac{1}{2} \Sigma(\nu) + \frac{1}{4} \int \nu(\rd x) \, x^2\right].
     \end{equation*}
  \end{corollary}
  \begin{proof}[Proof of Corollary~\ref{cor:ldp_Wop_var_principle}]
@@ -147,8 +143,8 @@ The result follows then from Proposition~\ref{prop:ldp_empirical_measure_conditi
  \myskip
  \textbf{Alternative proof --}
  For reasons of completeness, and as a first version of this manuscript contained it, we detail in Appendix~\ref{sec:appendix_ldp} a proof of Corollary~\ref{cor:ldp_Wop_var_principle} 
- that does not rely on Proposition~\ref{prop:ldp_empirical_measure_conditioned}, but only on its particular case $B = \bbR$ and $V(x) = x^2/2$, i.e.\ the case of a $\GOE(d)$ matrix, which was 
- tackled in the seminal work of~\cite{arous1997large}.
+ that does not rely on Proposition~\ref{prop:ldp_empirical_measure_conditioned}, but only on its particular case $B = \bbR$ and $V(x) = x^2/2$, i.e.\ when $\mu_{d}^{V,B}$ is the joint law of the eigenvalues of a $\GOE(d)$ matrix.
+ This setting was tackled in the seminal work of~\cite{arous1997large}.
  
  \subsection{Solving the variational principle: proof of Proposition~\ref{prop:ldp_Wop}}\label{subsec:var_principle_1st_mom}
 
@@ -338,5 +334,3 @@ $\inf_{\mu \in B(\mu_\kappa^\star, \delta)^c} [J_\kappa(\mu)] > 0$. Therefore, b
 \end{align*}
 which ends the proof by taking the limit $\delta \to 0$.
 $\qed$
-
-}
