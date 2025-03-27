@@ -10,11 +10,17 @@ We prove here Proposition~\ref{prop:tau2}, which follows from the following lemm
     Then $\bartau(\kappa) = \ttau(\eta^\star(\kappa),\kappa)$,
 where
 $\eta^\star(\kappa)$ is the unique value of $\eta > 0$ such that:
-\begin{equation}
+\changenew{
+\begin{align}
     \label{eq:etastar}
-      (1+\eta) \tau_1(\kappa) = \frac{1+\delta_{\eta}^2}{2(1-\delta_{\eta}^2)^2}
-    + \left[\frac{2 \delta_{\eta} (3+\delta_{\eta}^2) - (1+3 \delta_\eta^2)}{4(1-\delta_{\eta}^2)^3} + \frac{2(1+\delta_{\eta})^5}{(1-\delta_{\eta}^2)^4}\right] \kappa^2.
-\end{equation}
+      (1+\eta) \tau_1(\kappa) &=
+\frac{1+\delta_\eta^2}{2(1-\delta_\eta^2)^2}
+    + \left[\frac{\delta_\eta(1+6\delta_\eta+3\delta_\eta^2+2\delta_\eta^3)}{(1-\delta_\eta^2)^3(1-\delta_\eta)}\right] \kappa \\
+    &
+    + \left[ \frac{2(1+\delta_\eta)^5}{(1-\delta_\eta^2)^4} - \frac{(1+3 \delta_\eta^2)}{4(1-\delta_\eta^2)^3}\right] \kappa^2 
+      + \frac{\kappa^4(1+3\delta_\eta^2)}{32(1-\delta_\eta^2)^3}.
+\end{align}
+}
 Moreover, $\kappa \mapsto \bartau(\kappa)$ is a continuous function of $\kappa$.
 \end{lemma}
 \noindent
@@ -24,19 +30,24 @@ Moreover, solving eq.~\eqref{eq:etastar} gives a simple way to numerically evalu
 
 \begin{proof}[Proof of Lemma~\ref{lemma:tau2_prop}]
 Let 
+\changenew{
 \begin{equation*}
     \begin{dcases}
     f_\kappa(\eta) &\coloneqq (1+\eta) \tau_1(\kappa), \\
-    g_\kappa(\eta) &\coloneq \frac{1+\delta_{\eta}^2}{2(1-\delta_{\eta}^2)^2}
-      + \left[\frac{2 \delta_{\eta} (3+\delta_{\eta}^2) - (1+3 \delta_\eta^2)}{4(1-\delta_{\eta}^2)^3} + \frac{2(1+\delta_{\eta})^5}{(1-\delta_{\eta}^2)^4}\right] \kappa^2.
+    g_\kappa(\eta) &\coloneq \frac{1+\delta_\eta^2}{2(1-\delta_\eta^2)^2}
+    + \left[\frac{\delta_\eta(1+6\delta_\eta+3\delta_\eta^2+2\delta_\eta^3)}{(1-\delta_\eta^2)^3(1-\delta_\eta)}\right] \kappa \\
+    &
+    + \left[ \frac{2(1+\delta_\eta)^5}{(1-\delta_\eta^2)^4} - \frac{(1+3 \delta_\eta^2)}{4(1-\delta_\eta^2)^3}\right] \kappa^2 
+      + \frac{\kappa^4(1+3\delta_\eta^2)}{32(1-\delta_\eta^2)^3}.
     \end{dcases}
 \end{equation*}
+}
 Recall that $\delta_\eta$ is defined as the unique solution to $H[(1+\delta)/2]/\log 2 = \eta / (1+\eta)$, 
 with $H(p) = -p \log p - (1-p) \log(1-p)$.
 If $G(\delta) \coloneqq H[(1+\delta)/2]/\log 2$, then
 $G$ is smooth and strictly decreasing on $[0,1]$. 
 So $\delta_\eta = G^{-1}[\eta / (1+\eta)]$ is a smooth and strictly decreasing function of $\eta > 0$.
-It is then immediate by elementary arguments (as done e.g.\ in eq.~\eqref{eq:fprime_q}) that 
+It is then immediate by elementary arguments (it is easy to see that each of the $\kappa$-coefficients of $g_\kappa(\eta)$ is a strictly increasing function of $\delta$, similarly to what is done e.g.\ in eq.~\eqref{eq:fprime_q}) that 
 $g_\kappa(\eta)$ is also a smooth and strictly decreasing function of $\eta$.
 
 \myskip
@@ -200,11 +211,18 @@ We have thus checked condition $(ii)$ of Lemma~\ref{lemma:laplace_discrete}.
 \myskip
 \textbf{Condition $(i)$ --}
 We will show that for any $\delta \in (0,1)$:
+\changenew{
 \begin{align}\label{eq:to_show_Gd_2nd_derivative}
+    \nonumber
     \limsup_{d \to \infty}\sup_{|q| \leq \delta} G_d''(q) \leq 
-    \frac{1}{\tau} \left\{\frac{1+\delta^2}{2(1-\delta^2)^2}
-      + \left[\frac{2 \delta(3+\delta^2) - (1+3 \delta^2)}{4(1-\delta^2)^3} + \frac{2(1+\delta)^5}{(1-\delta^2)^4}\right] \kappa^2\right\}.
+    \frac{1}{\tau} &\left\{\frac{1+\delta^2}{2(1-\delta^2)^2}
+    + \left[\frac{\delta(1+6\delta+3\delta^2+2\delta^3)}{(1-\delta^2)^3(1-\delta)}\right] \kappa \right.\\
+    &
+    \left.
+      + \left[ \frac{2(1+\delta)^5}{(1-\delta^2)^4} - \frac{(1+3 \delta^2)}{4(1-\delta^2)^3}\right] \kappa^2 
+      + \frac{\kappa^4(1+3\delta^2)}{32(1-\delta^2)^3}\right\}.
 \end{align}
+}
 
 \myskip
 Let us first show how eq.~\eqref{eq:to_show_Gd_2nd_derivative} finishes the proof of Proposition~\ref{prop:2nd_moment}. 
@@ -262,54 +280,12 @@ Since $n/d^2 \to \tau$, we have:
    \limsup_{d \to \infty}\sup_{|q| \leq \delta} I_1(q) = \frac{1}{\tau} \sup_{|q| \leq \delta }\frac{(1+q^2)}{2(1-q^2)^2} 
     = \frac{(1+\delta^2)}{2 \tau(1-\delta^2)^2}.
 \end{align}
-\fixme{False, to be adapted}
-Note that under the law of $\langle \cdot \rangle_{q,\kappa}$ of eq.~\eqref{eq:gibbs_q},
-$\bW$ is distributed as a $\GOE(d)$ matrix, conditioned to satisfy $\|\bW\|_\op \leq \kappa$.
-By Theorem~\ref{thm:lsd_constrained_GOE}, we know that $\mu_\bW$ weakly converges (a.s.) to $\mu_\kappa^\star$.
-Since $\int \mu_\bW(\rd x) x^2 = \int \mu_\bW(\rd x) x^2 \indi\{|x| \leq \kappa\}$, we have by the Portmanteau theorem 
-and dominated convergence: 
-\begin{align*}
-    \lim_{d \to \infty} \frac{1}{d}\EE[\Tr \bW^2] &= \int \mu_\kappa^\star(\rd x) \, x^2 \, \indi\{|x| \leq \kappa\} \\ 
-    &= \int \mu_\kappa^\star(\rd x) \, x^2, \\
-    &\aeq \frac{\kappa^2 (8-\kappa^2)}{16},
-\end{align*}
-using eq.~\eqref{eq:int_mukappa_x2} in $(\rm a)$.
-In particular this easily implies: 
-\begin{align}\label{eq:bound_TrW2}
-   \frac{\kappa^2}{4} \leq \lim_{d \to \infty} \frac{1}{d}\EE[\Tr \bW^2] \leq \frac{\kappa^2}{2}.
-\end{align}
-By the Cauchy-Schwarz inequality 
-\begin{equation*}
-\langle \Tr[\bW \bY] \rangle_{q,\kappa} \leq \langle(\Tr[\bW^2] \Tr[\bY^2])^{1/2} \rangle_{q,\kappa}\leq \sqrt{\langle(\Tr \bW^2)(\Tr \bY^2)\rangle_{q,\kappa}} \leq [\EE[(\Tr[\bW^2])^2]]^{1/2}.
-\end{equation*}
-Using the same arguments as above, one gets from this:
-\begin{align}\label{eq:bound_TrWY}
-    \limsup_{d \to \infty} \sup_{|q| \leq 1} \frac{1}{d} \langle \Tr[\bW \bY] \rangle_{q,\kappa} \leq \sqrt{\lim_{d \to \infty} \frac{1}{d^2}\EE[(\Tr[\bW^2])^2]} &=\int \mu_\kappa^\star(\rd x) \, x^2 \leq \frac{\kappa^2}{2}.
-\end{align}
-For a small $\sigma > 0$, we let $n, d$ large enough (by eqs.~\eqref{eq:bound_TrW2},\eqref{eq:bound_TrWY}) such that
-$\EE[\Tr\bW^2] \geq d \kappa^2 (1-\sigma) / 4$ 
-and $\langle \Tr[\bW \bY] \rangle_{q,\kappa} \leq d \kappa^2 (1+\sigma) / 2$ for all $|q| \leq 1$.
-We get: 
-\begin{align*}
-    \sup_{|q| \leq \delta} I_2(q) &\leq \frac{d^2 \kappa^2}{4n} \max_{|q| \leq \delta }\left[\frac{2q(3+q^2) (1+\sigma) - (1+3q^2) (1-\sigma)}{(1-q^2)^3}\right].
-\end{align*}
-If $f(q) \coloneqq 2q(3+q^2) (1+\sigma) - (1+3q^2) (1-\sigma)$, then for all $q \in [-1,1]$:
-\begin{align}\label{eq:fprime_q}
-    f'(q) &= 6 [1+\sigma - q (1-q) + \sigma q (1+q)] \geq 6 \left[\frac{3}{4}+\sigma\right] > 0,
-\end{align}
-so that 
-\begin{align*}
-    \sup_{|q| \leq \delta} I_2(q) &\leq \frac{d^2 \kappa^2}{4n} \left[\frac{2\delta(3+\delta^2) (1+\sigma) - (1+3\delta^2) (1-\sigma)}{(1-\delta^2)^3}\right].
-\end{align*}
-Finally, taking $d \to \infty$ and $\sigma \to 0$:
-\begin{align}\label{eq:ub_I2}
-    \limsup_{d \to \infty} \sup_{|q| \leq \delta} I_2(q) \leq \frac{\kappa^2}{4\tau} \cdot \frac{2 \delta(3+\delta^2) - (1+3\delta^2)}{(1-\delta^2)^3}.
-\end{align}
+\changenew{
 Recall that for a real random variable $X$, we define the sub-Gaussian norm $\|X\|_{\psi_2}$ of $X$ as~\citep{vershynin2018high}:
 \begin{align*}
     \|X\|_{\psi_2} \coloneqq \inf \{t > 0 \, : \, \EE[\exp(X^2/t^2)] \leq 2\}. 
 \end{align*}
-To bound $I_3$, we rely on the following crucial result, which we prove in Section~\ref{subsec:lsi}.
+To bound $I_2$ and $I_3$, we rely on the following crucial result, which we prove in Section~\ref{subsec:lsi}.
 \begin{lemma}[Concentration of moments under $\langle \cdot \rangle_{q,\kappa}$]
     \label{lemma:conc_moments_Pqkappa}
     Let $q \in (-1,1)$, $\kappa \in (0,2]$, and 
@@ -333,7 +309,94 @@ To bound $I_3$, we rely on the following crucial result, which we prove in Secti
 \end{lemma}
 \noindent
 Lemma~\ref{lemma:conc_moments_Pqkappa} is a consequence of a log-Sobolev inequality we prove for $\langle \cdot \rangle_{q,\kappa}$.
-We apply eq.~\eqref{eq:var_PWY} to $P(X, Y) = - q (X^2+Y^2) + (1+q^2) XY$, which yields:
+
+\myskip 
+\textbf{Bounding $I_2$ --}
+Note that under the law of $\langle \cdot \rangle_{0,\kappa}$ of eq.~\eqref{eq:gibbs_q} when $q = 0$,
+$\bW$ is distributed as a $\GOE(d)$ matrix, conditioned to satisfy $\|\bW\|_\op \leq \kappa$.
+By Theorem~\ref{thm:lsd_constrained_GOE}, we know that $\mu_\bW$ weakly converges (a.s.) to $\mu_\kappa^\star$.
+Since $\int \mu_\bW(\rd x) x^2 = \int \mu_\bW(\rd x) x^2 \indi\{|x| \leq \kappa\}$, we have by the Portmanteau theorem 
+and dominated convergence: 
+\begin{align}
+    \label{eq:limit_TrW2_q0}
+    \nonumber
+    \lim_{d \to \infty} \frac{1}{d}\langle\Tr \bW^2\rangle_{0, \kappa} &= \int \mu_\kappa^\star(\rd x) \, x^2 \, \indi\{|x| \leq \kappa\} \\ 
+    &= \int \mu_\kappa^\star(\rd x) \, x^2, \\
+    &\aeq \frac{\kappa^2 (8-\kappa^2)}{16},
+\end{align}
+using eq.~\eqref{eq:int_mukappa_x2} in $(\rm a)$.
+By symmetry $\bW \to -\bW$, we also trivially have
+\begin{align}
+    \label{eq:limit_TrWY_q0}
+    \langle\Tr \bW \bY\rangle_{0, \kappa} &= 0.
+\end{align}
+Let us denote $P_q(X, Y) \coloneqq - q (X^2 + Y^2) + (1+q^2) X Y$. 
+One easily computes from eq.~\eqref{eq:gibbs_q} that 
+for any function $\varphi(\bW, \bY)$: 
+\begin{align*}
+    \frac{\partial}{\partial q}\langle \varphi(\bW, \bY)\rangle_{q,\kappa} 
+    &= \frac{d \left[\langle \varphi(\bW, \bY) \cdot \Tr[P_q(\bW, \bY)] \rangle_{q, \kappa} - \langle \varphi(\bW, \bY) \rangle_{q, \kappa} \langle \Tr[P_q(\bW, \bY)] \rangle_{q, \kappa}\right]}{2(1-q^2)^2}, \\ 
+    &= \frac{d \left[\langle \left(\varphi(\bW, \bY) - \langle \varphi \rangle_{q, \kappa}\right) \cdot \left(\Tr[P_q(\bW, \bY)] - \langle \Tr[P_q]\rangle_{q, \kappa}\right) \rangle_{q, \kappa}\right]}{2(1-q^2)^2}.
+\end{align*}
+In particular:
+\begin{align}\label{eq:derivative_average_q}
+    \left|\frac{\partial}{\partial q}\langle \varphi(\bW, \bY)\rangle_{q,\kappa}\right| 
+    &\leq \frac{d \left[\Var_{\langle \cdot \rangle_{q, \kappa}}[\varphi(\bW, \bY)] \cdot \Var_{\langle \cdot \rangle_{q, \kappa}}[\Tr P_q(\bW, \bY)]\right]^{1/2}}{2(1-q^2)^2}.
+\end{align}
+Using eq.~\eqref{eq:derivative_average_q} and Lemma~\ref{lemma:conc_moments_Pqkappa}, 
+we reach that for both $\varphi = \Tr[\bW^2]$ and $\varphi = \Tr[\bW \bY]$: 
+\begin{align}\label{eq:bound_derivative_applications}
+    \left|\frac{\partial}{\partial q} \langle \varphi(\bW, \bY)\rangle_{q,\kappa}\right| 
+    &\leq \frac{2 d \kappa (1+q)^2}{(1-q^2)^2} = \frac{2 d \kappa}{(1-q)^2}.
+\end{align}
+Integrating eq.~\eqref{eq:bound_derivative_applications}, and combining it with eqs.~\eqref{eq:limit_TrW2_q0} and eq.~\eqref{eq:limit_TrWY_q0}, we get:
+\begin{align}\label{eq:bound_TrW2_TrWY_q0}
+    \begin{dcases}
+        \left|\frac{1}{d}\langle\Tr \bW^2\rangle_{q, \kappa} - \frac{\kappa^2 (8-\kappa^2)}{16} \right| &\leq \frac{2\kappa |q|}{1-q}  + \smallO_d(1), \\
+        \left|\frac{1}{d}\langle\Tr \bW \bY\rangle_{q, \kappa} \right| &\leq \frac{2\kappa |q|}{1-q}  + \smallO_d(1),
+    \end{dcases}
+\end{align}
+where $\smallO_d(1)$ is uniform in $q$.
+We get from eq.~\eqref{eq:bound_TrW2_TrWY_q0}: 
+\begin{align}
+    \label{eq:I2_1}
+    \nonumber
+    \limsup_{d \to \infty}\sup_{|q| \leq \delta} I_2(q) &\leq 
+    \frac{1}{2\tau} \max_{|q| \leq \delta }\left[
+        \frac{4 \kappa q^2(3+q^2)}{(1-q^2)^3(1-q)} - \frac{1+3q^2}{(1-q^2)^3} \left(\frac{\kappa^2(8 - \kappa^2)}{16} - \frac{2\kappa |q|}{1-q}\right)
+    \right], \\ 
+    &= 
+    \frac{1}{2\tau} \max_{q \in [0, \delta]}\left[
+        \frac{2 \kappa q(1+6q+3q^2+2q^3)}{(1-q^2)^3(1-q)} - \frac{\kappa^2 (8-\kappa^2)(1+3q^2)}{16 (1-q^2)^3}
+    \right].
+\end{align}
+If 
+\begin{equation*}
+f_\kappa(q) \coloneqq \frac{2 \kappa q(1+6q+3q^2+2q^3)}{1-q} -  \frac{\kappa^2 (8-\kappa^2)(1+3q^2)}{16},
+\end{equation*}
+then for all $q \in [0,1]$ and $\kappa \in [0,2]$:
+\begin{align}\label{eq:fprime_q}
+    \nonumber
+    f_\kappa'(q) &= \frac{\kappa}{8(1-q)^2} \left[16 + 3(64-8\kappa+\kappa^3)q + 6(8+8\kappa-\kappa^3)q^2 + (32-3\kappa(8-\kappa^2))q^4 - 96 q^5\right], \\ 
+    \nonumber
+    &\geq \frac{\kappa}{8(1-q)^2} \left[16 + 3(64-16)q + 6(8-8)q^2 + (32-3\cdot 2 \cdot(8))q^4 - 96 q^5\right], \\ 
+    \nonumber
+    &\geq \frac{\kappa}{8(1-q)^2} \left[16+144q-16q^3-96q^5\right], \\ 
+    &\ageq \frac{\kappa}{8(1-q)^2} \left[16+32q\right] > 0,
+\end{align}
+using $q^k \leq q$ for any $k \geq 1$ in $(\rm a)$.
+This implies that in eq.~\eqref{eq:I2_1}, the maximum is attained at $q = \delta$, and we get:
+\begin{align}\label{eq:ub_I2}
+    \limsup_{d \to \infty} \sup_{|q| \leq \delta} I_2(q) 
+    \leq
+    \frac{1}{2\tau} \left[
+        \frac{2 \kappa \delta(1+6\delta+3\delta^2+2\delta^3)}{(1-\delta^2)^3(1-\delta)} - \frac{\kappa^2 (8-\kappa^2)(1+3\delta^2)}{16 (1-\delta^2)^3}
+    \right].
+\end{align}
+
+\myskip 
+\textbf{Bounding $I_3$ --}
+We apply eq.~\eqref{eq:var_PWY} of Lemma~\ref{lemma:conc_moments_Pqkappa} to $P_q(X, Y) = - q (X^2+Y^2) + (1+q^2) XY$, which yields:
 \begin{align*}
     I_3(q) &\leq \frac{d^2}{4 n (1-q^2)^4} \cdot 2(1+q) \left(2 \kappa [2 q + 1+q^2]\right)^2, \\ 
     &= \frac{2d^2 (1+q)^5 \kappa^2}{n (1-q^2)^4}.
@@ -345,6 +408,7 @@ So finally we get:
 Combining eqs.~\eqref{eq:ub_I1},\eqref{eq:ub_I2},\eqref{eq:ub_I3} finishes the proof of eq.~\eqref{eq:to_show_Gd_2nd_derivative}. 
 As we discussed above, this ends the proof of Proposition~\ref{prop:2nd_moment}.
 $\qed$
+}
 
 \subsection{Discrete Laplace's method for a dimension-dependent exponent}\label{subsec:proof_laplace_discrete}
 

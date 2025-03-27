@@ -289,11 +289,20 @@ We start by introducing a function $\tau_2(\kappa)$, which will serve as a thres
         - \frac{1+\delta}{2} \log \frac{1+\delta}{2} - \frac{1-\delta}{2} \log \frac{1-\delta}{2} = \frac{\eta}{1+\eta} \log 2.  
     \end{equation}
     For any $\eta > 0$, let 
-    \begin{equation}
+    \changenew{
+\begin{align}
+    \nonumber
         \label{eq:def_ttau}
-        \ttau(\eta,\kappa) \coloneqq \max\left\{(1+\eta) \tau_1(\kappa), \frac{1+\delta_{\eta}^2}{2(1-\delta_{\eta}^2)^2}
-      + \left[\frac{2 \delta_{\eta} (3+\delta_{\eta}^2) - (1+3 \delta_\eta^2)}{4(1-\delta_{\eta}^2)^3} + \frac{2(1+\delta_{\eta})^5}{(1-\delta_{\eta}^2)^4}\right] \kappa^2\right\}.
-    \end{equation}
+        \ttau(\eta,\kappa) &\coloneqq \max\left\{(1+\eta) \tau_1(\kappa), 
+\frac{1+\delta_\eta^2}{2(1-\delta_\eta^2)^2}
+    + \left[\frac{\delta_\eta(1+6\delta_\eta+3\delta_\eta^2+2\delta_\eta^3)}{(1-\delta_\eta^2)^3(1-\delta_\eta)}\right] \kappa \right.\\
+    &
+    \left.
+     \hspace{3cm} + \left[ \frac{2(1+\delta_\eta)^5}{(1-\delta_\eta^2)^4} - \frac{(1+3 \delta_\eta^2)}{4(1-\delta_\eta^2)^3}\right] \kappa^2 
+      + \frac{\kappa^4(1+3\delta_\eta^2)}{32(1-\delta_\eta^2)^3}
+\right\}.
+\end{align}
+    }
     We define
     \begin{equation}
         \label{eq:def_tau2}
@@ -363,6 +372,7 @@ In Figure~\ref{fig:phase_diagram}, we plot a sketch of the phase diagram of the 
         as proven by Theorems~\ref{thm:first_moment} and \ref{thm:second_moment}. 
         The border of the SAT region is given by $\tau_2(\kappa)$, see Proposition~\ref{prop:tau2}. 
         Numerically, we find $\tau_2(\kappa \to 2) \simeq 4.71$.
+        %FIXME Check now
         The orange region is not characterized by our results, and remains open.
         The dotted purple line shows $\tau_\f(\kappa)$: according to Theorem~\ref{thm:fail_second_moment}, for $\tau < \tau_\f(\kappa)$ the number of solutions 
         has large expectation and variance, and the second moment method fails (see also Fig.~\ref{fig:fail_second_moment}).
@@ -386,6 +396,7 @@ An immediate consequence of Theorem~\ref{thm:second_moment} is the following cor
     Furthermore, $\kappa_c(\tau) \to 0$ as $\tau \to \infty$.
 \end{corollary}
 \footnotetext{Numerically, we find $\tau \geq 5$ is enough, see Fig.~\ref{fig:phase_diagram}.}
+    %FIXME Check now
 \noindent
 Corollary~\ref{cor:tau_infty} establishes that for $n$ large enough but still in the scale $n = \Theta(d^2)$, one can find solutions 
 with margin arbitrarily close to $0$.
@@ -404,6 +415,7 @@ First, the threshold $\tau_2(\kappa)$ of eq.~\eqref{eq:def_tau2} is likely not o
 as the upper bounds on $\EE[Z_\kappa^2]$ proven in Section~\ref{sec:2nd_moment} are not expected to be tight.
 For this reason, the second moment ratio $\EE[Z_\kappa^2]/\EE[Z_\kappa]^2$ might still be bounded by a constant (cf.\ Proposition~\ref{prop:2nd_moment}) even for some values $\tau \leq \tau_2(\kappa)$. 
 For instance, one might conjecture that this includes values of $\tau$ arbitrarily close to $0$ when $\kappa$ approaches $2$, which is not captured by our current bounds.
+    %FIXME Check now
 Improving the estimates we obtain in Section~\ref{sec:2nd_moment} to obtain a sharp study of the range of parameters $(\tau, \kappa)$ with bounded second moment ratio is significantly more complex than in the SBP setting:
 it requires a precise understanding of the large deviation properties of the law of $(\|\bW_1\|_\op, \|\bW_2\|_\op)$, where $\bW_1, \bW_2$ are two correlated $\GOE(d)$ matrices, both conditioned on having small spectral norm (see eq.~\eqref{eq:def_Gd}). 
 A rate function for this law can be obtained in a variational form (see e.g.\ Theorem~3.3 of \cite{guionnet2004first}), however a numerical analysis of this variational formula 
