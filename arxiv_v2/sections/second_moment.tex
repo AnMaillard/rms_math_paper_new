@@ -10,7 +10,6 @@ We prove here Proposition~\ref{prop:tau2}, which follows from the following lemm
     Then $\bartau(\kappa) = \ttau(\eta^\star(\kappa),\kappa)$,
 where
 $\eta^\star(\kappa)$ is the unique value of $\eta > 0$ such that:
-\changenew{
 \begin{align}
     \label{eq:etastar}
       (1+\eta) \tau_1(\kappa) &=
@@ -20,7 +19,6 @@ $\eta^\star(\kappa)$ is the unique value of $\eta > 0$ such that:
     + \left[ \frac{2(1+\delta_\eta)^5}{(1-\delta_\eta^2)^4} - \frac{(1+3 \delta_\eta^2)}{4(1-\delta_\eta^2)^3}\right] \kappa^2 
       + \frac{\kappa^4(1+3\delta_\eta^2)}{32(1-\delta_\eta^2)^3}.
 \end{align}
-}
 Moreover, $\kappa \mapsto \bartau(\kappa)$ is a continuous function of $\kappa$.
 \end{lemma}
 \noindent
@@ -30,7 +28,6 @@ Moreover, solving eq.~\eqref{eq:etastar} gives a simple way to numerically evalu
 
 \begin{proof}[Proof of Lemma~\ref{lemma:tau2_prop}]
 Let 
-\changenew{
 \begin{equation*}
     \begin{dcases}
     f_\kappa(\eta) &\coloneqq (1+\eta) \tau_1(\kappa), \\
@@ -41,7 +38,6 @@ Let
       + \frac{\kappa^4(1+3\delta_\eta^2)}{32(1-\delta_\eta^2)^3}.
     \end{dcases}
 \end{equation*}
-}
 Recall that $\delta_\eta$ is defined as the unique solution to $H[(1+\delta)/2]/\log 2 = \eta / (1+\eta)$, 
 with $H(p) = -p \log p - (1-p) \log(1-p)$.
 If $G(\delta) \coloneqq H[(1+\delta)/2]/\log 2$, then
@@ -211,7 +207,6 @@ We have thus checked condition $(ii)$ of Lemma~\ref{lemma:laplace_discrete}.
 \myskip
 \textbf{Condition $(i)$ --}
 We will show that for any $\delta \in (0,1)$:
-\changenew{
 \begin{align}\label{eq:to_show_Gd_2nd_derivative}
     \nonumber
     \limsup_{d \to \infty}\sup_{|q| \leq \delta} G_d''(q) \leq 
@@ -222,7 +217,6 @@ We will show that for any $\delta \in (0,1)$:
       + \left[ \frac{2(1+\delta)^5}{(1-\delta^2)^4} - \frac{(1+3 \delta^2)}{4(1-\delta^2)^3}\right] \kappa^2 
       + \frac{\kappa^4(1+3\delta^2)}{32(1-\delta^2)^3}\right\}.
 \end{align}
-}
 
 \myskip
 Let us first show how eq.~\eqref{eq:to_show_Gd_2nd_derivative} finishes the proof of Proposition~\ref{prop:2nd_moment}. 
@@ -280,7 +274,6 @@ Since $n/d^2 \to \tau$, we have:
    \limsup_{d \to \infty}\sup_{|q| \leq \delta} I_1(q) = \frac{1}{\tau} \sup_{|q| \leq \delta }\frac{(1+q^2)}{2(1-q^2)^2} 
     = \frac{(1+\delta^2)}{2 \tau(1-\delta^2)^2}.
 \end{align}
-\changenew{
 Recall that for a real random variable $X$, we define the sub-Gaussian norm $\|X\|_{\psi_2}$ of $X$ as~\citep{vershynin2018high}:
 \begin{align*}
     \|X\|_{\psi_2} \coloneqq \inf \{t > 0 \, : \, \EE[\exp(X^2/t^2)] \leq 2\}. 
@@ -408,7 +401,6 @@ So finally we get:
 Combining eqs.~\eqref{eq:ub_I1},\eqref{eq:ub_I2},\eqref{eq:ub_I3} finishes the proof of eq.~\eqref{eq:to_show_Gd_2nd_derivative}. 
 As we discussed above, this ends the proof of Proposition~\ref{prop:2nd_moment}.
 $\qed$
-}
 
 \subsection{Discrete Laplace's method for a dimension-dependent exponent}\label{subsec:proof_laplace_discrete}
 

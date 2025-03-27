@@ -74,7 +74,7 @@ chosen randomly rather than potentially adversarially.
 The typical discrepancy for random vectors is now well understood: in the regime $n = \omega(d)$ (i.e.\ $d = \smallO(n)$, many more signs than dimensions), 
 \cite{turner2020balancing} established the following result (with partial results preceding in~\cite{karmarkar1986probabilistic,costello2009balancing}):
 \begin{theorem}[\cite{turner2020balancing}]\label{thm:rvector_disc}
-    Assume that $n = \omega(d)$ and that $\bu_1, \cdots, \bu_n \iid \mcN(0, \Id_d)$.
+    Assume that $\bu_1, \cdots, \bu_n \iid \mcN(0, \Id_d)$ and that $n = \omega(d)$.
     Then  
     \begin{align*}
         \plim_{d \to \infty} \frac{\disc(\bu_1, \cdots, \bu_n)}{\sqrt{\frac{\pi n}{2}} 2^{-n/d}} = 1,
@@ -289,7 +289,6 @@ We start by introducing a function $\tau_2(\kappa)$, which will serve as a thres
         - \frac{1+\delta}{2} \log \frac{1+\delta}{2} - \frac{1-\delta}{2} \log \frac{1-\delta}{2} = \frac{\eta}{1+\eta} \log 2.  
     \end{equation}
     For any $\eta > 0$, let 
-    \changenew{
 \begin{align}
     \nonumber
         \label{eq:def_ttau}
@@ -302,7 +301,6 @@ We start by introducing a function $\tau_2(\kappa)$, which will serve as a thres
       + \frac{\kappa^4(1+3\delta_\eta^2)}{32(1-\delta_\eta^2)^3}
 \right\}.
 \end{align}
-    }
     We define
     \begin{equation}
         \label{eq:def_tau2}
@@ -371,7 +369,7 @@ In Figure~\ref{fig:phase_diagram}, we plot a sketch of the phase diagram of the 
         Sketch of the satisfiable (SAT) and unsatisfiable (UNSAT) regimes in average-case matrix discrepancy, 
         as proven by Theorems~\ref{thm:first_moment} and \ref{thm:second_moment}. 
         The border of the SAT region is given by $\tau_2(\kappa)$, see Proposition~\ref{prop:tau2}. 
-        Numerically, we find \changenew{$\tau_2(\kappa \to 2) \simeq 5.67$}.
+        Numerically, we find $\tau_2(\kappa \to 2) \simeq 5.67$.
         The orange region is not characterized by our results, and remains open.
         The dotted purple line shows $\tau_\f(\kappa)$: according to Theorem~\ref{thm:fail_second_moment}, for $\tau < \tau_\f(\kappa)$ the number of solutions 
         has large expectation and variance, and the second moment method fails (see also Fig.~\ref{fig:fail_second_moment}).
