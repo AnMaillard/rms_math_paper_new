@@ -1,0 +1,21 @@
+Dear editor,
+
+Please find attached the manuscript, "Average-case matrix discrepancy: satisfiability bounds", which I hope you will find suitable for publication in Random Structures and Algorithms.
+
+In this manuscript, I study the problem of average-case matrix discrepancy. This problem is rooted both in discrepancy theory, where matrix discrepancy has received a lot of recent attention, and in the theory of constraint satisfaction problems and statistical physics. 
+Concretely, I study in this work the minimal operator norm achievable by a signed sum of a system of Gaussian i.i.d. matrices, when both the dimension of the matrices and the number of signings are very large.
+This model can be seen as a random variant of the celebrated Matrix Spencer conjecture, and as a matrix-valued analog of the symmetric binary perceptron in statistical physics.
+I establish a sharp satisfiability transition in this problem in the critical regime when the number of signings is quadratic in the dimension of the matrices. My proof techniques combine a first and second-moment type approach with deep results on the large deviations and concentration properties of the spectra of random matrix models which were developed in the random matrix theory literature.
+Notably, I prove that a system of n = O(d^2) Gaussian random matrices can be balanced so that the spectrum of the resulting matrix macroscopically shrinks compared to the typical semicircle law. 
+I also prove that (under a technical assumption), the second moment method is not sufficient to fully characterize the satisfiability diagram of this problem, uncovering a richer picture than in the vector-analog symmetric binary perceptron.
+
+I believe that these findings should appeal to a broad audience interested in random structures, discrepancy theory, and constraint satisfaction problems (and the phase transitions phenomena in such problems), particularly due to the application of rarely-used random matrix techniques in this context. The manuscript is original, unpublished, and not under consideration elsewhere.
+
+I would like to suggest Will Perkins as an editor who would be well suited to handling this manuscript. 
+
+Thank you for your time and consideration, and please do not hesitate to contact me if you have any questions. I look forward to hearing back from you.
+
+Sincerely,
+Antoine Maillard
+
+Inria Paris & DI ENS, Ecole Normale Superieure, Paris.

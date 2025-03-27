@@ -1,0 +1,181 @@
+We prove here Theorem~\ref{thm:fail_second_moment}, and discuss as well the technical hypothesis on which our statement relies.
+Let $\kappa \in (0, 2]$ and $\tau > 0$. We start again from the second moment computation detailed in Section~\ref{subsec:proof_2nd_moment}, 
+and more precisely from eq.~\eqref{eq:2nd_moment_2}, which we recall here:
+\begin{align}\label{eq:2nd_moment_recall}
+    \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} &= \frac{1}{2^n} \sum_{l=0}^n \binom{n}{l} \exp\{n G_d(q_l)\}, 
+\end{align}
+where for $q \in [-1,1]$:
+\begin{align*}
+    G_d(q) \coloneqq&  
+    \frac{1}{n} \log \frac{\bbP\left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q \bW + \sqrt{1-q^2} \bZ\|_\op \leq \kappa\right]}{\bbP[\|\bW\|_\op \leq \kappa]^2}.
+\end{align*}
+Using eq.~\eqref{eq:P_W_Z} we further have, for any $q \in (-1,1)$:
+\begin{align}\label{eq:Gd_integral}
+    G_d(q) &= \frac{1}{n} \log \frac{\int \indi\{\|\bW_1\|_\op, \|\bW_2\|_\op \leq \kappa\} e^{-\frac{d}{4(1-q^2)} (\Tr[\bW_1^2] + \Tr[\bW_2^2]) + \frac{dq}{2(1-q^2)} \Tr[\bW_1 \bW_2]} \rd \bW_1 \rd \bW_2}{\left(\int \rd \bW \, \indi\{\|\bW \|_\op \leq \kappa\} \, e^{-\frac{d}{4}\Tr[\bW^2]}\right)^2 (1-q^2)^{d(d+1)/4}}.
+\end{align}
+We can compute explicitly the limit of $G_d''(q)$ for $q$ close to $0$ as follows.
+\begin{lemma}\label{lemma:limit_Gsecond}
+    Recall the definition of $\tau_\f(\kappa)$ in eq.~\eqref{eq:tau_f}. We have
+    \begin{equation*}
+        \lim_{d \to \infty} G_d''(0) = \frac{\tau_\f(\kappa)}{\tau}.
+    \end{equation*}
+\end{lemma}
+\noindent
+Lemma~\ref{lemma:limit_Gsecond} relies on the limiting spectral distribution theorem we established in Theorem~\ref{thm:lsd_constrained_GOE}, 
+and is proven below. First, we establish how Lemma~\ref{lemma:limit_Gsecond}, 
+alongside the following technical hypothesis,
+ends the proof of Theorem~\ref{thm:fail_second_moment}.
+\begin{hypothesis}\label{hyp:control_Gsecond}
+    We assume that, for $G_d$ given in eq.~\eqref{eq:Gd_integral}:
+    \begin{equation*}
+        \lim_{\eps \downarrow 0}\limsup_{d \to \infty} \sup_{|q| \leq \eps} |G_d''(q) - G_d''(0)| = 0.
+    \end{equation*}
+\end{hypothesis}
+\noindent
+\textbf{Discussion of Hypothesis~\ref{hyp:control_Gsecond} --}
+Hypothesis~\ref{hyp:control_Gsecond} states that $G_d''(q)$ is continuous in $q = 0$, uniformly in $d$ as $d \to \infty$.
+We make two important remarks related to this hypothesis:
+\begin{itemize}[leftmargin=*]
+    \item First, note that $G_d$ in eq.~\eqref{eq:Gd_integral} can be interpreted as a large deviations rate function for the spectral norms of two $q$-correlated $\GOE(d)$ matrices $(\|\bW_1\|_\op, \|\bW_2\|_\op)$, 
+    on the scale $d^2$. 
+    In general, the large deviations rate function (in the weak topology) for the joint law of the spectral measures of two matrices $\bW_1$ and $\bW_2$
+    drawn from a $\beta$-ensemble with an interacting potential proportional to $\Tr[\bW_1 \bW_2]$ has been established in~\cite{guionnet2004first}[Theorem~3.3]. 
+    From these results, one can obtain the existence of the limit of $G_d(q)$ as $d \to \infty$ (which we call $G(q)$), as well as a variational formula for it.
+    Under this framework, Hypothesis~\ref{hyp:control_Gsecond} would follow if $G_d''$ was shown to converge uniformly to $G''$ in a neighborhood of $q = 0$.
+    \item A sufficient condition for Hypothesis~\ref{hyp:control_Gsecond} to hold is to establish that $\sup_{|q| \leq \eps} |G_d^{(3)}(q)| \leq C(\eps)$ as $d \to \infty$.
+    The third derivative of $G_d$ can be explicitly calculated from eq.~\eqref{eq:Gd_integral}, similar to our computation of the second derivative in Section~\ref{sec:2nd_moment}.
+    As discussed there, bounding the second derivative required demonstrating that $\Var_{\langle \cdot \rangle}[\Tr P[\bW_1, \bW_2]] = \mcO(1)$, where $P$ is a polynomial independent of $d$, and $\bW_1, \bW_2$ are two correlated $\GOE(d)$ matrices conditioned to have spectral norm at most $\kappa$ (see eq.~\eqref{eq:gibbs_q}).
+    We established this bound in Lemma~\ref{lemma:conc_moments_Pqkappa} using classical concentration techniques.
+    Note that $\langle \Tr[P(\bW_1, \bW_2)]\rangle = \Theta(d)$, so we established strong concentration properties for this quantity.
+    For the third derivative, however, we now essentially need to show that
+    \begin{equation}\label{eq:required_3rd_moment}
+        \left\langle\left(\Tr P[\bW_1, \bW_2] - \langle \Tr P[\bW_1, \bW_2] \rangle\right)^3\right\rangle = \mcO\left(\frac{1}{d}\right).
+    \end{equation}
+    Unfortunately, the bound established in Lemma~\ref{lemma:conc_moments_Pqkappa} only yields eq.~\eqref{eq:required_3rd_moment} 
+    with a right-hand side of $\mcO(1)$.
+    Achieving a sharper bound would require an even more precise control over the statistics of
+    $\Tr P[\bW_1, \bW_2]$
+    under the law $\langle \cdot \rangle$ of eq.~\eqref{eq:gibbs_q}, 
+    which we have not been able to achieve at present and leave as a direction for future work\footnote{
+     A bound $\smallO_d(1)$ for the quantity of eq.~\eqref{eq:required_3rd_moment} can be shown if the joint density of $(\bW_1, \bW_2)$ is proportional to $\exp\{-d \Tr V[\bW_1, \bW_2]\}$, for some strongly convex and polynomial potentials $V$, as a consequence 
+     of a central limit theorem for $\Tr P[\bW_1,\bW_2]$, see~\cite{guionnet2009large}[Chapter 9]. However even achieving this bound here appears non-trivial because our potential is singular as a consequence of the constraint $\indi\{\|\bW_a\|_\op \leq \kappa\}$ (see e.g.~\cite{borot2013asymptotic} for the case of single-matrix models).
+    }.
+\end{itemize}
+
+\myskip
+We come back to the proof of Theorem~\ref{thm:fail_second_moment}.
+If we assume that $\tau < \tau_\f(\kappa)$, by  Lemma~\ref{lemma:limit_Gsecond} and Hypothesis~\ref{hyp:control_Gsecond}, there exists 
+$\delta > 0$ and $\eps > 0$ (depending on $\tau, \kappa$) such that, for $d$ large enough: 
+\begin{equation}\label{eq:lb_Gd2}
+    \inf_{|q| \leq \eps} G_d''(q) \geq (1+\delta).
+\end{equation}
+Recall that $H(p) \coloneqq - p \log p - (1-p)\log (1-p)$ is the ``binary entropy'' function. We define $S(q) \coloneqq H[(1+q)/2] - \log 2$, 
+and
+\begin{align}\label{eq:def_Phid}
+    \Phi_d(q) \coloneqq G_d(q) + S(q).
+\end{align}
+Since $S$ is a smooth function of $q$, and $S''(0) = -1$, from eq.~\eqref{eq:lb_Gd2} there exists new constants $(\eps, \delta) > 0$ 
+such that
+\begin{equation}\label{eq:lb_Phid2}
+    \inf_{|q| \leq \eps} \Phi_d''(q) \geq \delta.
+\end{equation}
+Notice that $\Phi_d(0) = 0$ and $\Phi_d'(0) = 0$ (since $\Phi_d$ is an even function of $q$), so eq.~\eqref{eq:lb_Phid2} implies 
+that for $d$ large enough: 
+\begin{equation}\label{eq:lb_Phi}
+     \inf_{|q| \leq \eps}\left[\Phi_d(q) - \frac{\delta q^2}{2}\right] \geq 0.
+\end{equation}
+Using the classical inequality that for any $l \in \{0, \cdots, n\}$:
+\begin{equation*}
+   \binom{n}{l} \geq \frac{1}{n+1} 2^{n H(l/n)},
+\end{equation*}
+we obtain from eq.~\eqref{eq:2nd_moment_recall}:
+\begin{align*}
+    \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} &\geq \frac{1}{n+1} \sum_{l=0}^n \exp\{n \Phi_d(q_l)\} \ageq \frac{1}{n+1} \sum_{\substack{0 \leq l \leq n \\ |q_l| \leq \eps}} \exp\left\{\frac{n\delta q_l^2}{2}\right\},
+\end{align*}
+where $q_l = 2 (l/n) - 1$, and we used eq.~\eqref{eq:lb_Phi} in $(\rm a)$.
+Choosing $l \in \{0, \cdots, n\}$ such that $\eps/2 \leq |q_l| \leq \eps$, we reach (recall that $n/d^2 \to \tau$):
+\begin{align*}
+    \liminf_{d \to \infty} \frac{1}{d^2} \log \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} &\geq \frac{\delta \tau \eps^2}{8} > 0, 
+\end{align*}
+which ends the proof of Theorem~\ref{thm:fail_second_moment}. $\qed$
+
+\myskip 
+\textbf{Remark --} Notice that a statement akin to Theorem~\ref{thm:fail_second_moment} might still hold even if $\Phi_d''(0) < 0$ for large $d$, as long 
+as $\Phi_d$ reaches its global maximum in a value $q$ which is far from $0$ as $d \to \infty$, as our 
+argument can then be easily adapted to this setting.
+As such, we do not know if $\tau_\f(\kappa)$ (which 
+comes out of our local analysis around $q = 0$) is a sharp threshold for $\EE[Z_\kappa^2] \gg \EE[Z_\kappa]^2$.
+
+\myskip
+\begin{proof}[Proof of Lemma~\ref{lemma:limit_Gsecond} --]
+We start from eq.~\eqref{eq:d2G_dq2_1}, which for $q = 0$ gives:
+\begin{align}\label{eq:G20}
+    G_d''(0) &= \frac{d(d+1)}{2n} - \frac{d}{n} \EE[\Tr \bW^2] + \frac{d^2}{4n} \textrm{Var}[\Tr[\bW \bW']].
+\end{align}
+In eq.~\eqref{eq:G20}, $\bW$ and $\bW'$ are sampled independently according to the law 
+$\bbP_\kappa$ of $\bZ \sim \GOE(d)$ conditioned on $\|\bZ\|_\op \leq \kappa$, i.e.\
+for any test function $\varphi$:
+\begin{align}\label{eq:law_conditioned_GOE}
+    \EE_{\bbP_\kappa}[\varphi(\bZ)] &= \frac{\int \, \varphi(\bZ) \, \indi\{\|\bZ\|_\op \leq \kappa\} e^{-\frac{d}{4} \Tr[\bZ^2]} \rd \bZ}{\int \, \indi\{\|\bZ\|_\op \leq \kappa\} e^{-\frac{d}{4} \Tr[\bZ^2]} \rd \bZ}.
+\end{align}
+We know that for $\bW \sim \bbP_\kappa$, the empirical spectral distribution $\mu_\bW$ weakly converges (a.s.) to $\mu_\kappa^\star$ given by Theorem~\ref{thm:lsd_constrained_GOE}.
+Since $\int \mu_\bW(\rd x) x^2 = \int \mu_\bW(\rd x) x^2 \indi\{|x| \leq \kappa\}$, we have by the Portmanteau theorem 
+and dominated convergence: 
+\begin{align}\label{eq:term_1_G20}
+    \lim_{d \to \infty} \frac{1}{d}\EE[\Tr \bW^2] &= \int \mu_\kappa^\star(\rd x) \, x^2 \, \indi\{|x| \leq \kappa\} = \int \mu_\kappa^\star(\rd x) \, x^2.
+\end{align}
+We now focus on the last term of eq.~\eqref{eq:G20}.
+Notice that $\EE[\Tr[\bW \bW']] = \Tr[(\EE \bW)^2] = 0$, since $\EE \bW = 0$ because $\bbP_\kappa$ is symmetric under $\bW \leftrightarrow - \bW$.
+Moreover, for any orthogonal matrix $\bO \in \mcO(d)$, $\bW \deq \bO \bW \bO^\T$ (as is directly seen from eq.~\eqref{eq:law_conditioned_GOE}), so that we further have:
+\begin{align}\label{eq:variance_Haar_measure}
+   \textrm{Var}[\Tr[\bW \bW']] = \EE[\Tr[\bW \bW']^2]= \EE_{\bO, \bLambda, \bLambda'}[\Tr[\bO \bLambda \bO^\T \bLambda']^2].
+\end{align}
+In eq.~\eqref{eq:variance_Haar_measure}, $\bLambda = \Diag(\{\lambda_i\})$ is a diagonal matrix containing the eigenvalues of $\bW$ (and similarly for $\bLambda'$), 
+and $\bO$ is an orthogonal matrix sampled from the Haar measure on $\mcO(d)$, independently of $\bW, \bW'$.
+Thus:
+\begin{align}\label{eq:variance_Haar_measure_2}
+   \textrm{Var}[\Tr[\bW \bW']] = \sum_{i,j,k,l} \EE[\lambda_i \lambda_k] \EE[\lambda_j \lambda_l] \EE[O_{ij}^2 O_{kl}^2].
+\end{align}
+The terms involving $\lambda_i$ eq.~\eqref{eq:variance_Haar_measure_2} can be computed using the permutation invariance of the law of $\{\lambda_i\}$ as well as the invariance under $\bLambda \leftrightarrow - \bLambda$. 
+Concretely, for all $i \in [d]$:
+\begin{align}\label{eq:EE_lambdai2}
+    \EE[\lambda_i^2] = \EE[\lambda_1^2] = \frac{1}{d} \sum_{j=1}^d \EE[\lambda_j^2] = \frac{1}{d} \EE[\Tr \bW^2],
+\end{align}
+and for $i \neq j$:
+\begin{align}\label{eq:EE_lambdailambdaj}
+    \EE[\lambda_i \lambda_j] &= \EE[\lambda_1 \lambda_2] = \frac{1}{d-1} \EE\left[\lambda_1 \sum_{k \geq 2} \lambda_k\right]
+    = \frac{1}{d(d-1)} \EE[(\Tr \bW)^2 - \Tr(\bW^2)].
+\end{align}
+The first moments of the matrix elements of a Haar-sampled orthogonal matrix are elementary (see e.g.\ \cite{banica2011polynomial} for general results):
+\begin{align}\label{eq:moments_Haar}
+    \EE[O_{ij}^2 O_{kl}^2] &= \begin{dcases}
+        \frac{3}{d(d+2)} &(i = k \textrm{ and } j = l), \\
+        \frac{1}{d(d+2)} &(i = k \textrm{ and } j \neq l, \textrm{ or } i \neq k \textrm{ and } j = l), \\
+        \frac{d+1}{d(d-1)(d+2)} &(i \neq k \textrm{ and } j \neq l).
+    \end{dcases}
+\end{align}
+Using eq.~\eqref{eq:moments_Haar} in eq.~\eqref{eq:variance_Haar_measure_2}, separating 
+cases in the sum, we get:
+\begin{align}\label{eq:variance_Haar_measure_3}
+    \nonumber
+   \textrm{Var}[\Tr[\bW \bW']] &= 
+   \frac{3}{d(d+2)} \cdot d^2 \cdot \EE[\lambda_1^2]^2 + 
+   \frac{1}{d(d+1)} \cdot 2 d^2 (d-1) \cdot \EE[\lambda_1^2] \EE[\lambda_1 \lambda_2] \\ 
+    \nonumber
+   &+ \frac{d+1}{d(d-1)(d+2)} \cdot d^2(d-1)^2 \cdot \EE[\lambda_1 \lambda_2]^2, \\ 
+   &= [1 +\smallO_d(1)] \left(3\EE[\lambda_1^2]^2 + 2d \EE[\lambda_1 \lambda_2] \EE[\lambda_1^2] + d^2 \EE[\lambda_1 \lambda_2]^2 \right).
+\end{align}
+From eqs.~\eqref{eq:term_1_G20} and \eqref{eq:EE_lambdai2}, we have $\EE[\lambda_1^2] \to \EE_{\mu_\kappa^\star}[X^2]$ as $d \to \infty$.
+Furthermore, by Lemma~\ref{lemma:conc_moments_Pqkappa}, $\EE[(\Tr \bW)^2] = \Var[\Tr \bW] = \mcO(1)$ as $d \to \infty$, 
+so eq.~\eqref{eq:EE_lambdailambdaj} gives that $d \EE[\lambda_1 \lambda_2] \to - \EE_{\mu_\kappa^\star}[X^2]$ as $d \to \infty$.
+Plugging these limits in eq.~\eqref{eq:variance_Haar_measure_3} we get:
+\begin{align}\label{eq:term_2_G20}
+   \textrm{Var}[\Tr[\bW \bW']] &= 2 \left(\int \mu_\kappa^\star(\rd x) \, x^2 \right)^2 + \smallO_{d\to \infty}(1).
+\end{align}
+Finally, combining eqs.~\eqref{eq:G20}, \eqref{eq:term_1_G20} and \eqref{eq:term_2_G20} we obtain (recall $n/d^2 \to \tau$):
+\begin{align}\label{eq:limit_G20}
+    \lim_{d \to \infty} G_d''(0) &= \frac{1}{\tau} \left[\frac{1}{2} - \int \mu_\kappa^\star(\rd x) \, x^2 + \frac{1}{2}\left(- \frac{1}{2} \int \mu_\kappa^\star(\rd x) \, x^2\right)^2 \right].
+\end{align}
+The integral in eq.~\eqref{eq:limit_G20} was already computed in eq.~\eqref{eq:int_mukappa_x2}: plugging its value in eq.~\eqref{eq:limit_G20} 
+shows that $  \lim_{d \to \infty} G_d''(0) = \tau_\f(\kappa)/\tau$, which ends the proof of Lemma~\ref{lemma:limit_Gsecond}.
+\end{proof}
