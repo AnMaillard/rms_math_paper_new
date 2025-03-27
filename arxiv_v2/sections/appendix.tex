@@ -8,9 +8,9 @@ Recall that $\Sigma(\mu) \coloneqq \int \mu(\rd x) \mu(\rd y) \log |x-y|$.
     Let $\bW \sim \GOE(d)$. 
     We denote $\mu_{\bW} \coloneqq (1/d) \sum_{i=1}^d \delta_{\lambda_i(\bW)}$ its empirical spectral distribution. 
     For $\mu \in \mcM_1^+(\bbR)$, recall eq.~\eqref{eq:def_I}:
-    \begin{equation}
+    \begin{equation*}
         I(\mu) \coloneqq -\frac{1}{2} \Sigma(\mu) + \frac{1}{4} \int \mu(\rd x) \, x^2 - \frac{3}{8}.
-    \end{equation}
+    \end{equation*}
     Then: 
     \begin{itemize}
         \item[$(i)$] $I : \mcM_1^+(\bbR) \to [0, \infty]$ is a strictly convex function and a good rate function, i.e.\  
@@ -42,7 +42,7 @@ Here we essentially adapt these results to the discontinuous potential
 \myskip
 Let $Q \coloneqq \{\mu \in \mcM_1^+(\bbR) \, : \, \mu([-\kappa, \kappa]) = 1\}$. 
 By the Portmanteau theorem, $Q$ is sequentially closed under weak convergence, and thus closed since the weak topology on $\mcM_1^+(\bbR)$ is metrizable.
-We apply Proposition~\ref{prop:ldp_Wop} to get:
+We apply Proposition~\ref{prop:ldp_emeasure} to get:
 \begin{align}
     \label{eq:ub_Wop_var_principle}
     \nonumber
@@ -140,7 +140,7 @@ Using this in eq.~\eqref{eq:lb_Wop_2} gives:
 Recall that $\nu_\delta = \mu^\star_{\kappa - \delta}$, so that taking the limit $\delta \to 0$, we get:
 \begin{align}\label{eq:lb_Wop_var_principle}
     \liminf_{d \to \infty} \frac{1}{d^2} \log\bbP[\|\bW\|_\op \leq \kappa] 
-    &\geq - I(\mu_\kappa^\star) = - \inf_{\mu \in \mcM_1^+([-\kappa,\kappa])} I(\mu).,
+    &\geq - I(\mu_\kappa^\star) = - \inf_{\mu \in \mcM_1^+([-\kappa,\kappa])} I(\mu).
 \end{align}
 Combining eqs.~\eqref{eq:ub_Wop_var_principle} and \eqref{eq:lb_Wop_var_principle} ends the proof of Corollary~\ref{cor:ldp_Wop_var_principle}.
 $\qed$

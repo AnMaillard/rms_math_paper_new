@@ -12,7 +12,6 @@ experimental design, and the theory of approximation algorithms, to name a few.
 The reader will find in \cite{spencer1994ten,matousek2009geometric,chen2014panorama} a detailed account of the history and applications of 
 discrepancy theory.
 Arguably one of the most celebrated results in this area is the following theorem, known as Spencer's ``six deviations suffice''~\citep{spencer1985six}.
-\change{
 \begin{theorem}[\cite{spencer1985six}]
     \label{thm:spencer}
     There exists $C > 0$ such that for all $n, d \geq 1$, and all $\bu_1, \cdots, \bu_n \in \bbR^d$ with $\|\bu_i\|_\infty \leq 1$ for all $i \in [n]$: 
@@ -24,28 +23,26 @@ Arguably one of the most celebrated results in this area is the following theore
        \end{dcases}
     \end{equation*}
 \end{theorem}
-}
 \noindent
-\change{The second case $n > d$ can be deduced from the result for $n = d$ using classical arguments based on iterated rounding, see e.g.~\cite{spencer1994ten}.}
+The second case $n > d$ can be deduced from the result for $n = d$ using classical arguments based on iterated rounding, see e.g.~\cite{spencer1994ten}.
 Interestingly, Spencer's theorem shows that one can drastically improve over a naive pick of random signings $\eps_1, \cdots, \eps_n \iid \Unif(\{\pm 1\})$. Indeed, 
-it is not hard to show that \change{(taking $n = d$ for simplicity) random signings achieve $\left\|\sum_{i=1}^n \eps_i \bu_i\right\|_\infty = \Theta(\sqrt{n \log n})$ for some choice of $(\bu_i)_{i=1}^n$}, 
-with high probability as \change{$n \to \infty$}. Spencer's theorem \change{thus} implies the existence of a signing $\eps \in \{\pm 1\}^n$, 
-which depends on the value of the $\bu_i$'s, and whose discrepancy \change{generically} improves over the one of random signs by a logarithmic factor.
+it is not hard to show that (taking $n = d$ for simplicity) random signings achieve $\left\|\sum_{i=1}^n \eps_i \bu_i\right\|_\infty = \Theta(\sqrt{n \log n})$ for a worst-case choice of $(\bu_i)_{i=1}^n$, 
+with high probability as $n \to \infty$. Spencer's theorem thus implies the existence of a signing $\eps \in \{\pm 1\}^n$, 
+which depends on the value of the $\bu_i$'s, and whose discrepancy generically improves over the one of random signs by a logarithmic factor.
 While the original proof of \cite{spencer1985six} is not constructive, there has been recently a great number of results regarding efficient algorithmic constructions of 
 these signings. We will discuss this point further in Section~\ref{subsec:discussion}.
 
 \myskip 
 \textbf{Matrix discrepancy --}
 In the present work we consider the problem of \emph{matrix discrepancy}. Given a set of $n$ symmetric $d \times d$ matrices $\bA_1, \cdots, \bA_n$, 
-we aim to characterize the following discrepancy objective ($\|\cdot\|_\op$ is the spectral, or operator, norm):
+we aim to characterize the following discrepancy objective ($\|\bA\|_\op \coloneqq \max_{\|\bx\|_2=1} \|\bA \bx\|_2$ is the spectral, or operator, norm):
 \begin{equation}
     \label{eq:def_disc}
     \disc(\bA_1, \cdots, \bA_n) \coloneqq \min_{\eps \in \{\pm 1\}^n} \left\| \sum_{i=1}^n \eps_i \bA_i \right\|_\op.
 \end{equation}
-\change{
 As already mentioned, a foundational question in discrepancy is how the discrepancy objective compares to the one achieved by a \emph{random} choice of the 
-signings $\eps_i \iid \Unif(\{\pm 1\})$: matrix discrepancy is thus intimately connected to the study of large random matrices.}
-\change{Matrix discrepancy has also}
+signings $\eps_i \iid \Unif(\{\pm 1\})$: matrix discrepancy is thus intimately connected to the study of large random matrices.
+Matrix discrepancy has also
 been shown to have implications in the theory of quantum random access codes~\citep{hopkins2022matrix,bansal2023resolving}, 
 in generalizations of the Kadison-Singer problem~\citep{marcus2015interlacing,kyng2020four}, as well as 
 graph sparsification~\citep{batson2014twice} to name a few.
@@ -54,25 +51,24 @@ graph sparsification~\citep{batson2014twice} to name a few.
 The celebrated ``Matrix Spencer'' conjecture~\citep{zouzias2012matrix,meka2014discrepancy1} is likely the most important open problem in matrix discrepancy.
 It asserts that Spencer's Theorem~\ref{thm:spencer} can be generalized to the matrix setting, as follows.
 \begin{conjecture}[Matrix Spencer~\citep{zouzias2012matrix,meka2014discrepancy1}]\label{conj:mspencer}
-    There exists $C > 0$ such that for all $n, d \geq 1$, and all $\bA_1, \cdots, \bA_n$ symmetric $d \times d$ matrices with $\|\bA_i\|_\op \leq 1$ for all $i \in [n]$:
+    There exists $C > 0$ such that for all $n, d \geq 1$, and all $\bA_1, \cdots, \bA_n$ symmetric $d \times d$ matrices with $\max_{i \in [n]}\|\bA_i\|_\op \leq 1$:
     \begin{equation*}
         \disc(\bA_1, \cdots, \bA_n) \leq C \sqrt{n \max\left(1, \log \frac{d}{n}\right)}.
     \end{equation*}
-    \change{In particular, the discrepancy is $\mcO(\sqrt{n})$ for $d = n$.}
+    In particular, the discrepancy is $\mcO(\sqrt{n})$ for $d = n$.
 \end{conjecture}
 \noindent
 We stress that Spencer's theorem can be seen as the special case of Conjecture~\ref{conj:mspencer} in which all $\bA_i$ commute with each other (and are thus diagonalizable in the same basis).
 Moreover, a weaker form of Conjecture~\ref{conj:mspencer}, with a bound $\mcO(\sqrt{n \log d})$ on the right-hand side, can easily be shown to be achievable using a random choice 
 of signs $\eps_i \iid \Unif(\{\pm 1\})$, using the non-commutative Khintchine inequality of~\cite{lust1991non}.
-Despite a recent surge in efforts~\change{\citep{levy2017deterministic,hopkins2022matrix,dadush2022new}}, Conjecture~\ref{conj:mspencer} remains open at the time of this writing. 
-The best-known result is a proof of Matrix Spencer when
+Despite a recent surge in efforts~\citep{levy2017deterministic,hopkins2022matrix,dadush2022new}, Conjecture~\ref{conj:mspencer} remains open at the time of this writing. 
+The best-known result is a proof of Matrix Spencer if we additionally assume
 $\rk(\bA_i) \lesssim n / \log^3 n$~\citep{bansal2023resolving}, and is based on the recent improvements over the non-commutative Khintchine inequality of \cite{bandeira2023matrix}.
 In this work, we consider an average-case version of Conjecture~\ref{conj:mspencer}, introduced in Section~\ref{subsubsec:average_mdiscrepancy}.
 
-\subsubsection{\change{Random vector discrepancy, and the symmetric binary perceptron}}\label{subsubsec:sbp}
+\subsubsection{Random vector discrepancy, and the symmetric binary perceptron}\label{subsubsec:sbp}
 
-\change{
-    \noindent
+\noindent
 A natural question in vector discrepancy (i.e.\ in the setting of Theorem~\ref{thm:spencer}) is to shift our attention to average-case settings, where the $\bu_i$ are 
 chosen randomly rather than potentially adversarially.
 The typical discrepancy for random vectors is now well understood: in the regime $n = \omega(d)$ (i.e.\ $d = \smallO(n)$, many more signs than dimensions), 
@@ -93,10 +89,9 @@ the randomness makes the problem amenable to a detailed mathematical analysis wi
 In a complementary way, 
 recent works have characterized
 very precisely the minimal discrepancy in the proportional regime $n = \Theta(d)$, as a function of the ``aspect ratio'' $\beta \coloneqq \lim_{d \to \infty} n/d$.
-Indeed, this setting of random vector discrepancy related 
-to an instance of the \emph{symmetric binary perceptron} (SBP), a random constraint satisfaction problem 
-which
-emerged as a variant to the classical asymmetric binary perceptron. 
+This setting of random vector discrepancy is an instance of the \emph{symmetric binary perceptron} (SBP), a random constraint satisfaction problem 
+which was introduced in~\cite{aubin2019storage}
+as a variant to the classical asymmetric binary perceptron. 
 The latter is  
 a simple model of a neural network storing random patterns, which has a long history of study in 
 computer science, statistical physics, and probability theory~\citep{cover1965geometrical,gardner1988space,gardner1988optimal,krauth1989storage,sompolinsky1990learning,talagrand1999intersecting,talagrand2010mean}.
@@ -111,18 +106,15 @@ as:
 Letting $(\bu_i)_k \coloneqq (\bg_j)_k$, so that $(\bu_i)_{i=1}^n \iid \mcN(0, \Id_d)$ it is clear that the 
 the SBP can be thought as an average-case version of vector discrepancy, 
 and more precisely to the setting of Theorem~\ref{thm:rvector_disc} with $n = \Theta(d)$.
-}
 The SBP has received significant attention in the recent literature:
 its relative simplicity allows studying in detail the relation between its structural properties and the performance of 
 solving algorithms, 
 which can then guide the theory of more complex statistical models,
 see e.g.\ \cite{aubin2019storage,perkins2021frozen,abbe2022proof,gamarnik2022algorithms,kizildag2023symmetric,barbier2024atypical,alaoui2024hardness,barbier2024escape}.
-\change{
 Concretely, it is shown in \cite{aubin2019storage,abbe2022proof,gamarnik2022algorithms} (among other results) that 
 the SBP undergoes the following sharp satisfiability/unsatisfiability transition.
-}
 \begin{theorem}[Sharp threshold for the SBP~\citep{aubin2019storage,abbe2022proof}]\label{thm:trans_SBP}
-    \change{
+    Let $K > 0$.
     Define
     \begin{equation*}
         \beta_1(K) \coloneqq - \frac{\log \bbP_{z \sim \mcN(0,1)}[|z| \leq K]}{\log 2}.
@@ -132,7 +124,6 @@ the SBP undergoes the following sharp satisfiability/unsatisfiability transition
     \begin{equation*}
         Z_K \coloneqq \left|\left\{\eps \in \{\pm 1\}^n \, : \, \left\|\sum_{i=1}^n \eps_i \bu_i \right\|_\infty \leq K \sqrt{n}\right\}\right|.
     \end{equation*}
-    }
     Then in the limit $n, d \to \infty$ with $n / d \to \beta > 0$:
     \begin{itemize}
         \item[$(i)$] If $\beta < \beta_1(K)$, $\lim_{d \to \infty} \bbP[Z_K \geq 1] = 0$. 
@@ -156,41 +147,39 @@ Concretely, given $n, d \geq 1$ a \emph{margin} $\kappa > 0$, and $\bW_1, \cdots
 \end{center}
 \noindent 
 This problem can be seen as an average-case analog of Conjecture~\ref{conj:mspencer}, with the simple Gaussian random matrix model serving as a natural starting point.
-By investigating this simplified case in great detail, we aim to gain insight into Conjecture~\ref{conj:mspencer},
-to then probe it for increasingly complex random matrix models. This would form an alternative direction to other recent works~\citep{hopkins2022matrix,dadush2022new,bansal2023resolving} towards the Matrix Spencer conjecture.
+By investigating this simplified case in great detail, we firstly aim to gain insight, 
+in order to possibly probe Conjecture~\ref{conj:mspencer} in more structured random matrix models in the future.
+This would form an alternative direction to other recent works~\citep{hopkins2022matrix,dadush2022new,bansal2023resolving} towards a better understanding of the Matrix Spencer conjecture.
 
 \myskip 
-Additionally, \textbf{(P)} can naturally be thought of as the matrix discrepancy analog to the \change{random vector discrepancy problem (or the symmetric binary perceptron)}
+Additionally, \textbf{(P)} can naturally be thought of as the matrix discrepancy analog to the random vector discrepancy problem (or the symmetric binary perceptron)
 described above:
-\change{a mapping can be achieved by modifying our model to}
+a mapping can be achieved by modifying our model to
 diagonal matrices $\bW_i$ with i.i.d.\ elements drawn from $\mcN(0,1)$ on the diagonal, 
-and \change{setting $(\bg_i)_k = (\bW_{i})_{kk}$}.
+and setting $(\bg_i)_k = (\bW_{i})_{kk}$.
 
 \myskip
-\change{Importantly, we will focus on studying \textbf{(P)} in the case of a \emph{finite margin} $\kappa > 0$ as $n, d \to \infty$. 
+Importantly, we will focus on studying \textbf{(P)} in the case of a \emph{finite margin} $\kappa > 0$ as $n, d \to \infty$. 
 In random vector discrepancy, the satisfiability transition for a finite margin occurs in the scale $n = \Theta(d)$, -- i.e.\ in the symmetric binary perceptron setting -- see Theorem~\ref{thm:trans_SBP}.
 As we will see, in our model the critical scaling is rather $n = \Theta(d^2)$, and we will focus on this 
 regime throughout our work.
-}
 Our approach to tackle \textbf{(P)} further builds on the methods introduced by \cite{aubin2019storage} for the SBP model.
 Ultimately, the main goal we pursue is to obtain a detailed understanding of the satisfiability properties of \textbf{(P)}, 
 and to reach a counterpart to Theorem~\ref{thm:trans_SBP} in the context of average-case matrix discrepancy.
 
-\change{
 \myskip 
 \textbf{Parallel work --} 
-Shortly after a first version of the present manuscript was made available online, an independent study~\citep{wengiel2024asymptotic} appeared, exploring as well the asymptotic discrepancy of Gaussian i.i.d. matrices.
+Shortly after a first version of the present manuscript was made available online, an independent study~\citep{wengiel2024asymptotic} appeared, exploring as well the asymptotic discrepancy of Gaussian i.i.d.\ matrices.
 Their findings extend the approach of~\cite{turner2020balancing} for random vector discrepancy to this context,
 by proving a counterpart to Theorem~\ref{thm:rvector_disc} for random matrix discrepancy.
-Their results provide a sharp characterization in the regime $n = \omega(d^2)$ (i.e.\ $d = \smallO(\sqrt{n})$).
+Their results provide a sharp characterization in the regime $n = \omega(d^2)$ (i.e.\ $d = \smallO(\sqrt{n})$), and $\kappa = \smallO(1)$.
 Technically, \cite{wengiel2024asymptotic} employs the second moment method, similar to our work, 
 but relies on a general upper bound for the density of the joint law of the spectra of two correlated Gaussian matrices.
-In contrast, the present work focuses on the critical regime $n = \Theta(d^2)$, where the asymptotic margin $\kappa \in (0,2)$ is finite.
+In contrast, the present work focuses on the critical regime $n = \Theta(d^2)$, where the asymptotic margin $\kappa > 0$ is finite.
 In this critical regime, the bound used in~\cite{wengiel2024asymptotic} becomes vacuous, and we employ here different ideas to control this joint law.
 Combining the results of~\cite{wengiel2024asymptotic} with ours, 
 we achieve a nearly complete description of the asymptotic discrepancy of Gaussian i.i.d.\ matrices, 
 leaving open only a fraction of the phase diagram in the critical regime $n = \Theta(d^2)$, see Fig.~\ref{fig:phase_diagram}.
-}
 
 
 \subsection{Main results}
@@ -247,11 +236,9 @@ Notice that this bound is also the one given by a random choice of $\eps_i~\iid~
 $n^{-1/2}\sum_{i} \eps_i \bW_i\sim\GOE(d)$.
 In what follows, we therefore focus on the (interesting) regime $\kappa \in (0,2]$, in which a choice of signings \emph{dependent on the $\bW_i$} must be made in order to 
 get a solution with margin at most $\kappa$.
-\change{
 Notice that this argument implies that Conjecture~\ref{conj:mspencer} holds straightforwardly for i.i.d.\ $\GOE(d)$ matrices.
 For this reason, our interest in this problem stems primarily from its interpretation as a constraint satisfaction problem (e.g.\ as a matrix-analog of the SBP) and its connection to questions in random matrix theory, particularly in the critical regime $n = \Theta(d^2)$.
 Nevertheless, we also view our understanding of the discrepancy of i.i.d.\ $\GOE(d)$ matrices as a foundational step toward exploring more structured random matrix models, for which Conjecture~\ref{conj:mspencer} is significantly more complex and presents an exciting avenue for future research.
-}
 
 \subsubsection{Asymptotics of the first moment}
 
@@ -280,18 +267,16 @@ Our first main result is the following sharp asymptotics for the expectation of 
 \noindent
 In Section~\ref{sec:1st_moment} we carry out the proof of Theorem~\ref{thm:first_moment}. 
 It relies on Proposition~\ref{prop:ldp_Wop}, which establishes the large deviations of the operator norm of a 
-$\GOE(d)$ matrix, in the scale $d^2$. \change{This is a consequence of now-classical results on the large deviations of the empirical measure 
-in so-called $\beta$-matrix models~\citep{arous1997large,anderson2010introduction}. This yields the large deviation rate function in a variational form.}. 
-Further, using results of logarithmic potential theory~\citep{saff2013logarithmic} and the Tricomi theorem~\citep{tricomi1985integral}, we are able to then solve \change{this variational principle},
+$\GOE(d)$ matrix, in the scale $d^2$. This is a consequence of now-classical results on the large deviations of the empirical measure 
+in so-called $\beta$-matrix models~\citep{arous1997large,anderson2010introduction}, which yield the large deviation rate function in a variational form. 
+Further, using results of logarithmic potential theory~\citep{saff2013logarithmic} and the Tricomi theorem~\citep{tricomi1985integral}, we are able to then solve this variational principle,
 and its outcome gives eq.~\eqref{eq:tau_1st_moment}.
-\change{As a byproduct, we obtain the limiting spectral measure of a matrix $\bW~\sim~\GOE(d)$ constrained on the event $\|\bW\|_\op \leq \kappa$, see Theorem~\ref{thm:lsd_constrained_GOE}}.
+As a byproduct, we obtain the limiting spectral measure of a matrix $\bW~\sim~\GOE(d)$ constrained on the event $\|\bW\|_\op \leq \kappa$, see Theorem~\ref{thm:lsd_constrained_GOE}.
 
 \myskip
-\change{
-\textbf{Relation to results of~\cite{kunisky2023online} --}
-}
+\textbf{Relation to~\cite{kunisky2023online} --}
 Theorem~\ref{thm:first_moment} is a refinement of Theorem~1.13 of \cite{kunisky2023online}, 
-which show that $Z_\kappa = 0$ with high probability if $\kappa \leq \delta \cdot 4^{-\tau}$, for an (unspecified) absolute constant $\delta > 0$.
+which shows that $Z_\kappa = 0$ with high probability if $\kappa \leq \delta \cdot 4^{-\tau}$, for an (unspecified) absolute constant $\delta > 0$.
 For instance, the bound of \cite{kunisky2023online} correctly predicts $\tau_1(\kappa) \sim - \log \kappa / \log 4$ for $\kappa \to 0$, but fails to capture that $\tau_1(\kappa) \to 0$ continuously as $\kappa \to 2$. 
 
 \subsubsection{The satisfiability region}
@@ -344,7 +329,7 @@ is crucial in order to develop our second moment analysis.
 \noindent
 Finally, under a technical assumption, we show that in average-case matrix discrepancy and
 for some values of the parameters $(\tau, \kappa)$,
-the number of solutions $Z_\kappa$ can be both large in expectation and have large fluctuations, indicating the failure of the 
+the number of solutions $Z_\kappa$ can be both large in expectation and have large variance, indicating the failure of the 
 second moment method approach.
 \begin{theorem}[Failure of the second moment method in part of the phase diagram]
     \label{thm:fail_second_moment}
@@ -380,7 +365,7 @@ In Figure~\ref{fig:phase_diagram}, we plot a sketch of the phase diagram of the 
         Numerically, we find $\tau_2(\kappa \to 2) \simeq 4.71$.
         The orange region is not characterized by our results, and remains open.
         The dotted purple line shows $\tau_\f(\kappa)$: according to Theorem~\ref{thm:fail_second_moment}, for $\tau < \tau_\f(\kappa)$ the number of solutions 
-        does not concentrate around its expectation (see also Fig.~\ref{fig:fail_second_moment}).
+        has large expectation and variance, and the second moment method fails (see also Fig.~\ref{fig:fail_second_moment}).
         The right plots show the limits $\kappa \downarrow 0$ (top) and $\kappa \uparrow 2$ (bottom).
         We emphasize that $\tau_1(\kappa), \tau_2(\kappa) \to +\infty$ as $\kappa \downarrow 0$.
     \label{fig:phase_diagram}}
@@ -421,10 +406,8 @@ For this reason, the second moment ratio $\EE[Z_\kappa^2]/\EE[Z_\kappa]^2$ might
 For instance, one might conjecture that this includes values of $\tau$ arbitrarily close to $0$ when $\kappa$ approaches $2$, which is not captured by our current bounds.
 Improving the estimates we obtain in Section~\ref{sec:2nd_moment} to obtain a sharp study of the range of parameters $(\tau, \kappa)$ with bounded second moment ratio is significantly more complex than in the SBP setting:
 it requires a precise understanding of the large deviation properties of the law of $(\|\bW_1\|_\op, \|\bW_2\|_\op)$, where $\bW_1, \bW_2$ are two correlated $\GOE(d)$ matrices, both conditioned on having small spectral norm (see eq.~\eqref{eq:def_Gd}). 
-\change{
-    A rate function for this law can be obtained in a variational form (see e.g.\ Theorem~3.3 of \cite{guionnet2004first}), however a numerical analysis of this variational formula 
-    is a very challenging problem, which we leave as a future direction.
-}
+A rate function for this law can be obtained in a variational form (see e.g.\ Theorem~3.3 of \cite{guionnet2004first}), however a numerical analysis of this variational formula 
+is a very challenging problem, which we leave as a future direction.
 
 \myskip
 Furthermore, and very interestingly, we show in Theorem~\ref{thm:fail_second_moment} that 
@@ -440,7 +423,8 @@ Numerically, we find  that $\tau_1(\kappa) < \tau_c(\kappa)$ in the range $0.718
     \includegraphics[width=0.75\textwidth]{figures/fail_second_moment.pdf}
     \caption{
         Illustration of Theorem~\ref{thm:fail_second_moment}. There exists a region of parameters (in purple) $\tau \in (\tau_1(\kappa), \tau_c(\kappa))$
-        for which the number of solutions to average-case matrix discrepancy does not concentrate, and the second moment method fails at characterizing the feasibility of the problem.
+        for which the number of solutions $Z_\kappa$ to average-case matrix discrepancy satisfies both $\EE[Z_\kappa] \gg 1$ and $\EE[Z_\kappa^2] \gg (\EE[Z_\kappa])^2$,
+        so that the second moment method fails at characterizing the feasibility of the problem.
     \label{fig:fail_second_moment}}
 \end{figure}
 
@@ -448,16 +432,15 @@ Numerically, we find  that $\tau_1(\kappa) < \tau_c(\kappa)$ in the range $0.718
 We stress that the result of Theorem~\ref{thm:fail_second_moment} is in stark contrast with the symmetric binary perceptron, in 
 which the second moment method succeeds in the entirety of the phase diagram (Theorem~\ref{thm:trans_SBP}).
 In particular, this unveils a potentially richer picture for the geometry of the solution space than in the SBP.
-\change{We note that, given the proof of Theorem~\ref{thm:fail_second_moment} (see Section~\ref{sec:fail_2nd_moment}), 
+We note that, given the proof of Theorem~\ref{thm:fail_second_moment} (see Section~\ref{sec:fail_2nd_moment}), 
 we do not expect the second moment to be large because of spurious rare events, in which case one can often
-still apply the second moment method by conditioning away from these rare events, see e.g.~\cite{janson1996second}, and an application in random vector discrepancy in~\cite{altschuler2022discrepancy}. 
+still apply the second moment method by conditioning away from these rare events (see e.g.~\cite{janson1996second}, and an application in random vector discrepancy in~\cite{altschuler2022discrepancy}). 
 As such, we believe that sharply characterizing the satisfiability threshold would require other techniques, that could more directly tackle the typical number of solutions 
 $(1/d^2) \EE[\log Z_\kappa]$ (what is called the ``quenched'' free energy in the statistical physics jargon).
 We leave such a challenging investigation for a future work.
-}
 Finally, we emphasize that the failure of the second moment method might extend to other parts of the ``Unknown'' region of the phase diagram
 (beyond the purple region of Fig.~\ref{fig:fail_second_moment}) 
-which are not captured by the local analysis used for Theorem~\ref{thm:fail_second_moment}: we refer to Section~\ref{sec:fail_2nd_moment} for details.
+which are not captured by the local analysis used in Theorem~\ref{thm:fail_second_moment}: we refer to Section~\ref{sec:fail_2nd_moment} for details.
 
 \myskip 
 \textbf{Sharp threshold sequence --}
@@ -476,7 +459,8 @@ in the closure of the ``Unknown region'' of Fig.~\ref{fig:phase_diagram}.
 \end{corollary}
 \noindent
 The existence of a sharp threshold sequence has been established recently in a variety of other perceptron-like problems, see for instance \cite{talagrand1999self,talagrand2011mean,xu2021sharp,nakajima2023sharp,altschuler2023zero}.
-Corollary~\ref{cor:sharp_threshold} shows the existence of a sharp threshold $\kappa_c$ depending on $d$, and bounds it in an interval of size $\Theta(1)$. Note that we further conjecture $\kappa_c(d,\tau)$ to converge to a well-defined limit, as we plan to discuss in a future work.
+Corollary~\ref{cor:sharp_threshold} shows the existence of a sharp threshold $\kappa_c$ depending on $d$, and bounds it in an interval of size $\Theta(1)$. 
+We further conjecture $\kappa_c(d,\tau)$ to converge to a well-defined limit, as we plan to discuss in a future work.
 
 \myskip
 \textbf{Structure of the solution space --}
