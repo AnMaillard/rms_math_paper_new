@@ -1,0 +1,68 @@
+16-Sep-2025
+
+Dear Dr. Maillard,
+
+I am pleased to inform you that your paper (RSA.25058 entitled "Average-case matrix discrepancy: satisfiability bounds) has been tentatively accepted for publication in Random Structures & Algorithms, pending your submission of a revised version addressing the recommendations made in the referee reports.
+
+Please find the reports attached.
+
+NOTE: Here is a link to submit your revised manuscript: https://wiley.atyponrex.com/submissionBoard/1/de639316-4bc7-4187-a5f1-4d5efda45284/current (If no link appears, follow the instructions in the next paragraph).
+
+Alternatively, go to https://wiley.atyponrex.com/journal/RSA. Sort by journal and submission status to locate this manuscript, then click the "Revise Submission" button to submit your revision. You will be able to respond to the reviewer comments when asked to "Upload your Author Response." All supplementary and additional files will be carried over when you submit a revised manuscript. You may be required to provide additional files at the revision stage.
+
+When submitting your revised manuscript, you will be able to respond to the comments made by the reviewer(s) in the space provided. You can use this space to document any changes you make to the original manuscript.  In order to expedite the processing of the revised manuscript, please be as specific as possible in your response to the reviewer(s). IMPORTANT: Your original files are available to you when you upload your revised manuscript.  Please delete any redundant files before completing the submission.
+
+Because we are trying to facilitate timely publication of manuscripts submitted to Random Structures & Algorithms, your revised manuscript should be uploaded as soon as possible. If it is not possible for you to submit your revision in a reasonable amount of time, we may have to consider your paper as a new submission.  If you feel that you will be unable to submit your revision within the time allowed please contact me to discuss the possibility of extending the revision time.
+
+This journal offers a number of license options for published papers; information about this is available here: https://authorservices.wiley.com/author-resources/Journal-Authors/licensing/index.html. The submitting author has confirmed that all co-authors have the necessary rights to grant in the submission, including in light of each co-author’s funder policies. If any author’s funder has a policy that restricts which kinds of license they can sign, for example if the funder is a member of Coalition S, please make sure the submitting author is aware.
+
+We look forward to receiving an updated version of your manuscript.
+
+Sincerely,
+
+Dr. Boris Bukh
+P.S. – You can help your research get the attention it deserves! Wiley Editing Services offers professional video abstract and infographic creation to help you promote your research at www.wileyauthors.com/eeo/promotion. And, check out Wiley’s free Promotion Guide for best-practice recommendations for promoting your work at www.wileyauthors.com/eeo/guide.
+
+
+
+Reviewers' Comments to Author:
+
+Reviewer: 1
+
+Comments to the Author
+This paper concerns the "fully random" analogue of the Matrix spencer problem. Recent work has investigated the super and sub critical scalings of the random case, in which the problem comparitively trivializes. The article directly addresses the critical scaling and studies the satisfiability threshold.
+
+The result combines techniques from a number of fields and is technically impressive in addition to being interesting and significant. The problem setting is also of importance to multiple fields in combinatorics/probability, and is appropriate for the journal. The paper is also well written and I have no serious changes to suggest. 
+
+Some very minor remarks for the author:
+
+- It might be helpful to denote in the phase diagram what happens for $\kappa \ge 2$, since the diagram does not seem to indicate the phase transition. (E.g. either a brief remark in the caption or some kind of extension to the figure). 
+- Freezing — the annealed (second moment) computation should at least suggest whether freezing should hold. If so, it would be good to mention. 
+- There are some nice open problems mentioned in the article (freezing, 1rsb, limiting ESD, etc.) It would be great for the reader if there were a short subsection somewhere that listed all the open problems. 
+
+Reviewer: 2
+
+Comments to the Author
+This paper studies a natural random model of matrix discrepancy, which may be viewed as an average-case version of the well-known matrix Spencer conjecture of discrepancy theory. In particular, the author considers a particular model where input matrices are drawn i.i.d. from the Gaussian orthogonal ensemble (GOE), and asks how small the operator norm of a signed sum of these matrices can be made by a suitable choice of signs. Following the methodology developed in a similar setting for the case of vector discrepancy, the author considers the first and second moment methods.
+
+The first moment method computes the expected number of signings achieving a given norm, and shows that beyond a certain threshold this expected number of signings converges to zero (in a suitable asymptotic regime of the two dimensional parameters, the number of matrices and their ambient dimension). By Markov's inequality, this implies that when one considers a sufficiently large number of matrices, there are with high probability no signings with a sufficiently small operator norm. In the vector case, the analogous calculation can be shown to be sharp by the second moment method: the variance of the number of solutions is sufficiently small that, when the expected number of signings achieving a given operator norm is large, then with high probability there actually exists at least one signing achieving that norm. In the matrix case, however, the author uncovers that the situation is more delicate: for certain scalings of the number of matrices and the "target" operator norm, the expected number of solutions is comparable to its standard deviation, whereby the second moment method fails.
+
+In summary, the author establishes the portion of the "phase diagram" of this problem that can be understood via the first and second moment methods, and characterizes the obstruction to extending these methods to determine the entire phase diagram. The technical methods are quite sophisticated random matrix theory calculations involving the large deviations of the norms of either a single random GOE matrix, which follows fairly directly from existing large deviations principles, or those of the two norms of a correlated pair of GOE matrices, which is considerably more difficult to treat. Some related work on the same problem has appeared recently as well (in particular the author's citations of Kunisky and Zhang, 2023 and Wengiel, 2024), but the author's work is quite distinct from that, working on the one hand on a very special case of GOE matrices, but using their special structure to perform much more precise computations.
+
+I think the paper is written and presented very well, and the results and probabilistic techniques are quite interesting to a wide audience familiar with either discrepancy theory, random matrix theory, or more discrete problems of a similar flavor such as the analysis of random constraint satisfaction problems. The paper is an excellent fit for this journal in my opinion, and I recommend accepting it, with just a few minor comments and suggestions as detailed below.
+
+- Perhaps introducing the Boolean entropy function H(x) = -xlog(x) - (1-x)log(1-x) would make Equation (5) a little more transparent? (It appears anyway later on p21.)
+
+- On p12, it is worth mentioning that the algorithm analyzed by Kunisky and Zhang (2023) is actually originally due to Zouzias, and is just given a more precise analysis in the KZ23 citation in the average case setting.
+
+- The discussion at the top of p13 seems a little confusing - the author makes it sound like in the proof it is important to have the more general large deviations principles for beta-ensembles versus just for the empirical spectral distribution of a GOE matrix. Why would that be, when the probability in question here is just a probability about the latter for specifically a GOE matrix? Is the author trying to suggest that Proposition 2.3 could be used to derive similar limiting laws for the spectrum conditional on a small norm for other such ensembles aside from the GOE?
+
+- Very minor point: on p14, the formatting of Theorem 2.5 is a little strange with an extra line break, and for some reason "Edward B Saff" is always expanded in full unlike the abbreviations to just the last names of all other citations.
+
+- The "Fourier transform" in Lemma 2.7 is probably more commonly known as the "characteristic function" in probability literature.
+
+- Around Equation (36) on p21, it would be helpful to indicate that the calculations to follow are in the same spirit as extracting cumulants from derivatives of the cumulant generating function, expectations of observables under a Gibbs measure from derivatives of the log-partition function, and so forth. This would also clarify the discussion of Hypothesis 4.1 later.
+
+- Around Lemma 3.5, maybe as a separate proposition or observation the author could observe that the sub-Gaussian norm directly controls the variance, as is used in Lemma 3.5 (as far as I understand)?
+
+Additional Comments to the Author:

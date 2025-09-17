@@ -1,0 +1,34 @@
+- Submit it to arXiv and to a journal (applied probability, random structures) !
+	- Random structures and algorithms? Looks like a good fit!
+	- ALEA?
+	- EJP (ECP)? Maybe not goof enough on the proba side, and on the discrepancy side they would not be interested.
+	- Probability Theory and Related Fields (but Springer)
+	- Something else?
+
+DONE:
+- Add a remark on the result of this paper of Wengiel!
+- Make a diff with all the sections file of the arXiv_v1, see if obvious changes to make
+- p2: The stated version of Spencer's theorem is often given but not actually tight for n >> d: in this case, the correct scaling is sqrt(d), not sqrt(n) (by the technique of "iterated rounding").
+- p2: Bandeira--Boedihardjo--van Handel, while a wonderful paper, seems strange to give as the only reference about random matrix theory (especially since it itself does say anything about discrepancy problems).
+- Send an email to author of this paper, explaining my situations and my remarks on his paper.
+- What the fuck is this paper ?? https://arxiv.org/pdf/2410.23915 ?? I had missed it !! It seems to tackle exactly the same problem as me!! But it does not seem to apply to my setting I think... He tackles the case n >> d^2 >> 1. I should add a remark on this paper still, or contact Tim about it. If the paper is correct, something here seems very weird when he does second moment... I think his Lemma~4 is wrong. Still it might be possible to make this second moment upper bound work, I should also have thought of applying it maybe??? See what it gives, maybe it gives a better bound for q close to 2, this is just a very simple upper bound on the HCIZ integral, basically the one I use in ellipsoid fitting with Tim? (Yes this is the large theta limit, basically q->1 limit, in the HCIZ)
+- IMP: Add it as well in my slides for Lyon and the slides on my website !!!
+- Also update MDS notes on the statement of Spencer's theorem. Add the iterated rounding proof there, for reference (the one I wrote in Flexcil). For this I should give ref e.g. to https://arxiv.org/pdf/1512.02254. 
+- For the iterated rounding, see also Remark 1.2 of the paper of Tim&al, he must have got the same reviewer.
+- p2: There is a long line of work on the discrepancy of random vectors which would also be good to mention as part of the motivation for this question. One representative paper is Turner, Meka, Rigollet (2020) "Balancing Gaussian vectors in high dimension", and its introduction gives a good overview. See also the papers that cite them on scholar, in particular last paper from January 2025 on hardness of SBP! There is also this new paper of October on matrix discrepancy from Nurnberg that actually has some discussion of this point. An see the paper of Tim, they mention the important results (all the introduction, in particular the paragraph on related results)
+
+	- p5: I would mention that the argument at the bottom of the page about the regime kappa > 2 also implies that the matrix Spencer conjecture itself is proved straightforwardly for the case of i.i.d. GOE matrices, so this is not the reason for the interest in this problem, but rather the CSP interpretation I mention above (as far as I understand) and its more fine-grained details.
+	- p7: It would be helpful to give a little more context about this phenomenon of the second moment method failing. How would one repair this issue / has it been addressed in other work before? If I understand the issue correctly, the problem is not the same as that addressed by the conditional second moment method of the second moment "spuriously" being large because of a rare bad event. Rather, here what is needed would seem to be a second moment method restricted to counting some special, better-behaved subset of solutions?
+	- p11: Regarding Theorem 2.2: is there any reason to expect that, maybe only for certain values of kappa, typical solutions achieving that discrepancy should have the signed sum of W_i having eigenvalue density close to this conditional one of the GOE? (Going off of the intuition that for random signs the signed sum is again a GOE.) This would be intriguing and would make the Theorem maybe more relevant to the other results.
+	-> Clearly yes it should be, given the interpretation of the RS potential being maximized at q = 0, and mu being the typical spectrum of a solution.
+	-> But I would need a sharp second moment upper bound, with a 1 + smallO(1) instead of a constant. So what I prove at the moment is not enough.
+	- Theorem 1.7 establishes a lower bound for the region where a discrepancy of $\kappa\sqrt{n}$ is secured. However, the proof is non-constructive. It would be more fascinating if the authors could provide some intuition or insights from an algorithmic perspective for this result. 
+
+	
+- Statement of Spencer's theorem: check the case n!=d. From the paper of Banaszczyk (”standard argument” of the first page), it seems that I should get $\sqrt{n}$  for all values of $n, d$, thus actually the $\max(1, \log d/n)$ inside the square root is not neccesary, even if the partial coloring approach can not see it. In Lecture 5 of the 10 lectures of Spencer, this is mentioned as a consequence of the fact that we are actually bounding the linear discrepancy, I should not make mistakes about this point.
+
+- Mention https://arxiv.org/pdf/math/0211131 for the proof of LDP for correlated GOEs with constrained spectral norm
+- Reviews of STOC to take into account
+- After, go back to my ''Remarks for resubmission'' notes for good references on limits of matrix models, perturbative expansions of HCIZ integrals, etc...
+- Prove the technical assumption?
+- Change the structure of the first moment proof to take into account the references I had missed
