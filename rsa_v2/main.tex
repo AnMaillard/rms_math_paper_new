@@ -1,8 +1,10 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
-\usepackage{settings_custom}
+\usepackage{settings}
 \addbibresource{refs.bib}
 \allowdisplaybreaks
+
+\newcommand{\change}[1]{{\color{NavyBlue} #1}}
 
 \begin{document}
 \title{Average-case matrix discrepancy: satisfiability bounds}
@@ -38,8 +40,12 @@
 \input{sections/introduction.tex}
 
 \subsection*{Acknowledgements}
+\change{
 The author wants to thank Dylan Altschuler for discussions and a careful reading of a first version of this manuscript, 
-as well as Tim Kunisky and Afonso S.\ Bandeira for insightful discussions about the early stages of this work.
+Tim Kunisky and Afonso S.\ Bandeira for insightful discussions about the early stages of this work, 
+and anonymous reviewers for helpful comments and suggestions.
+}
+
 
 \section{Sharp asymptotics of the first moment}\label{sec:1st_moment}
 \input{sections/first_moment.tex}

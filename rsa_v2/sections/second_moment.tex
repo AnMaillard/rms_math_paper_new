@@ -104,8 +104,9 @@ ends the proof of Theorem~\ref{thm:second_moment}.
     and $\EE \|\bY\|_\op \leq 2$ for $\bY \sim \GOE(d)$ (see e.g.\ Exercise~7.3.5 of \cite{vershynin2018high}).
     From Lemma~\ref{lemma:dylan} we thus get 
     \begin{align}\label{eq:varX}
-        \Var(X) \leq \frac{4n}{c(\tau)^2 d}.
+        \Var(X) \leq \frac{4n}{c(\tau)^2 d},
     \end{align}
+    \change{where $\Var(X) \coloneqq \EE[(X - \EE X)^2]$.}
     Recall that the Paley-Zygmund inequality states that for any random variable $X \geq 0$:
     \begin{align*}
         \bbP[X > 0] \geq \frac{\EE[X]^2}{\EE[X^2]}.
@@ -160,7 +161,7 @@ where for $q \in [-1,1]$:
     G_d(q) \coloneqq&  
     \frac{1}{n} \log \frac{\bbP\left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q \bW + \sqrt{1-q^2} \bZ\|_\op \leq \kappa\right]}{\bbP[\|\bW\|_\op \leq \kappa]^2}.
 \end{align}
-Let $H(p) \coloneqq - p \log p - (1-p)\log (1-p)$ denote the ``binary entropy'' function.
+\change{Recall that $H(p) \coloneqq - p \log p - (1-p)\log (1-p)$.}
 We will leverage the following lemma, which is based on standard asymptotic techniques, 
 and whose proof is deferred to Section~\ref{subsec:proof_laplace_discrete}.
 \begin{lemma}\label{lemma:laplace_discrete}
@@ -253,6 +254,9 @@ We will use the shorthand notation
     \langle \cdot \rangle_{q,\kappa} &\coloneqq \frac{\int (\cdot) \indi\{\|\bW\|_\op, \|\bY\|_\op \leq \kappa\} e^{-\frac{d}{4(1-q^2)} (\Tr[\bW^2] + \Tr[\bY^2]) + \frac{dq}{2(1-q^2)} \Tr[\bY \bW]} \rd \bY \rd \bW}{\int \indi\{\|\bW\|_\op, \|\bY\|_\op \leq \kappa\} e^{-\frac{d}{4(1-q^2)} (\Tr[\bW^2] + \Tr[\bY^2]) + \frac{dq}{2(1-q^2)} \Tr[\bY \bW]} \rd \bY \rd \bW},
 \end{align}
 i.e.\ $\langle \cdot \rangle_{q,\kappa}$ is the law of $(\bW, \bY)$ two correlated $\GOE(d)$ matrices (with correlation $q$), conditioned on the event $\|\bW\|_\op, \|\bY\|_\op \leq \kappa$.
+\change{$G_d(q)$ is the log-partition function (or ``free energy'' in statistical physics) of 
+this high-dimensional probability measure, 
+and taking derivatives will yield averages of observables under $\langle \cdot \rangle_{q,\kappa}$.}
 We get
 \begin{align*}
     G_d'(q) &= \frac{d(d+1) q}{2n (1-q^2)} + \frac{1}{2n} \left\langle -\frac{dq}{(1-q^2)^2} \Tr[\bW^2+\bY^2] 
@@ -521,6 +525,8 @@ A particularly useful consequence of the LSI is the following.
    \begin{equation*}
     \mu(|G - \EE G| \geq \delta) \leq 2 \exp\left\{-\frac{\delta^2}{2 c \|G\|_L^2}\right\}.
    \end{equation*}
+   \change{In particular, $\Var(G) \leq c \|G\|_L^2$.}
+   \fixme{Is this the right place?}
 \end{lemma}
 \noindent
 Finally, we will use that a necessary condition for a measure to satisfy the LSI is the so-called \emph{Bakry-Emery (BE)} condition.

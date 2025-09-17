@@ -192,7 +192,7 @@ For a function $V : \bbR \to \bbR$, and $\bS \in \mcS_d$ with eigenvalues $(\lam
 and eigenvalues $(V(\lambda_i))_{i=1}^d$. 
 We denote by $\|\bS\|_{\op} \coloneqq \max_{i \in [d]}|\lambda_i|$ the operator norm.
 For any $B \subseteq \bbR$ we denote by $\mcM_1^+(B)$ the set of real probability distributions on $B$.
-Finally, for a probability measure $\mu \in \mcM_1^+(\bbR)$ we denote $\Sigma(\mu) \coloneqq \int \mu(\rd x) \mu(\rd y) \log |x - y|$ its non-commutative entropy.
+For a probability measure $\mu \in \mcM_1^+(\bbR)$ we denote $\Sigma(\mu) \coloneqq \int \mu(\rd x) \mu(\rd y) \log |x - y|$ its non-commutative entropy. 
 We say that a random matrix $\bY \in \mcS_d$ is generated from the \emph{Gaussian Orthogonal Ensemble} $\GOE(d)$ if
 \begin{equation*}
     Y_{ij} \iid \mcN(0, (1+\delta_{ij})/d) \textrm{ for } i \leq j.
@@ -228,9 +228,9 @@ $Z_\kappa$ thus counts the number of signings $\eps \in \{\pm 1\}^n$ with margin
 \myskip
 \textbf{The case $\kappa > 2$ --}
 Clearly $(1/\sqrt{n})\sum_{i=1}^n \bW_i \sim \GOE(d)$, so that (with $\eps_i = 1$ for all $i \in [n]$), for any $\kappa > 2$, 
-\begin{equation*}
+\begin{equation}\label{eq:kappa_gtr_2}
     \bbP\left[Z_\kappa \geq 1\right] \geq \bbP_{\bW \sim \GOE(d)}[\|\bW\|_\op \leq \kappa] \aeq 1 - \smallO_d(1),
-\end{equation*}
+\end{equation}
 using Theorem~\ref{thm:wigner} in $(\rm a)$.
 Notice that this bound is also the one given by a random choice of $\eps_i~\iid~\Unif(\{\pm 1\})$ (independently of $\{\bW_i\}_{i=1}^n$), as again in this case 
 $n^{-1/2}\sum_{i} \eps_i \bW_i\sim\GOE(d)$.
@@ -282,12 +282,15 @@ For instance, the bound of \cite{kunisky2023online} correctly predicts $\tau_1(\
 \subsubsection{The satisfiability region}
 
 We start by introducing a function $\tau_2(\kappa)$, which will serve as a threshold for the validity of our satisfiability analysis.
+\change{Let $H(p) \coloneqq - p \log p - (1-p)\log (1-p)$ denote the ``binary entropy'' function.}
 \begin{proposition}\label{prop:tau2}
    For any $\eta > 0$, let $\delta_\eta \in (0,1)$ to be the unique solution to:
+   \change{
     \begin{equation}
         \label{eq:def_delta_eta}
-        - \frac{1+\delta}{2} \log \frac{1+\delta}{2} - \frac{1-\delta}{2} \log \frac{1-\delta}{2} = \frac{\eta}{1+\eta} \log 2.  
+        H\left(\frac{1+\delta}{2}\right) = \frac{\eta}{1+\eta} \log 2.  
     \end{equation}
+   }
     For any $\eta > 0$, let 
 \begin{align}
     \nonumber
@@ -368,8 +371,9 @@ In Figure~\ref{fig:phase_diagram}, we plot a sketch of the phase diagram of the 
     \caption{
         Sketch of the satisfiable (SAT) and unsatisfiable (UNSAT) regimes in average-case matrix discrepancy, 
         as proven by Theorems~\ref{thm:first_moment} and \ref{thm:second_moment}. 
-        The border of the SAT region is given by $\tau_2(\kappa)$, see Proposition~\ref{prop:tau2}. 
-        Numerically, we find $\tau_2(\kappa \to 2) \simeq 5.67$.
+        The border of the SAT region \change{for $\kappa < 2$} is given by $\tau_2(\kappa)$, see Proposition~\ref{prop:tau2}. 
+        Numerically, we find $\tau_2(\kappa \uparrow 2) \simeq 5.67$.
+        \change{For $\kappa >2$, the problem trivially admits a solution, see eq.~\eqref{eq:kappa_gtr_2}.}
         The orange region is not characterized by our results, and remains open.
         The dotted purple line shows $\tau_\f(\kappa)$: according to Theorem~\ref{thm:fail_second_moment}, for $\tau < \tau_\f(\kappa)$ the number of solutions 
         has large expectation and variance, and the second moment method fails (see also Fig.~\ref{fig:fail_second_moment}).
@@ -442,7 +446,7 @@ In particular, this unveils a potentially richer picture for the geometry of the
 We note that, given the proof of Theorem~\ref{thm:fail_second_moment} (see Section~\ref{sec:fail_2nd_moment}), 
 we do not expect the second moment to be large because of spurious rare events, in which case one can often
 still apply the second moment method by conditioning away from these rare events (see e.g.~\cite{janson1996second}, and an application in random vector discrepancy in~\cite{altschuler2022discrepancy}). 
-As such, we believe that sharply characterizing the satisfiability threshold would require other techniques, that could more directly tackle the typical number of solutions 
+As such, we believe that sharply characterizing the satisfiability threshold would require other techniques, \change{perhaps by directly tackling} the typical number of solutions 
 $(1/d^2) \EE[\log Z_\kappa]$ (what is called the ``quenched'' free energy in the statistical physics jargon).
 We leave such a challenging investigation for a future work.
 Finally, we emphasize that the failure of the second moment method might extend to other parts of the ``Unknown'' region of the phase diagram
@@ -486,7 +490,7 @@ The past decade has seen a surge of interest in \emph{algorithmic discrepancy}, 
 $\eps \in \{\pm 1\}^n$ minimizing a discrepancy objective such as eq.~\eqref{eq:def_disc}. 
 In the classical context of vector discrepancy, this line of work was initiated by \cite{bansal2010constructive}, and we refer to \cite{bansal2023resolving,kunisky2023online} for a more detailed description of the 
 literature that followed.
-For the problem of average-case matrix discrepancy, \cite{kunisky2023online} propose an online algorithm that is able to achieve a discrepancy
+For the problem of average-case matrix discrepancy, \cite{kunisky2023online} \change{analyze an online algorithm, introduced originally by~\cite{zouzias2012matrix}, and show} that is able to achieve a discrepancy
 $\|\sum_i \eps_i \bW_i\|_\op \lesssim d \log(n+d)$ for a large class of random matrices $\bW_i$, including the $\GOE$ distribution.
 In the regime $n = \Theta(d^2)$, this unfortunately falls short of obtaining a discrepancy lower than $2 \sqrt{n}$. 
 Whether one can design a polynomial-time algorithm that can output (with large probability) a low-discrepancy $\eps \in \{\pm 1\}^n$ in parts of the SAT phase described in Fig.~\ref{fig:phase_diagram} 

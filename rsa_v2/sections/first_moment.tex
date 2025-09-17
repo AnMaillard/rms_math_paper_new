@@ -31,12 +31,19 @@ We thus focus on the case $\kappa \in (0,2]$ in what follows.
 
 \myskip 
 \textbf{Sketch of proof and important related work --}
-The proof of Proposition~\ref{prop:ldp_Wop} builds upon a large deviation principle (with respect to the weak topology) for the empirical spectral measure of a matrix $\bW$ drawn from $\GOE(d)$, \emph{conditioned} on $\|\bW\|_\op \leq \kappa$. 
-This large deviation principle is stated as Proposition~\ref{prop:ldp_empirical_measure_conditioned}, and follows from classical results of large deviations theory for so-called $\beta$-ensembles~\citep{arous1997large,anderson2010introduction}. 
+    The proof of Proposition~\ref{prop:ldp_Wop} builds upon a large deviation principle (with respect to the weak topology) for the empirical spectral measure of a matrix $\bW$ drawn from $\GOE(d)$, \emph{conditioned} on $\|\bW\|_\op \leq \kappa$.
+\change{
+We study the conditioned law directly, since it is a so-called $\beta$-ensemble (albeit with a singular potential enforcing the spectral norm constraint), 
+so that the large deviation analysis follows from the general
+results stated in Proposition~\ref{prop:ldp_empirical_measure_conditioned}.
 As a direct consequence, we obtain in Corollary~\ref{cor:ldp_Wop_var_principle} the asymptotics of eq.~\eqref{eq:ldp_Wop} as a variational principle over probability measures supported in $[-\kappa,\kappa]$.
-For completeness, we also provide in Appendix~\ref{sec:appendix_ldp} a proof of Corollary~\ref{cor:ldp_Wop_var_principle} that appeared in an earlier version of this work, and which only uses the large deviations of the spectral measure of a $\GOE(d)$ matrix~\citep{arous1997large}.
+We note that one could rely solely on the original large deviations principles for (unconditioned) $\GOE(d)$ matrices proven in~\cite{arous1997large},
+however this requires additional care because the set of probability measures supported in $[-\kappa,\kappa]$ has empty interior under the weak topology:
+for completeness, we also provide in Appendix~\ref{sec:appendix_ldp} a proof of Corollary~\ref{cor:ldp_Wop_var_principle}, 
+that appeared in an earlier version of this work, and which uses only the result of~\cite{arous1997large}.
+}
 We solve the resulting variational principle using the theory of logarithmic potentials~\citep{saff2013logarithmic} and Tricomi's theorem~\citep{tricomi1985integral}, similarly to the alternative proof of Wigner's semicircle law obtained by \cite{arous1997large} from their large deviations result.
-Similar arguments also appeared in the theoretical physics literature~\citep{dean2006large,vivo2007large,dean2008extreme,majumdar2014top}. 
+Similar arguments also appeared in the theoretical physics literature~\citep{dean2006large,vivo2007large,dean2008extreme,majumdar2014top}.
 We refer to \cite{anderson2010introduction,guionnet2022rare} for more background and open problems in the theory of large deviations for random matrices.
 
 \myskip
@@ -58,7 +65,7 @@ We illustrate the form of $\rho_\kappa(x)$ in Figure~\ref{fig:rho_kappa}.
 Theorem~\ref{thm:lsd_constrained_GOE} is proven in Section~\ref{subsec:proof_lsd_constrained_GOE}.
 \begin{figure}[!t]
    \centering
-\includegraphics[width=0.8\textwidth]{figures/rho_kappa.pdf}
+\includegraphics[width=0.9\textwidth]{figures/rho_kappa.pdf}
 \caption{$\rho_\kappa(x)$ of eq.~\eqref{def:rhokappa_1} for different values of $\kappa$. For $\kappa = 2$ one recovers the semicircle law.\label{fig:rho_kappa}}
 \end{figure}
 
@@ -169,7 +176,6 @@ In our context, the ``admissible weight function'' of~\cite{saff2013logarithmic}
 Adapting the results of the aforementioned literature to our notations, we obtain the following theorem.
 \begin{theorem}[\cite{saff2013logarithmic}]
     \label{thm:properties_inf_I}
-    ~\\
     Let $\kappa > 0$ and
     $E_\kappa \coloneqq \inf_{\mu \in \mcM_1^+([-\kappa,\kappa])} I(\mu)$. Then
     \begin{itemize}
@@ -210,7 +216,7 @@ We give here a short proof for the sake of completeness.
     which can be found e.g.\ as Proposition~II.2.2 in \cite{faraut2014logarithmic}.
     \begin{lemma}\label{lemma:nonc_entropy_pos}
         Let $\mu$ be a signed measure on $\bbR$ with compact support, and such that $\int_\bbR \mu(\rd x) = 0$. 
-        Let $\hat{\mu}(t) \coloneqq \int \mu(\rd x) \, e^{i t x}$ be the Fourier transform of $\mu$.
+        Let $\hat{\mu}(t) \coloneqq \int \mu(\rd x) \, e^{i t x}$ be the \change{characteristic function} of $\mu$.
         Then 
         \begin{equation*}
             \Sigma(\mu) \coloneqq \int \mu(\rd x) \mu(\rd y) \log |x - y| = - \int_0^\infty \frac{|\hat{\mu}(t)|^2}{t} \rd t.
