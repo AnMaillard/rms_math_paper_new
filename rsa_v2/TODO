@@ -8,8 +8,14 @@ For revision (17.09.25):
     (1) what I used for the talks (in particular showing E[Z] >> 1 in orange region)
     (2) Adding the region kappa > 2, with a brutal cut-off and a SAT (trivial) label
   - The second moment computation should apparently suggest whether freezing should hold (according to R1). I should look where I can find this, and add a comment on that.
+    - Look at Aubin&al for this intuition!
+    - Perkins & xu gives a formal proof, the idea is to have contiguity. But here I am not sure how would contiguity work: conditioning W_i on satisying the constraint is hard...
+    - Still I should look at this in greater detail!
+    - I have now clarified it (18.09.25, Flexcil): I can add this as another open problem, a short discussion on freezing and contiguity.
+    - I should re-organize Section 1.3, by introducing some "Open problems" that can be listed, and that I mention again at the end. This is nice, for future work. 
+    And I can discuss more the freezing of the solutions, and the contiguity issue.
   - Add a short subsection at the end listing the open problems: freezing, RSB, limiting ESD for correlated GOEs, checking the technical condition for failure of second moment, etc...
-  - Comments from R2:
+  * Comments from R2:
     * Perhaps introducing the Boolean entropy function H(x) = -xlog(x) - (1-x)log(1-x) would make Equation (5) a little more transparent? (It appears anyway later on p21.)
     * On p12, it is worth mentioning that the algorithm analyzed by Kunisky and Zhang (2023) is actually originally due to Zouzias, 
       and is just given a more precise analysis in the KZ23 citation in the average case setting.
