@@ -1,0 +1,50 @@
+We discuss briefly here Open Problem~\ref{op:freezing}, and more specifically how freezing could be established, 
+or at least conjectured, from the second moment computation.
+For the symmetric binary perceptron (SBP), freezing was conjectured in this way in~\cite{aubin2019storage}, before being established rigorously in~\cite{perkins2021frozen,abbe2022proof}.
+
+\myskip 
+Let us first fix some notations.
+For the remainder of this section we assume that the margin $\kappa \in (0,2)$ is given and fixed.
+\fixme{Use $\Sigma_n$ here!}
+We denote $\Sigma_d \coloneqq \{\pm 1\}^d$, and $\mcS_d$ the set of symmetric $d \times d$ matrices.
+We let $\bH \coloneqq (\bW_1, \cdots, \bW_n)$, and denote $S(\bH) \coloneqq \{\eps \in \{\pm 1\}^n \, \textrm{s.t.} \, \|\sum_{i=1}^n \eps_i \bW_i\|_{\op} \leq \kappa \sqrt{n} \}$.
+Recall that $Z_\kappa = |S(\bH)|$, see eq.~\eqref{eq:def_Zkappa}.
+
+\myskip 
+\textbf{Step 1: contiguity --}
+Freezing of solutions is a property of $\Unif(S(\bH))$, the uniform measure over the set of solutions.
+The classical approach to establish properties of this measure is to use a contiguity argument with a \emph{planted} version of the problem, 
+which is often easier to study. Concretely, we define two models.
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Random model} ($\bbP_{\ra}$): draw first $\bW_1, \cdots, \bW_n \iid \GOE(d)$, conditioned on $S(\bH) \neq \emptyset$.
+    Draw then $\eps \sim \Unif(S(\bH))$.
+    \item \textbf{Planted model} ($\bbP_{\pl}$): draw first $\eps \sim \Unif(\Sigma_d)$. Draw then $\bW_1, \cdots, \bW_n \iid \GOE(d)$, conditioned on 
+    satisfying $\|\sum_i \eps_i \bW_i\|_\op \leq \kappa \sqrt{n}$.
+\end{itemize}
+$\bbP_\ra$ and $\bbP_\pl$ define two probability measures over $\mcS_d^n \times \Sigma_d$. In the planted distribution, 
+we often denote $\eps = \eps^\star$.
+In many problems, $\bbP_\pl$ turns out to be easier to study than $\bbP_\ra$, and moreover we have the general identity, 
+for any $(\eps, \bH)$ such that $\eps \in S(\bH)$:
+\begin{align}\label{eq:planted_random}
+    \frac{\rd \bbP_{\pl}}{\rd \bbP_{\ra}}(\eps, \bH) &= \frac{Z_\kappa(\bH)}{\EE_0[Z_\kappa(\bH')]} \cdot \bbP_0(S(\bH') \neq 0),
+\end{align}
+where $\bbP_0$ is the law of $\bW_1, \cdots, \bW_n \iid \GOE(d)$.
+When $\bbP_0(S(\bH') \neq 0) \to 1$ as $d \to \infty$, contiguity of $\bbP_{\pl}$ and $\bbP_{\ra}$ thus follows from concentration of $Z_\kappa$ on its average, 
+and in particular 
+
+
+e refer to the previously-cited literature on the SBP for further references on planting and contiguity in constraint satisfaction problems.
+
+\myskip
+\textbf{Step 2: the planted solutions is isolated --}
+Once contiguity with the planted model is established, a key point is to notice that of $q = 1 - 2 l / n \in [-1,1]$:
+\fixme{Do I use $\langle \cdot \rangle$ for scalar product?}
+\begin{align*}
+    \bbP_\pl(\exists \eps \in S(\bH) \backslash \{\eps^\star\} \, : \, \langle \eps, \eps^\star\rangle = n q) 
+    &\leq 
+    \EE_\pl \left[\# \{\eps \in S(\bH) \backslash \{\eps^\star\} \, : \, \langle\eps, \eps^\star\rangle = n q\}\right], \\ 
+    &\aleq \binom{n}{l} \bbP_{\pl} \left[\left\|\sum_{i=1}^n \eps_i \bW_i\right\|_\op \leq \kappa\right],
+\end{align*}
+where in $(\rm a)$ we used the invariance of the law of $\GOE(d)$, and the probability is the same for all $\eps \in \Sigma_n$ such that 
+$\langle \eps, \eps^\star \rangle = n q$.
+\todo{Finish}

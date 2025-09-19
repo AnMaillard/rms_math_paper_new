@@ -361,7 +361,6 @@ we explain why this assumption is plausible and outline approaches toward a pote
 In Section~\ref{subsec:discussion}, we further discuss the implications of Theorem~\ref{thm:fail_second_moment} in relation to our other primary results.
 
 
-
 \subsection{Discussion and consequences}\label{subsec:discussion}
 
 In Figure~\ref{fig:phase_diagram}, we plot a sketch of the phase diagram of the problem, as established by Theorems~\ref{thm:first_moment},\ref{thm:second_moment} and \ref{thm:fail_second_moment}. 
@@ -382,7 +381,8 @@ In Figure~\ref{fig:phase_diagram}, we plot a sketch of the phase diagram of the 
     \label{fig:phase_diagram}}
 \end{figure}
 Our results characterize a large part of the $(\kappa, \tau)$ phase diagram: 
-we discuss in the following some important consequences, as well as open directions stemming from our analysis.
+we discuss in the following some important consequences, 
+\change{and highlight open problems and research directions arising from our analysis.}
 
 \myskip
 \textbf{Balancing $\Theta(d^2)$ random matrices -- }
@@ -419,6 +419,13 @@ Improving the estimates we obtain in Section~\ref{sec:2nd_moment} to obtain a sh
 it requires a precise understanding of the large deviation properties of the law of $(\|\bW_1\|_\op, \|\bW_2\|_\op)$, where $\bW_1, \bW_2$ are two correlated $\GOE(d)$ matrices, both conditioned on having small spectral norm (see eq.~\eqref{eq:def_Gd}). 
 A rate function for this law can be obtained in a variational form (see e.g.\ Theorem~3.3 of \cite{guionnet2004first}), however a numerical analysis of this variational formula 
 is a very challenging problem, which we leave as a future direction.
+\change{
+\begin{openquestion}[Sharp second moment]\label{op:sharp_2nd_mom}
+    Obtain the sharp limit of $(1/n) \log \EE[Z_\kappa^2]$, the exponential scale of the second moment.
+    This should likely rely on computing numerically $(i)$ the large-$d$ limit of the large deviations rate function of eq.~\eqref{eq:def_Gd}, 
+    and $(ii)$ the asymptotic spectral density of two \emph{correlated} $\GOE(d)$ matrices, conditioned to both have spectral norm at most $\kappa$.
+\end{openquestion}
+}
 
 \myskip
 Furthermore, and very interestingly, we show in Theorem~\ref{thm:fail_second_moment} that 
@@ -472,6 +479,12 @@ in the closure of the ``Unknown region'' of Fig.~\ref{fig:phase_diagram}.
 The existence of a sharp threshold sequence has been established recently in a variety of other perceptron-like problems, see for instance \cite{talagrand1999self,talagrand2011mean,xu2021sharp,nakajima2023sharp,altschuler2023zero}.
 Corollary~\ref{cor:sharp_threshold} shows the existence of a sharp threshold $\kappa_c$ depending on $d$, and bounds it in an interval of size $\Theta(1)$. 
 We further conjecture $\kappa_c(d,\tau)$ to converge to a well-defined limit, as we plan to discuss in a future work.
+\change{
+\begin{openquestion}[Sharp SAT/UNSAT transition]\label{op:quenched_limit}
+    Obtain the sharp limit of $(1/d^2) \EE \log Z_\kappa$, and from it a sharp SAT/UNSAT threshold, closing the gap in Fig.~\ref{fig:phase_diagram}.
+    In particular, compare it with the success of the second moment method (see Open Problem~\ref{op:sharp_2nd_mom}).
+\end{openquestion}
+}
 
 \myskip
 \textbf{Structure of the solution space --}
@@ -481,8 +494,21 @@ the geometric structure
 of the space of solutions $\{\eps \in \{\pm 1\}^n \, : \, \|\sum_i \eps_i \bW_i\|_\op~\leq~\kappa \sqrt{n}\}$.
 In the symmetric binary perceptron, the geometric structure of the solution space was investigated by~\cite{aubin2019storage,perkins2021frozen,abbe2022proof},
 and was shown to exhibit a ``frozen-1RSB'' structure: that is, typically, solutions are isolated and far apart.
-Whether the solution space in average-case matrix discrepancy presents similar geometric features is a stimulating question, especially as the failure of the second moment method in parts of the phase diagram might indicate a richer picture than in the SBP.
-We leave this question open for future investigation.
+\change{
+\begin{openquestion}[Structure of the set of solutions]\label{op:freezing}
+    Elucidate whether the solution space (in the SAT region of Fig.~\ref{fig:phase_diagram} for $\kappa < 2$) exhibits the ``frozen-1RSB'' property.
+\end{openquestion}
+\noindent
+In the SBP it was the second moment analysis that suggested the existence of freezing~\citep{aubin2019storage},
+however in the present context two 
+difficulties arise: $(i)$ this argument usually relies on establishing  a \emph{contiguity} property with a ``planted'' version of the model, 
+and $(ii)$ even under contiguity, the second moment upper bound developed in Section~\ref{sec:2nd_moment} 
+is unfortunately not sharp enough to determine whether freezing occurs, 
+even withing the SAT region of Fig.~\ref{fig:phase_diagram}.
+We discuss points $(i)$ and $(ii)$ above in further details in Appendix~\ref{sec:appendix_freezing}.
+Going beyond, the failure of the second moment method (discussed above)
+may also signal a different geometric structure than in the SBP, at least in parts of the phase diagram.
+}
 
 \myskip 
 \textbf{Algorithmic discrepancy --}
@@ -492,8 +518,16 @@ In the classical context of vector discrepancy, this line of work was initiated 
 literature that followed.
 For the problem of average-case matrix discrepancy, \cite{kunisky2023online} \change{analyze an online algorithm, introduced originally by~\cite{zouzias2012matrix}, and show} that is able to achieve a discrepancy
 $\|\sum_i \eps_i \bW_i\|_\op \lesssim d \log(n+d)$ for a large class of random matrices $\bW_i$, including the $\GOE$ distribution.
-In the regime $n = \Theta(d^2)$, this unfortunately falls short of obtaining a discrepancy lower than $2 \sqrt{n}$. 
-Whether one can design a polynomial-time algorithm that can output (with large probability) a low-discrepancy $\eps \in \{\pm 1\}^n$ in parts of the SAT phase described in Fig.~\ref{fig:phase_diagram} 
-remains an open question. 
+In the regime $n = \Theta(d^2)$, this \change{bound} unfortunately falls short of obtaining a discrepancy lower than $2 \sqrt{n}$. 
+%Whether one can design a polynomial-time algorithm that can output (with large probability) a low-discrepancy $\eps \in \{\pm 1\}^n$ in parts of the SAT phase described in Fig.~\ref{fig:phase_diagram} 
+%remains an open question. 
+\change{
+\begin{openquestion}[Efficient algorithms]\label{op:algorithms}
+    Is there a polynomial-time algorithm which, in the regime $n = \Theta(d^2)$ and with high probability, outputs $\eps \in \{\pm 1\}^n$ such that
+   $\|\sum_{i} \eps_i \bW_i\|_\op \leq \kappa \sqrt{n}$
+    for some $\kappa < 2$?
+\end{openquestion}
+}
+\noindent
 For the symmetric binary perceptron, which is the vector analog to our problem, it was recently shown that the phase diagram presents a large computational-to-statistical gap
 in which low-discrepancy solutions exist, while large classes of polynomial-time algorithms can not find them, and that this was related to the geometric structure of the solution space~\citep{bansal2020line,gamarnik2022algorithms}.

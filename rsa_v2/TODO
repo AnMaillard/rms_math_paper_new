@@ -14,7 +14,8 @@ For revision (17.09.25):
     - I have now clarified it (18.09.25, Flexcil): I can add this as another open problem, a short discussion on freezing and contiguity.
     - I should re-organize Section 1.3, by introducing some "Open problems" that can be listed, and that I mention again at the end. This is nice, for future work. 
     And I can discuss more the freezing of the solutions, and the contiguity issue.
-  - Add a short subsection at the end listing the open problems: freezing, RSB, limiting ESD for correlated GOEs, checking the technical condition for failure of second moment, etc...
+  - Add a short subsection at the end listing the open problems: 
+        freezing, RSB, limiting ESD for correlated GOEs, checking the technical condition for failure of second moment, etc...
   * Comments from R2:
     * Perhaps introducing the Boolean entropy function H(x) = -xlog(x) - (1-x)log(1-x) would make Equation (5) a little more transparent? (It appears anyway later on p21.)
     * On p12, it is worth mentioning that the algorithm analyzed by Kunisky and Zhang (2023) is actually originally due to Zouzias, 

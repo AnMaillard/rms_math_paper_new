@@ -56,11 +56,18 @@ and anonymous reviewers for helpful comments and suggestions.
 \section{Limitations of the second moment method}\label{sec:fail_2nd_moment}
 \input{sections/fail_2nd_moment.tex}
 
+\printbibliography
+
+\newpage
 \appendix 
 \addtocontents{toc}{\protect\setcounter{tocdepth}{1}} %Only sections titles in the TOC for the appendix
 
-\section{Large deviations for the spectral norm of a Gaussian matrix}\label{sec:appendix_ldp}
-\input{sections/appendix.tex}
+\change{
+\section{Contiguity with a planted model, and freezing of solutions}\label{sec:appendix_freezing}
+\input{sections/appendix_freezing.tex}
+}
 
-\printbibliography
+\section{Large deviations for the spectral norm of a Gaussian matrix}\label{sec:appendix_ldp}
+\input{sections/appendix_ldp.tex}
+
 \end{document}
