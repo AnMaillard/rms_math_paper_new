@@ -10,6 +10,20 @@ We let $\bH \coloneqq (\bW_1, \cdots, \bW_n)$, and denote $S(\bH) \coloneqq \{\e
 Recall that $Z_\kappa = |S(\bH)|$, see eq.~\eqref{eq:def_Zkappa}.
 In this appendix only, we call $\bbP_0$ the law of $\bW_1, \cdots, \bW_n \iid \GOE(d)$, which was denoted $\bbP$ in the rest of the manuscript.
 
+\begin{definition}[Freezing]\label{def:freezing}
+    Let $\kappa \in (0,2)$, and $\tau = n/d^2$, such that $Z_\kappa \geq 1$ with probability $1 - \smallO(1)$ as $d \to \infty$ (i.e.\ we are in the SAT phase).
+    The set $S(\bH)$ of solutions is said to exhibit freezing
+    if there exists $q_c \in (0,1)$ such that the following holds:
+    \begin{align*}
+        \plim_{n,d \to \infty} \frac{1}{n} \log |\{\eps' \in S(\bH) \, : \, \eps \cdot \eps' \geq n q_c\}| = 0,
+    \end{align*}
+    where the limit is in probability over $\eps \sim \Unif(S(\bH))$.
+\end{definition}
+\noindent
+Definition~\ref{def:freezing} is a relatively weak form of freezing: for a typical solution $\eps$, the number of solutions with overlap to $\eps$ greater than $q_c$  
+must be sub-exponential in $n$. In the SBP, one can show that $\eps$ is completely isolated, and thus the \emph{only} such solution.
+In what follows, we describe the two key ingredients in the classical route to establish freezing, as was done e.g.\ for the SBP.
+
 \myskip 
 \textbf{Step 1: contiguity --}
 Freezing of solutions is a property of $\Unif(S(\bH))$, the uniform measure over the set of solutions.
@@ -59,17 +73,18 @@ For these reasons, we leave the establishment of contiguity as an open problem.
 
 \myskip
 \textbf{Step 2: is the planted solutions isolated ?}
-Once contiguity with the planted model is established, a key point is that if $q = 1 - 2 l / n \in [-1,1]$:
+For $l \in [n]$, denote $q_l \coloneqq 2l/n - 1 \in [-1,1]$.
+A key point is that for any $q_0 = q(l_0) \in [-1,1]$:
 \begin{align*}
-    \bbP_\pl(\exists \eps \in S(\bH) \backslash \{\eps^\star\} \, : \,  \eps \cdot \eps^\star = n q) 
+    &\bbP_\pl(\exists \eps \in S(\bH) \backslash \{\eps^\star\} \, : \,  \eps \cdot \eps^\star \geq n q_0) \\
     &\aleq 
-    \EE_\pl \left[\# \{\eps \in S(\bH) \backslash \{\eps^\star\} \, : \, \eps \cdot \eps^\star = n q\}\right], \\ 
-    &\hspace{-50pt}\bleq \binom{n}{l} \bbP_{\pl} \left[\left\|\sum_{i=1}^n \eps_i \bW_i\right\|_\op \leq \kappa\right], \hspace{20pt} (\textrm{for any } \eps \in \Sigma_n \textrm{ s.t. } \eps \cdot \eps^\star = n q), \\
-    &\hspace{-50pt}\cleq \binom{n}{l} \frac{2^n}{\EE_0[Z_\kappa]} \bbP_{0} \left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q \bW + \sqrt{1-q^2} \bZ\|_\op \leq \kappa\right], \\
-    &\hspace{-50pt}\dleq \binom{n}{l} \frac{\bbP_{0} \left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q \bW + \sqrt{1-q^2} \bZ\|_\op \leq \kappa\right]}{\bbP_{0} \left[\|\bW\|_\op \leq \kappa\right]}.
+    \EE_\pl \left[\# \{\eps \in S(\bH) \backslash \{\eps^\star\} \, : \, \eps \cdot \eps^\star \geq n q_0\}\right], \\ 
+    &\bleq \sum_{l \geq l_0} \binom{n}{l} \bbP_{\pl} \left[\left\|\sum_{i=1}^n \eps_i \bW_i\right\|_\op \leq \kappa\right], \hspace{20pt} (\textrm{for any } \eps \in \Sigma_n \textrm{ s.t. } \eps \cdot \eps^\star = n q_l), \\
+    &\cleq \sum_{l \geq l_0}\binom{n}{l} \frac{2^n}{\EE_0[Z_\kappa]} \bbP_{0} \left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q_l \bW + \sqrt{1-q_l^2} \bZ\|_\op \leq \kappa\right], \\
+    &\dleq \sum_{l \geq l_0}\binom{n}{l} \frac{\bbP_{0} \left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q_l \bW + \sqrt{1-q_l^2} \bZ\|_\op \leq \kappa\right]}{\bbP_{0} \left[\|\bW\|_\op \leq \kappa\right]}.
 \end{align*}
 where in $(\rm a)$ we used Markov's inequality, in $(\rm b)$ we used the invariance of the law of $\GOE(d)$, in $(\rm c)$ the definition of the planted distribution, and in $(\rm d)$ the expression of $\EE_0[Z_\kappa]$, see Section~\ref{sec:1st_moment}.
-Given this derivation and, assuming contiguity, for a given $\tau = \lim n / d^2$ in the SAT phase (i.e.\ such that $Z_k \geq 1$ with high probability), a sufficient condition for the frozen-1RSB structure of solutions 
+Given this derivation and, assuming contiguity with the planted model, for a given $\tau = \lim n / d^2$ in the SAT phase (i.e.\ such that $Z_k \geq 1$ with high probability), a sufficient condition for the freezing of solutions 
 is that there exists $q_c \in (0,1)$ such that for all $q \in (q_c, 1)$: 
 \begin{align}\label{eq:sufficient_cond_freezing}
     \lim_{d \to \infty} \frac{1}{d^2} \log \frac{\bbP_0 \left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q \bW + \sqrt{1-q^2} \bZ\|_\op \leq \kappa\right]}{\bbP_0 \left[\|\bW\|_\op \leq \kappa\right]} + \tau H\left(\frac{1+q}{2}\right) < 0.
