@@ -1,0 +1,132 @@
+We discuss briefly here Open Problem~\ref{op:freezing}, more specifically how freezing could be established, 
+or at least conjectured, from the second moment computation.
+For the symmetric binary perceptron (SBP), this was the path followed in~\cite{aubin2019storage}, before
+freezing was established rigorously in~\cite{perkins2021frozen,abbe2022proof}.
+
+\myskip 
+Let us first fix some notations.
+For the remainder of this section we assume that the margin $\kappa \in (0,2)$ is given and fixed.
+We denote $\Sigma_n \coloneqq \{\pm 1\}^n$, and $\mcS_d$ the set of symmetric $d \times d$ matrices.
+For $\eps, \eps' \in \Sigma_n$, we denote $R(\eps, \eps') \coloneqq (1/n) \sum_{i=1}^n \eps_i \eps'_i$ their overlap.
+We let $\bH \coloneqq (\bW_1, \cdots, \bW_n)$, and denote $S(\bH) \coloneqq \{\eps \in \{\pm 1\}^n \, \textrm{s.t.} \, \|\sum_{i=1}^n \eps_i \bW_i\|_{\op} \leq \kappa \sqrt{n} \}$.
+Recall that $Z_\kappa = |S(\bH)|$, see eq.~\eqref{eq:def_Zkappa}.
+In this appendix only we call $\bbP_0$ the law of $\bW_1, \cdots, \bW_n \iid \GOE(d)$, which was denoted $\bbP$ in the rest of the manuscript.
+
+\begin{definition}[Freezing]\label{def:freezing}
+    Let $\tau = n/d^2 = \Theta(1)$ be large enough so that $Z_\kappa \geq 1$ with probability $1 - \smallO(1)$ as $d \to \infty$ (i.e.\ we are in the SAT phase).
+    The set $S(\bH)$ of solutions is said to exhibit freezing
+    if there exists $q_c \in (0,1)$ such that the following holds:
+    \begin{align*}
+        \plim_{n,d \to \infty} \frac{1}{n} \log |\{\eps' \in S(\bH) \, : \, R(\eps, \eps') \geq q_c\}| = 0,
+    \end{align*}
+    where the limit is in probability over $\bH$ and $\eps \sim \Unif(S(\bH))$.
+\end{definition}
+\noindent
+Definition~\ref{def:freezing} captures a relatively weak notion of freezing: for a typical solution $\eps$, the number of solutions with overlap to $\eps$ exceeding $q_c$ is at most sub-exponential in $n$. 
+In the SBP, one can prove a stronger property, namely that $\eps$ is completely isolated and thus the \emph{unique} solution with such overlap. 
+Below we briefly outline the two main ingredients in the classical approach to proving freezing---as carried out for the SBP---and explain why these steps present difficulties in the context of random matrix discrepancy. 
+We refer to the literature cited above for more background and references.
+
+\myskip 
+\textbf{Step 1: contiguity --}
+Freezing of solutions is a property of $\Unif(S(\bH))$, the uniform measure over the set of solutions.
+The classical approach to establish properties of this measure is to use a contiguity argument with a \emph{planted} version of the problem, 
+which is often easier to study.
+Recall that, for two sequences of probability distributions $\bbP_d$ and $\bbQ_d$ (that depend on $d$), we say that $\bbP_d$ is contiguous to $\bbQ_d$, denoted $\bbP_d \lhd \bbQ_d$, 
+if for any sequence of measurable events $A_d$:
+\begin{align}\label{eq:contiguity}
+(\bbQ_d(A_d) \to 0 \textrm{ as } d \to \infty)
+ \Rightarrow 
+(\bbP_d(A_d) \to 0 \textrm{ as } d \to \infty).
+\end{align}
+In our setting, we define the following two models.
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Random model} ($\bbP_{\ra}$): draw first $\bW_1, \cdots, \bW_n \iid \GOE(d)$, conditioned on $S(\bH) \neq \emptyset$.
+    Draw then $\eps \sim \Unif(S(\bH))$.
+    \item \textbf{Planted model} ($\bbP_{\pl}$): draw first $\eps \sim \Unif(\Sigma_n)$. Draw then $\bW_1, \cdots, \bW_n \iid \GOE(d)$, conditioned on 
+    satisfying $\|\sum_i \eps_i \bW_i\|_\op \leq \kappa \sqrt{n}$.
+\end{itemize}
+$\bbP_\ra$ and $\bbP_\pl$ define two probability measures over $\mcS_d^n \times \Sigma_n$. In the planted distribution, 
+we often denote $\eps = \eps^\star$.
+In many problems, $\bbP_\pl$ turns out to be easier to study than $\bbP_\ra$, and moreover we have the general identity, 
+for any $(\eps, \bH)$ such that $\eps \in S(\bH)$:
+\begin{align}\label{eq:planted_random}
+    \frac{\rd \bbP_{\pl}}{\rd \bbP_{\ra}}(\eps, \bH) &= \frac{Z_\kappa(\bH)}{\EE_0[Z_\kappa(\bH')]} \cdot \bbP_0(S(\bH') \neq 0).
+\end{align}
+%When $\bbP_0(S(\bH) \neq 0) \to 1$ as $d \to \infty$, contiguity of $\bbP_{\pl}$ and $\bbP_{\ra}$ thus follows from concentration of $Z_\kappa$ on its average. 
+%More generally,
+%if for a given sequence $\alpha_d > 0$ one can establish that there exists $M > 0$ such that
+%\begin{align}\label{eq:concentration_fenergy}
+%%    \frac{1}{d^2} \log Z_\kappa = \lim_{d \to \infty} \frac{1}{d^2} \log \EE[Z_\kappa] + \mcO\left(\frac{\alpha_d}{d^2}\right),
+%    \lim_{d \to \infty}\bbP_0\left(\frac{Z_\kappa}{\EE[Z_\kappa]} \geq e^{-M\alpha_d}\right) &= 0,
+%\end{align}
+%then one can show that events that have probability $\exp(-\omega(\alpha_d))$ under $\bbP_{\pl}$ must have probability $\smallO(1)$ under $\bbP_\ra$~\citep{perkins2021frozen}.
+%In particular, if $\alpha_d = \mcO(1)$ then $\bbP_\pl \lhd \bbP_\ra$.
+%Unfortunately, the bound we establish in Proposition~\ref{prop:2nd_moment} does not imply a bound of the type of eq.~\eqref{eq:concentration_fenergy}.
+%Establishing concentration of $Z_\kappa$ in average-case matrix discrepancy also appears more complex than in the SBP, 
+%where the fluctuations of $Z_\kappa$ can be exactly characterized~\citep{abbe2022proof}:
+%whether this concentration holds in the whole SAT phase is also unclear, given the failure of the second-moment method in parts of the phase diagram, see Theorem~\ref{thm:fail_second_moment}.
+%For these reasons, we leave the establishment of contiguity as an open problem.
+%\begin{openquestion}[Contiguity]\label{op:contiguity}
+%    For $\kappa \in (0,2)$ and $\tau = n/d^2$ sufficiently large (such that $S(\bH) \neq \emptyset$ with high probability), are $\bbP_\ra$ and $\bbP_\pl$  
+%    contiguous as $d \to \infty$? Can one at least show a bound of the type of eq.~\eqref{eq:concentration_fenergy}?
+%\end{openquestion}
+When $\bbP_0(S(\bH) \neq 0) \to 1$ as $d \to \infty$, contiguity of $\bbP_{\pl}$ and $\bbP_{\ra}$ thus follows from concentration of $Z_\kappa$ around its mean. 
+More generally, suppose that for some sequence $\alpha_d > 0$ there exists $M > 0$ such that
+\begin{align}\label{eq:concentration_fenergy}
+    \lim_{d \to \infty}\bbP_0\!\left(\frac{Z_\kappa}{\EE[Z_\kappa]} \geq e^{-M\alpha_d}\right) = 1.
+\end{align}
+Then one can show that any event with probability $\exp(-\omega(\alpha_d))$ under $\bbP_{\pl}$ must have probability $\smallO(1)$ under $\bbP_\ra$~\citep{perkins2021frozen}.
+In particular, if $\alpha_d = \mcO(1)$ then $\bbP_\pl \lhd \bbP_\ra$. 
+Unfortunately, combining Theorems~\ref{thm:first_moment} and \ref{thm:second_moment} only implies a bound of the type of eq.~\eqref{eq:concentration_fenergy} 
+for $\alpha_d = \Theta(d^2)$.
+Establishing a better concentration bound for $Z_\kappa$ in average-case matrix discrepancy appears more delicate than in the SBP, 
+where fluctuations of $Z_\kappa$ can be characterized exactly~\citep{abbe2022proof}. 
+It is also unclear whether concentration should hold throughout the entire satisfiable phase, given the failure of the second-moment method in parts of the phase diagram (see Theorem~\ref{thm:fail_second_moment}). 
+For these reasons, we leave the question of contiguity open. 
+\begin{openquestion}[Contiguity]\label{op:contiguity}
+    For $\kappa \in (0,2)$ and $\tau = n/d^2 = \Theta(1)$ sufficiently large (so that $S(\bH) \neq \emptyset$ with high probability), are $\bbP_\ra$ and $\bbP_\pl$ contiguous as $d \to \infty$? 
+    Can one at least establish a bound of the form~\eqref{eq:concentration_fenergy} for some $\alpha_d = \smallO(d^2)$?
+\end{openquestion}
+
+\myskip
+\textbf{Step 2: is the planted solutions isolated ?}
+For $l \in [n]$, denote $q_l \coloneqq 2l/n - 1 \in [-1,1]$.
+A key point is that for any $q_0 = q_{l_0} < q_1 = q_{l_1} \in [-1,1]$:
+\begin{align}\label{eq:planted_sol_isolated}
+    \nonumber
+%    &\bbP_\pl(\exists \eps \in S(\bH) \backslash \{\eps^\star\} \, : \,  \eps \cdot \eps^\star \geq n q_0) \\
+%    \nonumber
+%    &\aleq 
+    &\EE_\pl \left[\# \{\eps \in S(\bH) \backslash \{\eps^\star\} \, : \, q_0 \leq R(\eps, \eps^\star) \leq q_1\}\right], \\ 
+    \nonumber
+    &\aleq \sum_{l_0 \leq l \leq l_1} \binom{n}{l} \bbP_{\pl} \left[\left\|\sum_{i=1}^n \eps_i \bW_i\right\|_\op \leq \kappa\right], \hspace{20pt} (\textrm{for any } \eps \in \Sigma_n \textrm{ s.t. } R(\eps, \eps^\star) = q_l), \\
+    \nonumber
+    &\bleq \sum_{l_0 \leq l \leq l_1}\binom{n}{l} \frac{2^n}{\EE_0[Z_\kappa]} \bbP_{0} \left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q_l \bW + \sqrt{1-q_l^2} \bZ\|_\op \leq \kappa\right], \\
+    &\cleq \sum_{l_0 \leq l \leq l_1}\binom{n}{l} \frac{\bbP_{0} \left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q_l \bW + \sqrt{1-q_l^2} \bZ\|_\op \leq \kappa\right]}{\bbP_{0} \left[\|\bW\|_\op \leq \kappa\right]}.
+\end{align}
+where 
+%in $(\rm a)$ we used Markov's inequality, 
+in $(\rm a)$ we used the invariance of the law of $\GOE(d)$, in $(\rm b)$ the definition of the planted distribution, and in $(\rm c)$ the expression of $\EE_0[Z_\kappa]$, see Section~\ref{sec:1st_moment}.
+For a given $\tau = \lim n / d^2 = \Theta(1)$ large enough so that $Z_k \geq 1$ with high probability,
+one can then 
+study the asymptotics of the RHS of eq.~\eqref{eq:planted_sol_isolated}
+by using
+similar arguments to the ones developed in Section~\ref{sec:2nd_moment}.
+Assuming contiguity, 
+we deduce that a sufficient condition for the freezing of solutions 
+(Definition~\ref{def:freezing})
+is that there exists $q_c \in (0,1)$ such that for all $\eps \in (0, 1- q_c)$:
+\begin{align}\label{eq:sufficient_cond_freezing}
+    \limsup_{d \to \infty} \sup_{q \in (q_c, 1-\eps)} \gamma_d(q) < 0,
+\end{align}
+where
+\begin{align}\label{eq:def_gammad}
+   \gamma_d(q) \coloneqq \frac{1}{d^2} \log \frac{\bbP_0 \left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q \bW + \sqrt{1-q^2} \bZ\|_\op \leq \kappa\right]}{\bbP_0 \left[\|\bW\|_\op \leq \kappa\right]} + \tau H\left(\frac{1+q}{2}\right).
+\end{align}
+Unfortunately, the bounds we derive in Section~\ref{sec:2nd_moment} for the first term in eq.~\eqref{eq:def_gammad} become trivial as $q$ approaches $1$. 
+We therefore leave an investigation of eq.~\eqref{eq:sufficient_cond_freezing} as an open question, which could be illuminated by a sharp second moment analysis (see Open Problem~\ref{op:sharp_2nd_mom}).
+\begin{openquestion}[Second moment potential close to $q = 1$]
+    Establish whether eq.~\eqref{eq:sufficient_cond_freezing} holds for $\tau = n /d^2 = \Theta(1)$ sufficiently large (as a function of $\kappa \in (0,2)$), and some $q_c < 1$.
+    A natural conjecture would be given by the behavior of $\gamma(q) \coloneqq \lim_{d \to \infty} \gamma_d(q)$ for $q$ close to $1$.
+\end{openquestion}

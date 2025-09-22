@@ -1,0 +1,276 @@
+%Loading packages
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+%Prevent a small font warning
+\usepackage{stmaryrd}
+\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage[symbols,nogroupskip,sort=none,toc=false]{glossaries-extra}
+\usepackage{graphicx}
+\usepackage[pdfpagemode=UseNone,bookmarksopen=false,colorlinks=true,urlcolor=blue,citecolor=magenta,citebordercolor=blue,linkcolor=blue]{hyperref}
+\usepackage{amsmath,tikz,stmaryrd,float,amsthm,amssymb,mathrsfs}
+\usepackage[bottom,flushmargin,perpage]{footmisc}
+\usepackage{mathtools}
+\usepackage{cleveref}
+\usepackage{comment}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{mathdots}
+\usepackage{dsfont}
+\usepackage{lmodern}
+\usepackage{lipsum,etoolbox}
+\usepackage{thmtools}
+\usepackage{array}
+\usepackage[justification=centering]{caption}
+\usepackage{cases}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{blkarray}
+\usepackage{tabularx}
+\usepackage[titletoc]{appendix}
+\usepackage{wrapfig}
+\usepackage{braket}
+\usepackage[normalem]{ulem}
+\usepackage{xfrac}
+
+\usepackage{authblk}
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    natbib = true %To use citep and citet
+]{biblatex}
+\renewcommand{\cite}[1]{\citet{#1}} %So that the year is in parentheses by default
+
+\usetikzlibrary{bayesnet}
+\tikzset{middlearrow/.style={decoration={markings,mark= at position 0.5 with {\arrow{#1}} ,},postaction={decorate}}}
+\usetikzlibrary{arrows}
+\newcommand{\midarrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
+
+%Appendix formating
+\usepackage{titlesec}
+\makeatletter
+\newcommand{\setappendix}{Appendix~\thesection:~~}
+\newcommand{\setsection}{\thesection~~}
+\titleformat{\section}{\bfseries\LARGE}{%
+	\ifnum\pdfstrcmp{\@currenvir}{appendices}=0
+	\setappendix
+	\else
+	\setsection
+\fi}{0em}{}
+\makeatother
+
+
+
+%New commands
+\DeclareUnicodeCharacter{00A0}{~}
+
+\ExplSyntaxOn
+% #1 = command to use
+% #2 = optional prefix
+% #3 = list
+\NewDocumentCommand{\createbunch}{ m O{} m }
+ {
+  \clist_map_inline:nn { #3 } { \cs_new_protected:cpn { #2 ##1 } { #1 { ##1 } } }
+ }
+\ExplSyntaxOff
+
+%Bold capital letters
+\createbunch{\mathbf}[b]{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}
+%Bold lowercase letters
+\createbunch{\mathbf}[b]{a,b,c,d,g,h,i,j,k,l,n,o,p,q,r,s,t,u,v,w,x,y,z}
+\newcommand{\bbe}{{\mathbf{e}}}
+\newcommand{\bbf}{{\mathbf{f}}}
+\newcommand{\bmm}{{\mathbf{m}}}
+\newcommand{\bzero}{{\mathbf{0}}}
+
+%Mathcal letters
+\createbunch{\mathcal}[mc]{A,B,C,D,E,F,I,S,M,N,P,O,R,X,Z,W}
+
+%Hat letters
+\createbunch{\hat}[h]{q,Q,S,y,c}
+\newcommand{\bhat}[1]{\hat{\mathbf{#1}}}
+\createbunch{\bhat}[hb]{q,Q,S,x,W,u,v}
+
+%Tilde letters
+\createbunch{\widetilde}[t]{U,V,G,H,y,p,q}
+\newcommand{\btilde}[1]{\widetilde{\mathbf{#1}}}
+\createbunch{\btilde}[tb]{U,V,G,S,W,y}
+\newcommand{\tDelta}{{\widetilde{\Delta}}}
+\newcommand{\tnu}{{\widetilde{\nu}}}
+\newcommand{\talpha}{{\widetilde{\alpha}}}
+%\newcommand{\tkappa}{{\widetilde{\kappa}}}
+\newcommand{\ttau}{{\widetilde{\tau}}}
+%\newcommand{\barkappa}{{\bar{\kappa}}}
+\newcommand{\bartau}{{\bar{\tau}}}
+
+%Bold symbols
+\newcommand{\bSigma}{{\boldsymbol{\Sigma}}}
+\newcommand{\bGamma}{{\boldsymbol{\Gamma}}}
+\newcommand{\bPhi}{{\boldsymbol{\Phi}}}
+\newcommand{\bLambda}{{\boldsymbol{\Lambda}}}
+
+\newcommand{\blambda}{{\boldsymbol{\lambda}}}
+\newcommand{\bmu}{{\boldsymbol{\mu}}}
+\newcommand{\bomega}{{\boldsymbol{\omega}}}
+\newcommand{\brho}{{\boldsymbol{\rho}}}
+\newcommand{\bgamma}{{\boldsymbol{\gamma}}}
+\newcommand{\bsigma}{{\boldsymbol{\sigma}}}
+\newcommand{\btau}{{\boldsymbol{\tau}}}
+\newcommand{\beps}{{\boldsymbol{\varepsilon}}}
+\newcommand{\btheta}{{\boldsymbol{\theta}}}
+\newcommand{\bxi}{{\boldsymbol{\xi}}}
+\newcommand{\bzeta}{{\boldsymbol{\zeta}}}
+
+\newcommand{\eff}{\mathrm{eff.}}
+\newcommand{\pl}{\mathrm{pl.}}
+\newcommand{\ra}{\mathrm{ra.}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\GOE}{\mathrm{GOE}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SAT}{\mathrm{SAT}}
+\newcommand{\UNSAT}{\mathrm{UNSAT}}
+\newcommand{\Gauss}{\mathrm{Gauss.}}
+\newcommand{\LS}{\mathrm{LS}}
+\newcommand{\NN}{\mathrm{NN}}
+\newcommand{\Id}{\mathrm{I}}
+\newcommand{\plog}{\mathrm{plog}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\MP}{\mathrm{MP}}
+\newcommand{\Lip}{\mathrm{Lip}}
+\newcommand{\sci}{\mathrm{s.c.}}
+\newcommand{\HCIZ}{\mathrm{HCIZ}}
+\newcommand{\GS}{\mathrm{GS}}
+\newcommand{\Diag}{\mathrm{Diag}}
+\newcommand{\inj}{\mathrm{inj}}
+\newcommand{\conj}{\mathrm{conj.}}
+\newcommand{\rd}{\mathrm{d}}
+\newcommand{\rF}{\mathrm{F}}
+\newcommand{\rL}{\mathrm{L}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\Unif}{\mathrm{Unif}}
+\newcommand{\ones}{\mathbf{1}}
+\newcommand{\indi}{\mathds{1}}
+\newcommand{\Tr}{{\rm Tr}}
+\newcommand{\rk}{{\rm rk}}
+\newcommand{\tr}{{\rm tr}}
+\newcommand{\out}{{\rm out}}
+\newcommand{\RS}{{\rm RS}}
+\newcommand{\annealed}{{\rm ann.}}
+\newcommand{\ORSB}{{\rm 1RSB}}
+\newcommand{\FRSB}{{\rm FRSB}}
+\newcommand{\RSB}{{\rm RSB}}
+\newcommand{\Eul}{{\rm Euler}}
+\newcommand{\WR}{{\rm WR}}
+\newcommand{\IT}{{\rm IT}}
+\newcommand{\AT}{{\rm dAT}}
+\newcommand{\alg}{{\rm Algo}}
+\newcommand{\BO}{{\rm BO}}
+\newcommand{\MMSE}{{\rm MMSE}}
+\newcommand{\AMP}{{\rm AMP}}
+\newcommand{\RIE}{{\rm RIE}}
+\newcommand{\f}{{\rm fail.}}
+\newcommand{\PR}{{\rm PR}}
+\newcommand{\GD}{\mathrm{GD}}
+\newcommand{\AGD}{\mathrm{AGD}}
+\newcommand{\disc}{{\rm disc}}
+\newcommand{\Hess}{{\rm Hess}}
+\newcommand{\SLC}{{\rm SLC}}
+
+\newcommand{\T}{{\top}}
+\newcommand{\iid}{\overset{\mathrm{i.i.d.}}{\sim}}
+\newcommand{\aeq}{\overset{\mathrm{(a)}}{=}}
+\newcommand{\beq}{\overset{\mathrm{(b)}}{=}}
+\newcommand{\ceq}{\overset{\mathrm{(c)}}{=}}
+\newcommand{\deq}{\overset{\mathrm{(d)}}{=}}
+\newcommand{\eeq}{\overset{\mathrm{(e)}}{=}}
+\newcommand{\aleq}{\overset{\mathrm{(a)}}{\leq}}
+\newcommand{\bleq}{\overset{\mathrm{(b)}}{\leq}}
+\newcommand{\cleq}{\overset{\mathrm{(c)}}{\leq}}
+\newcommand{\dleq}{\overset{\mathrm{(d)}}{\leq}}
+\newcommand{\eleq}{\overset{\mathrm{(e)}}{\leq}}
+\newcommand{\ageq}{\overset{\mathrm{(a)}}{\geq}}
+\newcommand{\bgeq}{\overset{\mathrm{(b)}}{\geq}}
+\newcommand{\cgeq}{\overset{\mathrm{(c)}}{\geq}}
+\newcommand{\dgeq}{\overset{\mathrm{(d)}}{\geq}}
+\newcommand{\egeq}{\overset{\mathrm{(e)}}{\geq}}
+\newcommand{\aless}{\overset{\mathrm{(a)}}{<}}
+\newcommand{\agtr}{\overset{\mathrm{(a)}}{>}}
+
+
+%Some mathbb symbols
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%smallO
+\newcommand\smallO{
+  o
+  }
+
+  %Some math operators
+\DeclareMathOperator*{\flatt}{vec}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\extr}{extr}
+\DeclareMathOperator*{\supp}{supp}
+\DeclareMathOperator*{\sign}{sign}
+\DeclareMathOperator*{\plim}{p-lim}
+\DeclareMathOperator*{\dlim}{d-lim}
+\DeclareMathOperator\arctanh{arctanh}
+\DeclarePairedDelimiter\abs{|}{|}%
+\DeclarePairedDelimiter\norm{\|}{\|}%
+\DeclareRobustCommand{\deq}[0]{\overset{\rm d}{=}}
+\DeclareRobustCommand{\peq}[0]{\overset{\rm p}{=}}
+\DeclareRobustCommand{\aseq}[0]{\overset{\rm a.s.}{=}}
+\DeclareRobustCommand{\dto}[0]{\overset{\rm d}{\to}}
+\DeclareRobustCommand{\pto}[0]{\overset{\rm p}{\to}}
+\DeclareRobustCommand{\aslim}[0]{\overset{\rm a.s.}{\to}}
+
+
+\declaretheorem[style=plain, name=Theorem, within=section]{theorem}
+\declaretheorem[style=plain, name=Lemma, sibling=theorem]{lemma}
+\declaretheorem[style=plain, name=Conjecture, sibling=theorem]{conjecture}
+\declaretheorem[style=plain, name=Proposition,sibling=theorem]{proposition}
+\declaretheorem[style=plain, name=Corollary, sibling=theorem]{corollary}
+\declaretheorem[style=plain, name=Result, within=section]{result}
+\declaretheorem[style=plain, name=Claim,sibling=result]{claim}
+\declaretheorem[style=definition, name=Open Question, within = section]{openquestion}
+
+\declaretheorem[style=definition, name=Definition, within=section]{definition}
+\declaretheorem[style=definition, name=Hypothesis, within=section]{hypothesis}
+\declaretheorem[style=definition, name=Property, within=section]{property}
+\declaretheorem[style=definition, name=Model,within=section]{model}
+%
+\declaretheorem[style=remark, name=Remark, within = section]{remark}
+
+
+%FIXME and TODO commands
+\newcommand{\fixme}[1]{{\sffamily\normalsize\bfseries {\underline{\color{red}FIXME:}} } {\color{red} #1}}
+\newcommand{\todo}[1]{{\sffamily\normalsize\bfseries {\underline{\color{ForestGreen}TODO:}} } {\color{ForestGreen} #1}}
+%\newcommand{\done}{{\color{ForestGreen} \textbf{DONE}}}
+%\newcommand{\new}[1]{{\color{gray} #1}}
+
+%IMPORTANT marker
+\newcommand{\imp}{{\sffamily\normalsize\bfseries {\underline{\color{red}IMPORTANT.}} }}
+
+%URGENT
+\newcommand{\urg}[1]{{\sffamily\normalsize\bfseries {\underline{\color{blue}URGENT:}} } {\color{blue} #1}}
+
+%RECENT
+\newcommand{\recent}{{\sffamily\normalsize\bfseries {\underline{\color{ForestGreen}RECENT.}} }}
+
+%Itemize
+\renewcommand{\labelitemi}{$\bullet$}
+
+\renewcommand{\Re}{\mathrm{Re}}
+\renewcommand{\Im}{\mathrm{Im}}
+
+%
+\newcommand{\myskip}{\medskip\noindent}
