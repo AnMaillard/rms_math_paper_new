@@ -1,0 +1,63 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2cm, right=2cm]{geometry}
+\usepackage{settings}
+%\addbibresource{refs.bib}
+\renewcommand{\section}[2]{}%Avoid bib title
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{-10pt}
+
+% paragraph formatting
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5.5pt}
+
+% no page numbers
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+{\bf \Large Answer to the referees}
+\end{center}
+
+I would like to thank the referees for their careful reading of the paper, 
+their positive assessment, and their comments that will greatly help me to improve the presentation and the overall quality of the manuscript. 
+I implemented all the minor comments and corrections suggested by the referees. 
+I answer below to the more significant points raised, and I summarize the main changes implemented in the revised version.
+
+\myskip 
+For the referees' convenience, I highlighted in dark red the changes made in the revision.
+Equation numbers and pages refer to the new revised version.
+
+\myskip 
+\noindent\textbf{Points raised by Reviewer~1.}
+\begin{itemize}
+    \item Following the referee's advice, I introduced in Section~1.3 a series of open questions arising from this work, 
+    in order to make them more accessible to the reader. 
+    \item I added a new Appendix~A, discussing the freezing of solutions and how this phenomenon 
+    could be studied via the second moment analysis. 
+    In particular, I highlight open problems concerning contiguity with planted models, 
+    and the behavior of the second moment potential close to $q=1$. 
+    \item In Figure~1, I added the region $\kappa > 2$, to clarify that in this case the problem is trivially satisfiable.
+\end{itemize}
+\myskip 
+\noindent\textbf{Points raised by Reviewer~2.}
+\begin{itemize}
+    \item Below Proposition~2.1 I clarified why I study the conditioned GOE law directly: 
+    the conditioned ensemble is indeed a $\beta$-ensemble (with a singular potential enforcing the spectral norm constraint), 
+    which makes the large deviation analysis more straightforward. 
+    While one could alternatively use the large deviations for unconditioned GOE matrices, 
+    this approach requires extra care because the set of probability measures supported in $[-\kappa, \kappa]$ has empty interior under the weak topology. 
+    I had originally derived the result using this large deviations principle for unconditioned GOE matrices, and this derivation is now included in Appendix~A for completeness. 
+    I chose to present the conditioned approach in the main text because it directly leverages existing results on $\beta$-ensembles (see Proposition~2.3). 
+    As the reviewer points out, this
+    also generalizes to norm-constrained matrix ensembles beyond the GOE. 
+    I modified the discussion in the main text to clarify this point.
+    \item Regarding Lemma~3.5, I agree the bound on the variance is what is used in the rest of the proof. 
+    However --- if I understood correctly the reviewer's comment --- I am not convinced that the fact that the sub-Gaussian norm directly controls the variance 
+    deserves a separate lemma: I instead moved this fact as a remark below Lemma~3.7.
+\end{itemize}
+Finally, I removed on page~11 a couple of sentences related to the possibility of applying 
+the second moment method in a conditional manner to yield a sharp SAT/UNSAT threshold, 
+as I believe these statements were somehow speculative. 
+
+\end{document}
