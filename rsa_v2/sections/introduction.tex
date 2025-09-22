@@ -450,12 +450,6 @@ Numerically, we find  that $\tau_1(\kappa) < \tau_c(\kappa)$ in the range $0.718
 We stress that the result of Theorem~\ref{thm:fail_second_moment} is in stark contrast with the symmetric binary perceptron, in 
 which the second moment method succeeds in the entirety of the phase diagram (Theorem~\ref{thm:trans_SBP}).
 In particular, this unveils a potentially richer picture for the geometry of the solution space than in the SBP.
-%We note that, given the proof of Theorem~\ref{thm:fail_second_moment} (see Section~\ref{sec:fail_2nd_moment}), 
-%we do not expect the second moment to be large because of spurious rare events, in which case one can often
-%still apply the second moment method by conditioning away from these rare events (see e.g.~\cite{janson1996second}, and an application in random vector discrepancy in~\cite{altschuler2022discrepancy}). 
-%As such, we believe that sharply characterizing the satisfiability threshold would require other techniques, \change{perhaps by directly tackling} the typical number of solutions 
-%$(1/d^2) \EE[\log Z_\kappa]$ (what is called the ``quenched'' free energy in the statistical physics jargon).
-%We leave such a challenging investigation for a future work.
 Finally, we emphasize that the failure of the second moment method might extend to other parts of the ``Unknown'' region of the phase diagram
 (beyond the purple region of Fig.~\ref{fig:fail_second_moment}) 
 which are not captured by the local analysis used in Theorem~\ref{thm:fail_second_moment}: we refer to Section~\ref{sec:fail_2nd_moment} for details.
@@ -519,8 +513,6 @@ literature that followed.
 For the problem of average-case matrix discrepancy, \cite{kunisky2023online} \change{analyze an online algorithm, introduced originally by~\cite{zouzias2012matrix}, and show} that is able to achieve a discrepancy
 $\|\sum_i \eps_i \bW_i\|_\op \lesssim d \log(n+d)$ for a large class of random matrices $\bW_i$, including the $\GOE$ distribution.
 In the regime $n = \Theta(d^2)$, this \change{bound} unfortunately falls short of obtaining a discrepancy lower than $2 \sqrt{n}$. 
-%Whether one can design a polynomial-time algorithm that can output (with large probability) a low-discrepancy $\eps \in \{\pm 1\}^n$ in parts of the SAT phase described in Fig.~\ref{fig:phase_diagram} 
-%remains an open question. 
 \change{
 \begin{openquestion}[Efficient algorithms]\label{op:algorithms}
     Is there a polynomial-time algorithm which, in the regime $n = \Theta(d^2)$ and with high probability, outputs $\eps \in \{\pm 1\}^n$ such that
