@@ -1,6 +1,10 @@
 - Thank the reviewers for their comments and their appreciation of the paper. 
 - Comments that will help enhance the presentation of the paper, and its overall quality
 
+- I also removed a couple of sentences (on page 10) related to whether the second moment method could be applied in a conditional manner 
+to yield a sharp SAT/UNSAT threshold, as they were too speculative I believe.
+
 - R2:
 	- Below Proposition~2.1 I clarify why I study the conditioned GOE law directly: the conditioned ensemble is indeed a $\beta$-ensemble (with a singular potential enforcing the spectral norm constraint), which makes the large deviation analysis more straightforward. While one could alternatively use the large deviations for unconditioned GOE matrices, this approach requires extra care because the set of probability measures supported in $[-\kappa, \kappa]$ has empty interior under the weak topology. Originally, I derived the result using the unconditioned GOE LDP, and this derivation is included in Appendix A for completeness. I chose to present the conditioned approach in the main text because it directly leverages existing results on $\beta$-ensembles (see Proposition 2.3) -- which, as the reviewer noticed, also generalize to norm-constrained matrix ensembles beyond the GOE. I have modified the discussion in the main text to clarify this point.
 	- Regarding Lemma 3.5, I agree that in the end the statement regarding the variance is the result used in other parts of the proof. However -- if I understood correctly the reviewer's comment -- the fact that a bound on the sub-Gaussian norm directly controls the variance is, in my view, very classical and I am not convinced that it deserves a separate statement.
+	To clarify this, I moved this argument as a remark below Lemma 3.7.

@@ -421,7 +421,7 @@ A rate function for this law can be obtained in a variational form (see e.g.\ Th
 is a very challenging problem, which we leave as a future direction.
 \change{
 \begin{openquestion}[Sharp second moment]\label{op:sharp_2nd_mom}
-    Obtain the sharp limit of $(1/n) \log \EE[Z_\kappa^2]$, the exponential scale of the second moment.
+    Obtain the sharp limit of $(1/d^2) \log \EE[Z_\kappa^2]$, the exponential scale of the second moment.
     This should likely rely on computing numerically $(i)$ the large-$d$ limit of the large deviations rate function of eq.~\eqref{eq:def_Gd}, 
     and $(ii)$ the asymptotic spectral density of two \emph{correlated} $\GOE(d)$ matrices, conditioned to both have spectral norm at most $\kappa$.
 \end{openquestion}
@@ -450,12 +450,12 @@ Numerically, we find  that $\tau_1(\kappa) < \tau_c(\kappa)$ in the range $0.718
 We stress that the result of Theorem~\ref{thm:fail_second_moment} is in stark contrast with the symmetric binary perceptron, in 
 which the second moment method succeeds in the entirety of the phase diagram (Theorem~\ref{thm:trans_SBP}).
 In particular, this unveils a potentially richer picture for the geometry of the solution space than in the SBP.
-We note that, given the proof of Theorem~\ref{thm:fail_second_moment} (see Section~\ref{sec:fail_2nd_moment}), 
-we do not expect the second moment to be large because of spurious rare events, in which case one can often
-still apply the second moment method by conditioning away from these rare events (see e.g.~\cite{janson1996second}, and an application in random vector discrepancy in~\cite{altschuler2022discrepancy}). 
-As such, we believe that sharply characterizing the satisfiability threshold would require other techniques, \change{perhaps by directly tackling} the typical number of solutions 
-$(1/d^2) \EE[\log Z_\kappa]$ (what is called the ``quenched'' free energy in the statistical physics jargon).
-We leave such a challenging investigation for a future work.
+%We note that, given the proof of Theorem~\ref{thm:fail_second_moment} (see Section~\ref{sec:fail_2nd_moment}), 
+%we do not expect the second moment to be large because of spurious rare events, in which case one can often
+%still apply the second moment method by conditioning away from these rare events (see e.g.~\cite{janson1996second}, and an application in random vector discrepancy in~\cite{altschuler2022discrepancy}). 
+%As such, we believe that sharply characterizing the satisfiability threshold would require other techniques, \change{perhaps by directly tackling} the typical number of solutions 
+%$(1/d^2) \EE[\log Z_\kappa]$ (what is called the ``quenched'' free energy in the statistical physics jargon).
+%We leave such a challenging investigation for a future work.
 Finally, we emphasize that the failure of the second moment method might extend to other parts of the ``Unknown'' region of the phase diagram
 (beyond the purple region of Fig.~\ref{fig:fail_second_moment}) 
 which are not captured by the local analysis used in Theorem~\ref{thm:fail_second_moment}: we refer to Section~\ref{sec:fail_2nd_moment} for details.
@@ -499,13 +499,13 @@ and was shown to exhibit a ``frozen-1RSB'' structure: that is, typically, soluti
     Elucidate whether the solution space (in the SAT region of Fig.~\ref{fig:phase_diagram} for $\kappa < 2$) exhibits the ``frozen-1RSB'' property.
 \end{openquestion}
 \noindent
-In the SBP it was the second moment analysis that suggested the existence of freezing~\citep{aubin2019storage},
-however in the present context two 
+In the SBP it was the second moment analysis that suggested the existence of freezing~\citep{aubin2019storage}.
+However in the present context two 
 difficulties arise: $(i)$ this argument usually relies on establishing  a contiguity property with a ``planted'' version of the model, 
-and $(ii)$ even under contiguity, the second moment upper bound developed in Section~\ref{sec:2nd_moment} 
+and $(ii)$ even if contiguity holds, the second moment upper bound developed in Section~\ref{sec:2nd_moment} 
 is unfortunately not sharp enough to determine whether freezing occurs, 
 even withing the SAT region of Fig.~\ref{fig:phase_diagram}.
-We discuss points $(i)$ and $(ii)$ above in further details in Appendix~\ref{sec:appendix_freezing}.
+We discuss points $(i)$ and $(ii)$ in further details in Appendix~\ref{sec:appendix_freezing}.
 Going beyond, the failure of the second moment method (discussed above)
 may also signal a different geometric structure than in the SBP, at least in parts of the phase diagram.
 }

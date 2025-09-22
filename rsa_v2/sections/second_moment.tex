@@ -517,18 +517,23 @@ A particularly useful consequence of the LSI is the following.
 \begin{lemma}[Herbst]\label{lemma:herbst}
    Assume that $\mu \in \mcM_1^+(\bbR^d)$ satisfies the LSI with constant $c$. Let $G~:~\bbR^d \to \bbR$ be a Lipschitz function, with Lipschitz constant $\|G\|_L$. 
    Then for all $\lambda \in \bbR$: 
-   \begin{align*}
+   \begin{align}\label{eq:herbst_MGF}
     \EE_\mu \left[e^{\lambda[G - \EE G]}\right] \leq \exp\left\{\frac{c \|G\|_L^2\lambda^2}{2}\right\}.
-   \end{align*}
+   \end{align}
    Therefore, for all 
    $\delta > 0$: 
    \begin{equation*}
     \mu(|G - \EE G| \geq \delta) \leq 2 \exp\left\{-\frac{\delta^2}{2 c \|G\|_L^2}\right\}.
    \end{equation*}
-   \change{In particular, $\Var(G) \leq c \|G\|_L^2$.}
-   \fixme{Is this the right place?}
 \end{lemma}
 \noindent
+\change{
+\textbf{Remark --}Notice that Lemma~\ref{eq:herbst_MGF} implies that 
+$\|G - \EE G\|_{\psi_2} \leq C \sqrt{c} \|G\|_L$ for some absolute constant $C > 0$,
+and moreover (by Taylor expansion close to $\lambda = 0$) we have $\Var(G) \leq c \|G\|_L^2$.
+}
+
+\myskip
 Finally, we will use that a necessary condition for a measure to satisfy the LSI is the so-called \emph{Bakry-Emery (BE)} condition.
 \begin{theorem}[Theorem~4.4.17 of \cite{anderson2010introduction}]\label{thm:be_implies_lsi}
     Let $d \geq 1$ and $\Phi : \bbR^d \to \bbR$ a $\mcC^2$ function. 
@@ -643,8 +648,4 @@ with Lipschitz constant
     \|f\|_L \leq \sqrt{d} \sum_{p \geq 0} p \cdot \kappa^{p-1} \sum_{i_1, \cdots, i_p \in \{1,2\}} |a_{i_1 \cdots i_p}|.
 \end{equation*}
 Combining Lemmas~\ref{lemma:lsi_Pqkappa} and \ref{lemma:herbst} finishes the proof of Lemma~\ref{lemma:conc_moments_Pqkappa}.
-Indeed, notice that if $X$ is a random variable such that $\EE[X] = 0$ and 
-$\EE[e^{\lambda X}] \leq e^{\lambda^2 K^2 / 2}$ for some $K > 0$ and all $\lambda \in \bbR$, 
-then $\|X\|_{\psi_2} \leq C K$, and moreover
-by Taylor expansion close to $\lambda = 0$, we get $\Var(X) \leq K^2$.
 $\qed$
