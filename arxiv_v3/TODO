@@ -2,7 +2,7 @@ I add a (*) to the line rather than (-) if the change is done.
 
 For revision (17.09.25):
   * After all changes, check formatting (page breaks etc)
-  - Update arXiv
+  * Update arXiv
   * Check that I don't say anything wrong on second moment method failing vs annealed != quenched (cite paper of Subag? maybe not necessary)
   * Update phase diagram plots with 
     (1) what I used for the talks (in particular showing E[Z] >> 1 in orange region)

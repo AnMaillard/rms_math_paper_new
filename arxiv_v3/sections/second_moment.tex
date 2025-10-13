@@ -1,0 +1,649 @@
+Section~\ref{subsec:proof_properties_tau2} is dedicated to studying the properties of the threshold $\tau_2(\kappa)$. 
+The proof of Theorem~\ref{thm:second_moment}, which is the main goal of this section, is outlined in Section~\ref{subsec:reduction_2nd_moment_ub},
+and details are given in the remainder of Section~\ref{sec:2nd_moment}.
+
+\subsection{Properties of the satisfiability bound}\label{subsec:proof_properties_tau2}
+
+We prove here Proposition~\ref{prop:tau2}, which follows from the following lemma.
+\begin{lemma}\label{lemma:tau2_prop}
+    Define, for any $\kappa > 0$, $\bartau(\kappa) \coloneqq \min_{\eta > 0} \ttau(\eta, \kappa)$.
+    Then $\bartau(\kappa) = \ttau(\eta^\star(\kappa),\kappa)$,
+where
+$\eta^\star(\kappa)$ is the unique value of $\eta > 0$ such that:
+\begin{align}
+    \label{eq:etastar}
+      (1+\eta) \tau_1(\kappa) &=
+\frac{1+\delta_\eta^2}{2(1-\delta_\eta^2)^2}
+    + \left[\frac{\delta_\eta(1+6\delta_\eta+3\delta_\eta^2+2\delta_\eta^3)}{(1-\delta_\eta^2)^3(1-\delta_\eta)}\right] \kappa \\
+    &
+    + \left[ \frac{2(1+\delta_\eta)^5}{(1-\delta_\eta^2)^4} - \frac{(1+3 \delta_\eta^2)}{4(1-\delta_\eta^2)^3}\right] \kappa^2 
+      + \frac{\kappa^4(1+3\delta_\eta^2)}{32(1-\delta_\eta^2)^3}.
+\end{align}
+Moreover, $\kappa \mapsto \bartau(\kappa)$ is a continuous function of $\kappa$.
+\end{lemma}
+\noindent
+Recall that $\tau_2(\kappa) = \min_{u \in [0,\kappa]} \bartau(u)$, as defined in Lemma~\ref{lemma:tau2_prop}, 
+so that $\kappa \mapsto \tau_2(\kappa)$ is clearly continuous and non-increasing.
+Moreover, solving eq.~\eqref{eq:etastar} gives a simple way to numerically evaluate $\kappa \in [0,2] \mapsto \bartau(\kappa)$, which then yields the values of $\tau_2$.
+
+\begin{proof}[Proof of Lemma~\ref{lemma:tau2_prop}]
+Let 
+\begin{equation*}
+    \begin{dcases}
+    f_\kappa(\eta) &\coloneqq (1+\eta) \tau_1(\kappa), \\
+    g_\kappa(\eta) &\coloneq \frac{1+\delta_\eta^2}{2(1-\delta_\eta^2)^2}
+    + \left[\frac{\delta_\eta(1+6\delta_\eta+3\delta_\eta^2+2\delta_\eta^3)}{(1-\delta_\eta^2)^3(1-\delta_\eta)}\right] \kappa \\
+    &
+    + \left[ \frac{2(1+\delta_\eta)^5}{(1-\delta_\eta^2)^4} - \frac{(1+3 \delta_\eta^2)}{4(1-\delta_\eta^2)^3}\right] \kappa^2 
+      + \frac{\kappa^4(1+3\delta_\eta^2)}{32(1-\delta_\eta^2)^3}.
+    \end{dcases}
+\end{equation*}
+Recall that $\delta_\eta$ is defined as the unique solution to $H[(1+\delta)/2]/\log 2 = \eta / (1+\eta)$, 
+with $H(p) = -p \log p - (1-p) \log(1-p)$.
+If $G(\delta) \coloneqq H[(1+\delta)/2]/\log 2$, then
+$G$ is smooth and strictly decreasing on $[0,1]$. 
+So $\delta_\eta = G^{-1}[\eta / (1+\eta)]$ is a smooth and strictly decreasing function of $\eta > 0$.
+It is then immediate by elementary arguments (it is easy to see that each of the $\kappa$-coefficients of $g_\kappa(\eta)$ is a strictly increasing function of $\delta$, similarly to what is done e.g.\ in eq.~\eqref{eq:fprime_q}) that 
+$g_\kappa(\eta)$ is also a smooth and strictly decreasing function of $\eta$.
+
+\myskip
+Moreover, we have $g_\kappa(0^+) = \infty$, $f_\kappa(0^+) = \tau_1(\kappa) < \infty$, and $g_\kappa(\infty) < \infty$, $f_\kappa(\infty) = \infty$.
+It is then elementary to show that for any $\kappa > 0$, $\min_{\eta > 0} \ttau(\eta, \kappa) = \min_{\eta > 0} \max\{f_\kappa(\eta), g_\kappa(\eta)\}$ 
+is reached in a unique $\eta^\star(\kappa)$, such that $f_\kappa(\eta^\star(\kappa)) = g_\kappa(\eta^\star(\kappa))$, and that 
+$\eta^\star(\kappa)$ is a continuous function of $\kappa$, which implies that $\bartau(\kappa) = f_\kappa(\eta^\star(\kappa))$ is also continuous.
+\end{proof}
+
+\subsection{Reduction to a second moment upper bound}\label{subsec:reduction_2nd_moment_ub}
+
+The main element of our analysis is the following upper bound.
+\begin{proposition}\label{prop:2nd_moment}
+    Let $\kappa \in (0, 2]$. Recall the definition of $Z_\kappa$ in eq.~\eqref{eq:def_Zkappa}, and of $\bartau(\kappa)$ in Lemma~\ref{lemma:tau2_prop}.
+    Assume that $\tau > \bartau(\kappa)$.
+    Then, for $n, d \to \infty$ with $n/d^2 \to \tau$:
+    \begin{equation*} 
+        \limsup_{d \to \infty} \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} \leq L \cdot \left[1 - \frac{\bartau(\kappa)}{\tau}\right]^{-1/2},
+    \end{equation*}
+    for an absolute constant $L > 0$.
+\end{proposition}
+\noindent
+We will detail the proof of Proposition~\ref{prop:2nd_moment} in Section~\ref{subsec:proof_2nd_moment}, deferring some intermediate results to Section~\ref{subsec:proof_laplace_discrete} and \ref{subsec:lsi}. 
+We first show how to deduce Theorem~\ref{thm:second_moment}.
+
+\begin{proof}[Proof of Theorem~\ref{thm:second_moment}]
+Since $\tau > \tau_2(\kappa) = \min_{u \in [0,\kappa]} \bartau(u)$ (see Lemma~\ref{lemma:tau2_prop}), 
+and $Z_{\kappa'} \leq Z_\kappa$ for any $\kappa' \leq \kappa$, we can assume without loss of generality that $\tau > \bartau(\kappa)$ in order to prove Theorem~\ref{thm:second_moment}.
+
+\myskip
+Because the bound on the right-hand side is strictly higher than $1$, Proposition~\ref{prop:2nd_moment} is not strong enough to directly guarantee the existence of solutions with high probability.
+This is a recurring challenge in many random constraint satisfaction problems where
+$\EE[Z_\kappa^2]/\EE[Z_\kappa]^2 \to C > 1$. 
+This occurs e.g.\ 
+in the symmetric binary perceptron, the vector analog of our matrix discrepancy task, see \cite{abbe2022proof}, 
+and prevents from applying the classical second moment method to get high-probability bounds.
+Fortunately, in~\cite{altschuler2023zero} the author develops general techniques on sharp transitions for integer feasibility problems, 
+and applies them to show the concentration of the discrepancy $\min_{\eps \in \{\pm 1\}^n} \left\|\sum_{i=1}^n \eps_i \bW_i \right\|_\op$.
+\begin{lemma}[Theorem~7 of \cite{altschuler2023zero}]
+    \label{lemma:dylan}
+    Let $d \geq 1$, and $\bW_1, \cdots, \bW_n \iid \GOE(d)$.
+    Let $\disc(\bW_1, \cdots, \bW_n) \coloneqq \min_{\eps \in \{\pm 1\}^n} \left\|\sum_{i=1}^n \eps_i \bW_i \right\|_\op$. 
+    Assume that $n/d^2 \to \tau$ as $d \to \infty$. Then there exists $c(\tau) > 0$ such that
+    \begin{align*}
+        \frac{\EE[\disc(\bW_1, \cdots, \bW_n)]}{\sqrt{\Var[\disc(\bW_1, \cdots, \bW_n)]}} \geq c(\tau) \sqrt{d}.
+    \end{align*}
+\end{lemma}
+\noindent
+Let us see how the combination of Lemma~\ref{lemma:dylan} with our second moment estimates (Proposition~\ref{prop:2nd_moment}) 
+ends the proof of Theorem~\ref{thm:second_moment}.
+
+\myskip 
+    Since $\bartau(\kappa)$ is a continuous function of $\kappa$ by Lemma~\ref{lemma:tau2_prop}, we choose $\delta > 0$ small enough such 
+    that $\tau > \bartau(\kappa-\delta)$.
+    Let $X \coloneqq \disc(\bW_1, \cdots, \bW_n)$.
+    Notice that $X \leq \|\sum_{i=1}^n \bW_i\|_\op$, 
+    so that $\EE X \leq 2 \sqrt{n}$ since $(1/\sqrt{n})\sum_{i=1}^n \bW_i \sim \GOE(d)$, 
+    and $\EE \|\bY\|_\op \leq 2$ for $\bY \sim \GOE(d)$ (see e.g.\ Exercise~7.3.5 of \cite{vershynin2018high}).
+    From Lemma~\ref{lemma:dylan} we thus get 
+    \begin{align}\label{eq:varX}
+        \Var(X) \leq \frac{4n}{c(\tau)^2 d},
+    \end{align}
+    where $\Var(X) \coloneqq \EE[(X - \EE X)^2]$.
+    Recall that the Paley-Zygmund inequality states that for any random variable $X \geq 0$:
+    \begin{align*}
+        \bbP[X > 0] \geq \frac{\EE[X]^2}{\EE[X^2]}.
+    \end{align*} 
+    Applying it to $Z_{\kappa - \delta}$ and using Proposition~\ref{prop:2nd_moment}, we get that 
+    \begin{equation}\label{eq:PX_lb}
+        \bbP[X \leq (\kappa-\delta) \sqrt{n}] \geq L^{-1} \cdot \left[1 - \frac{\bartau(\kappa-\delta)}{\tau}\right]^{1/2} + \smallO_d(1).
+    \end{equation}
+    Let us denote $C(\tau,\kappa,\delta) \coloneqq L \cdot [1 - \bartau(\kappa-\delta)/\tau]^{-1/2}$.
+    By Chebyshev's inequality and eq.~\eqref{eq:varX}, we further have for all $t > 0$:
+    \begin{align*}
+        \bbP[X \geq \EE X - t] \geq 1 - \frac{4n}{c(\tau)^2 d t^2}.
+    \end{align*}
+    In particular, if $t = c(\tau)^{-1} \sqrt{8 C(\tau, \kappa, \delta) n / d}$, we have $\bbP[X \geq \EE X - t] \geq 1 - (2C(\tau,\kappa,\delta))^{-1}$, which combined 
+    with eq.~\eqref{eq:PX_lb} implies that  
+    \begin{equation*}
+        \EE X \leq (\kappa-\delta) \sqrt{n} + c_2(\tau,\kappa,\delta) \sqrt{\frac{n}{d}}, 
+    \end{equation*}
+    where we redefined the constant $c_2(\tau,\kappa,\delta) > 0$.
+    Again by Chebyshev's inequality and eq.~\eqref{eq:varX}, this implies that for all $u > 0$:
+    \begin{align*}
+        \bbP[X \leq (\kappa-\delta) \sqrt{n} + c_2 \sqrt{\frac{n}{d}} + u] &\geq 1 - \frac{c_1(\tau) n}{d u^2}.
+    \end{align*}
+    Picking $u = \delta \sqrt{n} - c_2 \sqrt{n/d}$, we have $u \geq (\delta/2) \sqrt{n}$ for $n,d$ large enough, and this yields:
+    \begin{align*}
+        \bbP[X \leq \kappa \sqrt{n}] &\geq 1 - \frac{4 c_1(\tau)}{\delta^2 d} \to_{d \to \infty} 1,
+    \end{align*}
+    which ends the proof.
+\end{proof}
+
+\subsection{Proof of the second moment upper bound}
+\label{subsec:proof_2nd_moment}
+
+We prove here Proposition~\ref{prop:2nd_moment}.
+We compute the second moment as: 
+\begin{align}\label{eq:2nd_moment_1}
+    \nonumber
+    \EE[Z_\kappa^2] &= \sum_{\eps, \eps' \in \{\pm 1\}^n} \bbP\left[\left\|\sum_{i=1}^n \eps_i \bW_i\right\|_\op \leq \kappa \sqrt{n} \, \, \textrm{ and } \, \,\left\|\sum_{i=1}^n \eps'_i \bW_i\right\|_\op \leq \kappa \sqrt{n}\right], \\ 
+    \nonumber
+    &\aeq 2^n \sum_{\eps \in \{\pm 1\}^n} \bbP\left[\left\|\sum_{i=1}^n \bW_i\right\|_\op \leq \kappa \sqrt{n} \, \, \textrm{ and } \, \,\left\|\sum_{i=1}^n \eps_i \bW_i\right\|_\op \leq \kappa \sqrt{n}\right], \\
+    &\beq 2^n \sum_{l=0}^n \binom{n}{l} \bbP\left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q_l \bW + \sqrt{1-q_l^2} \bZ\|_\op \leq \kappa\right].
+\end{align}
+In $(\rm a)$ and $(\rm b)$ we used the rotation invariance of the $\GOE(d)$ distribution. In eq.~\eqref{eq:2nd_moment_1}, 
+we changed variables to $l \coloneqq (\langle \eps, \ones_n\rangle + n)/2$ and defined the ``overlap'' $q_l \coloneqq (1/n) \langle \eps, \ones_n \rangle = 2 (l/n) - 1$.
+Furthermore, $\bW, \bZ \sim \GOE(d)$ independently. 
+We get from eq.~\eqref{eq:2nd_moment_1} that (recall as well eq.~\eqref{eq:E_Zr}):
+\begin{align}\label{eq:2nd_moment_2}
+    \frac{\EE[Z_\kappa^2]}{\EE[Z_\kappa]^2} &= \frac{1}{2^n} \sum_{l=0}^n \binom{n}{l} \exp\{n G_d(q_l)\}, 
+\end{align}
+where for $q \in [-1,1]$:
+\begin{align}\label{eq:def_Gd}
+    G_d(q) \coloneqq&  
+    \frac{1}{n} \log \frac{\bbP\left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q \bW + \sqrt{1-q^2} \bZ\|_\op \leq \kappa\right]}{\bbP[\|\bW\|_\op \leq \kappa]^2}.
+\end{align}
+Recall that $H(p) \coloneqq - p \log p - (1-p)\log (1-p)$.
+We will leverage the following lemma, which is based on standard asymptotic techniques, 
+and whose proof is deferred to Section~\ref{subsec:proof_laplace_discrete}.
+\begin{lemma}\label{lemma:laplace_discrete}
+    Let $n \geq 1$, and $F_n : [-1,1] \to \bbR$ such that $F_n(0) = 0$ and $F_n'(0) = 0$.
+    Assume that there exists $(\gamma, \delta) > 0$ such that:
+    \begin{itemize}
+        \item[$(i)$] $\limsup_{n \to \infty} \sup_{|q| \leq \delta} F_n''(q) \leq 1 - \gamma$. 
+        \item[$(ii)$] $\limsup_{n \to \infty} \sup_{|q| \geq \delta} \left[F_n(q) + H\left(\frac{1+q}{2}\right) \right] < \log 2$. 
+    \end{itemize}
+    Then (with $q_l \coloneqq 2l/n - 1 \in [-1,1]$ for $l \in \{0,\cdots, n\}$):
+    \begin{align*}
+        \limsup_{n \to \infty} \frac{1}{2^n}\sum_{l=0}^n \binom{n}{l} \exp\{n F_n(q_l)\} &\leq \frac{C}{\sqrt{\gamma}},
+    \end{align*}
+    for a global constant $C > 0$.
+\end{lemma}
+\noindent
+From eq.~\eqref{eq:2nd_moment_2}, in order to finish the proof of Proposition~\ref{prop:2nd_moment}, it suffices to check conditions 
+$(i)$ and $(ii)$ of Lemma~\ref{lemma:laplace_discrete} for $G_d$ defined in eq.~\eqref{eq:def_Gd}, for $\tau > \bartau(\kappa)$, $\gamma = 1 - \bartau(\kappa)/\tau$, and some $\delta > 0$.
+
+\myskip
+Recall the definition of $\eta^\star(\kappa)$ in Lemma~\ref{lemma:tau2_prop}. 
+We let $\delta \coloneqq \delta_{\eta^\star(\kappa)}$ as defined by eq.~\eqref{eq:def_delta_eta}.
+
+\myskip 
+\textbf{Condition $(ii)$ --} 
+Notice that $G_d(0) = 0$ and that $G_d$ is clearly an even function of $q$, so $G_d'(0) = 0$ (the smoothness of $G_d$ can be shown by direct computation, as we will see in eq.~\eqref{eq:P_W_Z}).
+Furthermore, we have the trivial bound:
+\begin{align*}
+    G_d(q) + H \left(\frac{1+q}{2}\right) &\leq H \left(\frac{1+q}{2}\right)  - \frac{1}{n} \log \bbP[\|\bW\|_\op \leq \kappa].
+\end{align*}
+Recall that $q \mapsto H[(1+q)/2]$ is even, and strictly decreasing on $[0,1]$.
+Using Proposition~\ref{prop:ldp_Wop}, and the definition of $\tau_1(\kappa)$ in eq.~\eqref{eq:tau_1st_moment}, 
+we get
+\begin{align*}
+    \limsup_{d \to \infty} \sup_{|q| \geq \delta} \left[G_d(q) + H \left(\frac{1+q}{2}\right)\right] &\leq H \left(\frac{1+\delta}{2}\right) + \frac{\tau_1(\kappa)}{\tau} \log 2, \\ 
+    &\aless H \left(\frac{1+\delta}{2}\right) + \left[\frac{1}{1+\eta^\star(\kappa)}\right] \log 2, \\ 
+    &\beq \left[\frac{\eta^\star(\kappa)}{1+\eta^\star(\kappa)} + \frac{1}{1+\eta^\star(\kappa)}\right] \log 2, \\ 
+    &= \log 2,
+\end{align*}
+using $\tau > \bartau(\kappa) = (1+\eta^\star(\kappa))\tau_1(\kappa)$ in $(\rm a)$, 
+and the definition of $\delta = \delta_{\eta^\star(\kappa)}$ in $(\rm b)$, cf.\ eq.~\eqref{eq:def_delta_eta}.
+We have thus checked condition $(ii)$ of Lemma~\ref{lemma:laplace_discrete}.
+
+\myskip
+\textbf{Condition $(i)$ --}
+We will show that for any $\delta \in (0,1)$:
+\begin{align}\label{eq:to_show_Gd_2nd_derivative}
+    \nonumber
+    \limsup_{d \to \infty}\sup_{|q| \leq \delta} G_d''(q) \leq 
+    \frac{1}{\tau} &\left\{\frac{1+\delta^2}{2(1-\delta^2)^2}
+    + \left[\frac{\delta(1+6\delta+3\delta^2+2\delta^3)}{(1-\delta^2)^3(1-\delta)}\right] \kappa \right.\\
+    &
+    \left.
+      + \left[ \frac{2(1+\delta)^5}{(1-\delta^2)^4} - \frac{(1+3 \delta^2)}{4(1-\delta^2)^3}\right] \kappa^2 
+      + \frac{\kappa^4(1+3\delta^2)}{32(1-\delta^2)^3}\right\}.
+\end{align}
+
+\myskip
+Let us first show how eq.~\eqref{eq:to_show_Gd_2nd_derivative} finishes the proof of Proposition~\ref{prop:2nd_moment}. 
+We pick $\delta = \delta_{\eta^\star(\kappa)}$. 
+By Lemma~\ref{lemma:tau2_prop}, eq.~\eqref{eq:to_show_Gd_2nd_derivative} can be rewritten for this value of $\delta$ 
+as 
+\begin{align*}
+    \limsup_{d \to \infty}\sup_{|q| \leq \delta} G_d''(q) \leq 
+    \frac{\bartau(\kappa)}{\tau} = 1 - \gamma,
+\end{align*}
+with $\gamma \coloneqq (1 - \bartau(\kappa)/\tau)$.
+This implies that condition $(i)$ of Lemma~\ref{lemma:laplace_discrete} holds with this value of $\gamma$, 
+and thus ends the proof of Proposition~\ref{prop:2nd_moment}, as described above.
+
+\myskip
+\textbf{Proof of eq.~\eqref{eq:to_show_Gd_2nd_derivative} --}
+There remains to show eq.~\eqref{eq:to_show_Gd_2nd_derivative}.
+Let $q \in [0,1)$.
+We have ($\rd \bW = \prod_{i \leq j} \rd W_{ij}$ is the Lebesgue measure over the space $\mcS_{d}$ of symmetric matrices):
+\begin{align}
+    \label{eq:P_W_Z}
+    \nonumber
+    &\bbP\left[\|\bW\|_\op \leq \kappa \textrm{ and } \|q \bW + \sqrt{1-q^2} \bZ\|_\op \leq \kappa\right] \\ 
+    \nonumber
+    &= \frac{\int \indi\{\|\bW\|_\op \leq \kappa\} e^{-\frac{d}{4} \Tr[\bW^2]} \bbP\left[\|q \bW + \sqrt{1-q^2} \bZ\|_\op \leq \kappa\right] \rd \bW}{\int  e^{-\frac{d}{4} \Tr[\bW^2]} \rd \bW}, \\
+    \nonumber
+    &= \frac{\int \indi\{\|\bW\|_\op \leq \kappa\} e^{-\frac{d}{4} \Tr[\bW^2]} \left(\int \rd \bY e^{-\frac{d}{4(1-q^2)}\Tr[(\bY - q \bW)^2]} \indi\{\|\bY\|_\op \leq \kappa\}\right) \rd \bW}{\left(\int  e^{-\frac{d}{4} \Tr[\bW^2]} \rd \bW\right) \left(\int \rd \bY e^{-\frac{d}{4(1-q^2)}\Tr[\bY^2]}\right)}, \\
+    &= \frac{\int \indi\{\|\bW\|_\op, \|\bY\|_\op \leq \kappa\} e^{-\frac{d}{4(1-q^2)} (\Tr[\bW^2] + \Tr[\bY^2]) + \frac{dq}{2(1-q^2)} \Tr[\bY \bW]} \rd \bY \rd \bW}{\left(\int \rd \bW e^{-\frac{d}{4}\Tr[\bW^2]}\right)^2 (1-q^2)^{d(d+1)/4}}.
+\end{align}
+Starting from eq.~\eqref{eq:P_W_Z}, we can compute the derivatives of $G_d(q)$.
+We will use the shorthand notation 
+\begin{align}
+    \label{eq:gibbs_q}
+    \langle \cdot \rangle_{q,\kappa} &\coloneqq \frac{\int (\cdot) \indi\{\|\bW\|_\op, \|\bY\|_\op \leq \kappa\} e^{-\frac{d}{4(1-q^2)} (\Tr[\bW^2] + \Tr[\bY^2]) + \frac{dq}{2(1-q^2)} \Tr[\bY \bW]} \rd \bY \rd \bW}{\int \indi\{\|\bW\|_\op, \|\bY\|_\op \leq \kappa\} e^{-\frac{d}{4(1-q^2)} (\Tr[\bW^2] + \Tr[\bY^2]) + \frac{dq}{2(1-q^2)} \Tr[\bY \bW]} \rd \bY \rd \bW},
+\end{align}
+i.e.\ $\langle \cdot \rangle_{q,\kappa}$ is the law of $(\bW, \bY)$ two correlated $\GOE(d)$ matrices (with correlation $q$), conditioned on the event $\|\bW\|_\op, \|\bY\|_\op \leq \kappa$.
+$G_d(q)$ is the log-partition function (or ``free energy'' in statistical physics) of 
+this high-dimensional probability measure, 
+and taking derivatives will yield averages of observables under $\langle \cdot \rangle_{q,\kappa}$.
+We get
+\begin{align*}
+    G_d'(q) &= \frac{d(d+1) q}{2n (1-q^2)} + \frac{1}{2n} \left\langle -\frac{dq}{(1-q^2)^2} \Tr[\bW^2+\bY^2] 
+    + \frac{d(1+q^2)}{(1-q^2)^2} \Tr[\bW\bY]
+    \right\rangle_{q,\kappa}.
+\end{align*}
+Differentiating further, we obtain:
+\begin{align}\label{eq:d2G_dq2_1}
+    \nonumber
+    G_d''(q) &= \underbrace{\frac{d(d+1) (1+q^2)}{2n (1-q^2)^2}}_{\eqqcolon I_1(q)}
+    + \underbrace{\frac{1}{2n} \left\langle -\frac{d(1+3q^2)}{(1-q^2)^3} \Tr[\bW^2+\bY^2] 
+    + \frac{2dq(3+q^2)}{(1-q^2)^3} \Tr[\bW\bY] \right\rangle_{q,\kappa}}_{\eqqcolon I_2(q)} \\ 
+    &+ \underbrace{\frac{1}{4n} \textrm{Var}_{\langle \cdot \rangle_{q,\kappa}} \left(-\frac{dq}{(1-q^2)^2} \Tr[\bW^2+\bY^2] 
+    + \frac{d(1+q^2)}{(1-q^2)^2} \Tr[\bW\bY]\right)}_{\eqqcolon I_3(q)}.
+\end{align}
+We bound successively the different terms $\{I_a\}_{a=1}^3$ in eq.~\eqref{eq:d2G_dq2_1}. 
+Since $n/d^2 \to \tau$, we have:
+\begin{align}\label{eq:ub_I1}
+   \limsup_{d \to \infty}\sup_{|q| \leq \delta} I_1(q) = \frac{1}{\tau} \sup_{|q| \leq \delta }\frac{(1+q^2)}{2(1-q^2)^2} 
+    = \frac{(1+\delta^2)}{2 \tau(1-\delta^2)^2}.
+\end{align}
+Recall that for a real random variable $X$, we define the sub-Gaussian norm $\|X\|_{\psi_2}$ of $X$ as~\citep{vershynin2018high}:
+\begin{align*}
+    \|X\|_{\psi_2} \coloneqq \inf \{t > 0 \, : \, \EE[\exp(X^2/t^2)] \leq 2\}. 
+\end{align*}
+To bound $I_2$ and $I_3$, we rely on the following crucial result, which we prove in Section~\ref{subsec:lsi}.
+\begin{lemma}[Concentration of moments under $\langle \cdot \rangle_{q,\kappa}$]
+    \label{lemma:conc_moments_Pqkappa}
+    Let $q \in (-1,1)$, $\kappa \in (0,2]$, and 
+    \begin{equation*}
+    P(X_1, X_2) \coloneqq \sum_{p\geq 0}\sum_{i_1, \cdots, i_p \in \{1,2\}} a_{i_1 \cdots i_p} X_{i_1} \cdots X_{i_p}
+    \end{equation*}
+    be a polynomial 
+    in two non-commutative random variables $(X_1, X_2)$.
+    Let $(\bW, \bY)~\sim~\langle \cdot \rangle_{q,\kappa}$ given by eq.~\eqref{eq:gibbs_q}.
+    Then: 
+    \begin{equation*}
+    \|\Tr \, P(\bW, \bY) - \langle \Tr \, P(\bW, \bY) \rangle_{q,\kappa} \|_{\psi_2} \leq C \sqrt{1+q} 
+    \sum_{p\geq 0} p \cdot \kappa^{p-1}\sum_{i_1, \cdots, i_p \in \{1,2\}} |a_{i_1 \cdots i_p}|,
+    \end{equation*}
+    where $C > 0$ is an absolute constant. Furthermore, we have the fully explicit bound:
+    \begin{equation}\label{eq:var_PWY}
+        \Var_{\langle \cdot \rangle_{q,\kappa}} [\Tr \, P(\bW, \bY)] \leq 
+         2(1+q)
+        \left(\sum_{p\geq 0} p \cdot \kappa^{p-1}\sum_{i_1, \cdots, i_p \in \{1,2\}} |a_{i_1 \cdots i_p}|\right)^2.
+    \end{equation}
+\end{lemma}
+\noindent
+Lemma~\ref{lemma:conc_moments_Pqkappa} is a consequence of a log-Sobolev inequality we prove for $\langle \cdot \rangle_{q,\kappa}$.
+
+\myskip 
+\textbf{Bounding $I_2$ --}
+Note that under the law of $\langle \cdot \rangle_{0,\kappa}$ of eq.~\eqref{eq:gibbs_q} when $q = 0$,
+$\bW$ is distributed as a $\GOE(d)$ matrix, conditioned to satisfy $\|\bW\|_\op \leq \kappa$.
+By Theorem~\ref{thm:lsd_constrained_GOE}, we know that $\mu_\bW$ weakly converges (a.s.) to $\mu_\kappa^\star$.
+Since $\int \mu_\bW(\rd x) x^2 = \int \mu_\bW(\rd x) x^2 \indi\{|x| \leq \kappa\}$, we have by the Portmanteau theorem 
+and dominated convergence: 
+\begin{align}
+    \label{eq:limit_TrW2_q0}
+    \nonumber
+    \lim_{d \to \infty} \frac{1}{d}\langle\Tr \bW^2\rangle_{0, \kappa} &= \int \mu_\kappa^\star(\rd x) \, x^2 \, \indi\{|x| \leq \kappa\} \\ 
+    &= \int \mu_\kappa^\star(\rd x) \, x^2, \\
+    &\aeq \frac{\kappa^2 (8-\kappa^2)}{16},
+\end{align}
+using eq.~\eqref{eq:int_mukappa_x2} in $(\rm a)$.
+By symmetry $\bW \to -\bW$, we also trivially have
+\begin{align}
+    \label{eq:limit_TrWY_q0}
+    \langle\Tr \bW \bY\rangle_{0, \kappa} &= 0.
+\end{align}
+Let us denote $P_q(X, Y) \coloneqq - q (X^2 + Y^2) + (1+q^2) X Y$. 
+One easily computes from eq.~\eqref{eq:gibbs_q} that 
+for any function $\varphi(\bW, \bY)$: 
+\begin{align*}
+    \frac{\partial}{\partial q}\langle \varphi(\bW, \bY)\rangle_{q,\kappa} 
+    &= \frac{d \left[\langle \varphi(\bW, \bY) \cdot \Tr[P_q(\bW, \bY)] \rangle_{q, \kappa} - \langle \varphi(\bW, \bY) \rangle_{q, \kappa} \langle \Tr[P_q(\bW, \bY)] \rangle_{q, \kappa}\right]}{2(1-q^2)^2}, \\ 
+    &= \frac{d \left[\langle \left(\varphi(\bW, \bY) - \langle \varphi \rangle_{q, \kappa}\right) \cdot \left(\Tr[P_q(\bW, \bY)] - \langle \Tr[P_q]\rangle_{q, \kappa}\right) \rangle_{q, \kappa}\right]}{2(1-q^2)^2}.
+\end{align*}
+In particular:
+\begin{align}\label{eq:derivative_average_q}
+    \left|\frac{\partial}{\partial q}\langle \varphi(\bW, \bY)\rangle_{q,\kappa}\right| 
+    &\leq \frac{d \left[\Var_{\langle \cdot \rangle_{q, \kappa}}[\varphi(\bW, \bY)] \cdot \Var_{\langle \cdot \rangle_{q, \kappa}}[\Tr P_q(\bW, \bY)]\right]^{1/2}}{2(1-q^2)^2}.
+\end{align}
+Using eq.~\eqref{eq:derivative_average_q} and Lemma~\ref{lemma:conc_moments_Pqkappa}, 
+we reach that for both $\varphi = \Tr[\bW^2]$ and $\varphi = \Tr[\bW \bY]$: 
+\begin{align}\label{eq:bound_derivative_applications}
+    \left|\frac{\partial}{\partial q} \langle \varphi(\bW, \bY)\rangle_{q,\kappa}\right| 
+    &\leq \frac{2 d \kappa (1+q)^2}{(1-q^2)^2} = \frac{2 d \kappa}{(1-q)^2}.
+\end{align}
+Integrating eq.~\eqref{eq:bound_derivative_applications}, and combining it with eqs.~\eqref{eq:limit_TrW2_q0} and eq.~\eqref{eq:limit_TrWY_q0}, we get:
+\begin{align}\label{eq:bound_TrW2_TrWY_q0}
+    \begin{dcases}
+        \left|\frac{1}{d}\langle\Tr \bW^2\rangle_{q, \kappa} - \frac{\kappa^2 (8-\kappa^2)}{16} \right| &\leq \frac{2\kappa |q|}{1-q}  + \smallO_d(1), \\
+        \left|\frac{1}{d}\langle\Tr \bW \bY\rangle_{q, \kappa} \right| &\leq \frac{2\kappa |q|}{1-q}  + \smallO_d(1),
+    \end{dcases}
+\end{align}
+where $\smallO_d(1)$ is uniform in $q$.
+We get from eq.~\eqref{eq:bound_TrW2_TrWY_q0}: 
+\begin{align}
+    \label{eq:I2_1}
+    \nonumber
+    \limsup_{d \to \infty}\sup_{|q| \leq \delta} I_2(q) &\leq 
+    \frac{1}{2\tau} \max_{|q| \leq \delta }\left[
+        \frac{4 \kappa q^2(3+q^2)}{(1-q^2)^3(1-q)} - \frac{1+3q^2}{(1-q^2)^3} \left(\frac{\kappa^2(8 - \kappa^2)}{16} - \frac{2\kappa |q|}{1-q}\right)
+    \right], \\ 
+    &= 
+    \frac{1}{2\tau} \max_{q \in [0, \delta]}\left[
+        \frac{2 \kappa q(1+6q+3q^2+2q^3)}{(1-q^2)^3(1-q)} - \frac{\kappa^2 (8-\kappa^2)(1+3q^2)}{16 (1-q^2)^3}
+    \right].
+\end{align}
+If 
+\begin{equation*}
+f_\kappa(q) \coloneqq \frac{2 \kappa q(1+6q+3q^2+2q^3)}{1-q} -  \frac{\kappa^2 (8-\kappa^2)(1+3q^2)}{16},
+\end{equation*}
+then for all $q \in [0,1]$ and $\kappa \in [0,2]$:
+\begin{align}\label{eq:fprime_q}
+    \nonumber
+    f_\kappa'(q) &= \frac{\kappa}{8(1-q)^2} \left[16 + 3(64-8\kappa+\kappa^3)q + 6(8+8\kappa-\kappa^3)q^2 + (32-3\kappa(8-\kappa^2))q^4 - 96 q^5\right], \\ 
+    \nonumber
+    &\geq \frac{\kappa}{8(1-q)^2} \left[16 + 3(64-16)q + 6(8-8)q^2 + (32-3\cdot 2 \cdot(8))q^4 - 96 q^5\right], \\ 
+    \nonumber
+    &\geq \frac{\kappa}{8(1-q)^2} \left[16+144q-16q^3-96q^5\right], \\ 
+    &\ageq \frac{\kappa}{8(1-q)^2} \left[16+32q\right] > 0,
+\end{align}
+using $q^k \leq q$ for any $k \geq 1$ in $(\rm a)$.
+This implies that in eq.~\eqref{eq:I2_1}, the maximum is attained at $q = \delta$, and we get:
+\begin{align}\label{eq:ub_I2}
+    \limsup_{d \to \infty} \sup_{|q| \leq \delta} I_2(q) 
+    \leq
+    \frac{1}{2\tau} \left[
+        \frac{2 \kappa \delta(1+6\delta+3\delta^2+2\delta^3)}{(1-\delta^2)^3(1-\delta)} - \frac{\kappa^2 (8-\kappa^2)(1+3\delta^2)}{16 (1-\delta^2)^3}
+    \right].
+\end{align}
+
+\myskip 
+\textbf{Bounding $I_3$ --}
+We apply eq.~\eqref{eq:var_PWY} of Lemma~\ref{lemma:conc_moments_Pqkappa} to $P_q(X, Y) = - q (X^2+Y^2) + (1+q^2) XY$, which yields:
+\begin{align*}
+    I_3(q) &\leq \frac{d^2}{4 n (1-q^2)^4} \cdot 2(1+q) \left(2 \kappa [2 q + 1+q^2]\right)^2, \\ 
+    &= \frac{2d^2 (1+q)^5 \kappa^2}{n (1-q^2)^4}.
+\end{align*}
+So finally we get:
+\begin{align}\label{eq:ub_I3}
+    \limsup_{d \to \infty} \sup_{|q| \leq \delta} I_3(q) &\leq \frac{2(1+\delta)^5 \kappa^2}{\tau (1-\delta^2)^4}.
+\end{align}
+Combining eqs.~\eqref{eq:ub_I1},\eqref{eq:ub_I2},\eqref{eq:ub_I3} finishes the proof of eq.~\eqref{eq:to_show_Gd_2nd_derivative}. 
+As we discussed above, this ends the proof of Proposition~\ref{prop:2nd_moment}.
+$\qed$
+
+\subsection{Discrete Laplace's method for a dimension-dependent exponent}\label{subsec:proof_laplace_discrete}
+
+We prove here Lemma~\ref{lemma:laplace_discrete}.
+By hypothesis $(ii)$, we fix $\eps > 0$ such that, for $n$ large enough:
+\begin{equation}
+    \label{eq:bound_Fn_plus_H_eps}
+    \sup_{|q| \geq \delta} \left[F_n(q) + H\left(\frac{1+q}{2}\right) \right] \leq \log 2 - \eps.
+\end{equation}
+Recall the classical inequality:
+\begin{align}
+    \label{eq:bounds_binomial_crude}
+  \binom{n}{l} \leq e^{n H(l/n)}, \hspace{0.5cm} &\textrm{ for } l \in \{0,\cdots, n\}.
+\end{align}
+Combining eqs.~\eqref{eq:bound_Fn_plus_H_eps} and \eqref{eq:bounds_binomial_crude}, we have 
+\begin{align}
+    \nonumber
+    \frac{1}{2^n}\sum_{l=0}^n \indi\left\{\left|l - \frac{n}{2}\right| > \frac{n \delta}{2}\right\} \binom{n}{l} \exp\{n F_n(q_l)\}
+    &\leq \frac{1}{2^n}\sum_{l=0}^n \indi\left\{\left|l - \frac{n}{2}\right|> \frac{n \delta}{2}\right\} \exp\{n(\log 2  - \eps)\}, \\ 
+    \label{eq:ub_2nd_mom_large_q}
+    &\leq n \exp\{- n \eps\}.
+\end{align}
+Let $\sigma \in (0, \gamma)$.
+By hypothesis $(i)$, we get that for $n$ large enough 
+$F_n''(q)\leq(1-\gamma+\sigma)$ for all $|q| \leq \delta$.
+Since $F_n(0) = 0$ and $F_n'(0) = 0$, this implies
+$F_n(q)\leq(1-\gamma+\sigma) q^2/2$ for all $|q| \leq \delta$.
+Therefore,
+\begin{align}
+    \label{eq:ub_2nd_mom_small_q_1}
+    \frac{1}{2^n}\sum_{l=0}^n \indi\left\{\left|l - \frac{n}{2}\right| \leq \frac{n \delta}{2}\right\} \binom{n}{l} \exp\{n F_n(q_l)\}
+    &\leq \frac{1}{2^n} \sum_{l=0}^n \binom{n}{l} e^{\frac{n(1-\gamma+\sigma)}{2} q_l^2}.
+\end{align}
+Recall that $q_l = 2 (l/n) - 1$.
+The right-hand side of eq.~\eqref{eq:ub_2nd_mom_small_q_1} can now be analyzed with standard extensions of Laplace's method. 
+We use here the following statement, which is a consequence of the proof of Lemma~2 of \cite{achlioptas2002asymptotic}.
+\begin{lemma}[\cite{achlioptas2002asymptotic}]
+    \label{lemma:achlioptas}
+    There exists $B, C > 0$ such that the following holds.
+    Let $G$  a real analytic positive function on $[0,1]$, and define for $\alpha \in [0,1]$: 
+    \begin{align*}
+        g(\alpha) \coloneqq \frac{G(\alpha)}{\alpha^\alpha (1-\alpha)^{1-\alpha}}. 
+    \end{align*} 
+    If there exists $\alpha_{\max} \in (0,1)$ a strict global maximum of $g$ in $[0,1]$ such that $g''(\alpha_{\max}) < 0$, then for sufficiently large $n$: 
+    \begin{align*}
+        B \cdot\frac{g(\alpha_{\max})^{n+1/2}}{\sqrt{-g''(\alpha_{\max})}} \leq \sum_{l=0}^n \binom{n}{l} G(l/n)^n\leq C \cdot \frac{g(\alpha_{\max})^{n+1/2}}{\sqrt{\alpha_{\max}(1-\alpha_{\max})(-g''(\alpha_{\max}))}}.
+    \end{align*}
+\end{lemma}
+\noindent 
+\textbf{Remark --} Lemma~\ref{lemma:achlioptas} is stated in \cite{achlioptas2002asymptotic}
+as 
+\begin{align*}
+    C_1 \cdot g(\alpha_{\max})^n \leq \sum_{l=0}^n \binom{n}{l} G(l/n)^n\leq C_2 \cdot g(\alpha_{\max})^{n},
+\end{align*}
+where the constants $C_1, C_2$ might depend on $\alpha_{\max}$ and $g(\alpha_{\max})$. 
+Their proof (see Appendix~A of \cite{achlioptas2002asymptotic}) reveals the dependency of $C_1, C_2$ on $\alpha_{\max}$ and $g''(\alpha_{\max})$, which we make explicit here.
+
+\myskip
+We apply Lemma~\ref{lemma:achlioptas} in eq.~\eqref{eq:ub_2nd_mom_small_q_1}, with 
+\begin{align*}
+    G(x) \coloneqq \frac{1}{2} e^{\frac{(1-\gamma+\sigma) (2 x - 1)^2}{2}}
+\end{align*}
+Let
+\begin{align*}
+    g(x) \coloneqq \frac{G(x)}{x^x (1-x)^{1-x}} = \frac{e^{\frac{(1-\gamma+\sigma) (2 x - 1)^2}{2}}}{2 x^x (1-x)^{1-x}}.
+\end{align*}
+It is clear that $g(x) = g(1-x)$ for all $x \in [0,1]$, and moreover
+\begin{align*}
+    \frac{1}{2}\frac{\rd}{\rd x} (\log g)(x) &= - (1-\gamma+\sigma)(1-2x) + \arctanh(1-2x).
+\end{align*}
+Since $\arctanh(u) \geq u$ for all $u \in [0,1)$, we get that for all $x \in (0,1/2]$:
+\begin{align*}
+    \frac{\rd}{\rd x} (\log g)(x) &\geq 2(\gamma-\sigma) (1-2x).
+\end{align*}
+Combining this with the symmetry $g(x) = g(1-x)$, we obtain that $g$
+has a strict global maximum in $x = 1/2$, and we compute $g(1/2) = 1$.
+Moreover, we get by direct computation that $g''(1/2) = - 4(\gamma-\sigma)  < 0$.
+All in all, we reach that for $n$ large enough:
+\begin{align}
+    \label{eq:ub_2nd_mom_small_q_2}
+     \frac{1}{2^n} \sum_{l=0}^n \binom{n}{l} e^{-\frac{n(1-\gamma)}{2} q_l^2} \leq \frac{C}{\sqrt{\gamma-\sigma}}.
+\end{align}
+Combining eqs.~\eqref{eq:ub_2nd_mom_large_q},\eqref{eq:ub_2nd_mom_small_q_1} and \eqref{eq:ub_2nd_mom_small_q_2}, we get:
+\begin{align*}
+    \limsup_{n \to \infty} \frac{1}{2^n}\sum_{l=0}^n \binom{n}{l} \exp\{n F_n(q_l)\} &\leq \limsup_{n \to \infty} [n e^{-n \eps} + C (\gamma-\sigma)^{-1/2}] = C (\gamma-\sigma)^{-1/2}.
+\end{align*}
+Letting $\sigma \downarrow 0$ ends the proof of Lemma~\ref{lemma:laplace_discrete}. $\qed$
+
+\subsection{Log-Sobolev inequality for the conditioned law of two correlated \texorpdfstring{$\GOE(d)$}{}}
+\label{subsec:lsi}
+
+In this section, we start by reminders on log-Sobolev inequalities, before proving such a property 
+for the law of eq.~\eqref{eq:gibbs_q}, and finally proving Lemma~\ref{lemma:conc_moments_Pqkappa}.
+
+\subsubsection{Log-Sobolev inequalities and concentration of measure}\label{subsubsec:lsi}
+
+\begin{definition}\label{def:lsi}
+    Let $d \geq 1$.
+    A probability measure $\mu \in \mcM_1^+(\bbR^d)$ is said to satisfy the \emph{Logarithmic Sobolev Inequality} (LSI) with constant $c > 0$ if, for any differentiable function 
+    $f$ in $L^2(\mu)$, we have 
+    \begin{equation}
+        \label{eq:lsi}
+        \int f^2 \log \frac{f^2}{\int f^2 \, \rd \mu} \rd \mu \leq 2 c \int \|\nabla f\|_2^2 \, \rd \mu.
+    \end{equation}
+\end{definition}
+\noindent
+We refer the reader to~\cite{guionnet2009large,anderson2010introduction}
+for more on the theory of log-Sobolev inequalities and their applications to concentration results in random matrix theory.
+A particularly useful consequence of the LSI is the following. 
+\begin{lemma}[Herbst]\label{lemma:herbst}
+   Assume that $\mu \in \mcM_1^+(\bbR^d)$ satisfies the LSI with constant $c$. Let $G~:~\bbR^d \to \bbR$ be a Lipschitz function, with Lipschitz constant $\|G\|_L$. 
+   Then for all $\lambda \in \bbR$: 
+   \begin{align}\label{eq:herbst_MGF}
+    \EE_\mu \left[e^{\lambda[G - \EE G]}\right] \leq \exp\left\{\frac{c \|G\|_L^2\lambda^2}{2}\right\}.
+   \end{align}
+   Therefore, for all 
+   $\delta > 0$: 
+   \begin{equation*}
+    \mu(|G - \EE G| \geq \delta) \leq 2 \exp\left\{-\frac{\delta^2}{2 c \|G\|_L^2}\right\}.
+   \end{equation*}
+\end{lemma}
+\noindent
+\textbf{Remark --} Notice that Lemma~\ref{eq:herbst_MGF} implies that 
+$\|G - \EE G\|_{\psi_2} \leq C \sqrt{c} \|G\|_L$ for some absolute constant $C > 0$,
+and moreover (by Taylor expansion close to $\lambda = 0$) we have $\Var(G) \leq c \|G\|_L^2$.
+
+\myskip
+Finally, we will use that a necessary condition for a measure to satisfy the LSI is the so-called \emph{Bakry-Emery (BE)} condition.
+\begin{theorem}[Theorem~4.4.17 of \cite{anderson2010introduction}]\label{thm:be_implies_lsi}
+    Let $d \geq 1$ and $\Phi : \bbR^d \to \bbR$ a $\mcC^2$ function. 
+    Assume that $\Phi$ satisfies the Bakry-Emery condition:
+    \begin{equation*}
+         \Hess \, \Phi (x) \succeq \frac{1}{c} \Id_d,
+    \end{equation*}
+    for all $x \in \bbR^d$, for some $c > 0$. 
+    Then the measure
+    \begin{equation*}
+        \mu_\Phi(\rd x) \coloneqq \frac{1}{\mcZ} e^{-\Phi(x)} \rd x
+    \end{equation*}
+    satisfies the LSI with constant $c$.
+\end{theorem}
+
+\subsubsection{\texorpdfstring{A log-Sobolev inequality for the law of eq.~\eqref{eq:gibbs_q}}{}}\label{subsubsec:lsi_Pqkappa}
+
+We show the following lemma.
+\begin{lemma}\label{lemma:lsi_Pqkappa}
+   For any $q \in (-1,1)$ and $\kappa > 0$,
+   the law $\langle \cdot \rangle_{q,\kappa}$ of eq.~\eqref{eq:gibbs_q} satisfies the LSI with constant $2(1+q)/d$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lemma:lsi_Pqkappa}]
+    Let $\eps > 0$. We denote $\phi_\eps(x) \coloneqq e^{-x^2/(2\eps)}/\sqrt{2\pi\eps}$.
+    We define 
+    \begin{equation*}
+        V_\eps(x) \coloneqq - \log \left(\int_{-\kappa}^\kappa \rd y \, e^{-y^2/2} \, \phi_\eps(x-y)\right).
+    \end{equation*}
+    \noindent
+    \textbf{Reminders on log-concavity --} 
+    A real positive integrable function $p$ is said to be \emph{strongly log-concave} with variance parameter $\sigma^2$ (denoted $\SLC(\sigma^2)$)
+    if $p(x) = \phi_{\sigma^2}(x) \cdot e^{\varphi(x)}$, for some concave function $\varphi : \bbR \to [-\infty, \infty)$.
+    We refer the reader to \cite{saumard2014log} for properties of log-concave and strongly log-concave functions and probability distributions.
+    It is clear that $x \mapsto e^{-x^2/2} \indi\{|x| \leq \kappa\}$ is $\SLC(1)$,
+    and that $\phi_\eps$ is $\SLC(\eps)$. 
+    By Theorem~3.7 of \cite{saumard2014log}, if $f$ is $\SLC(\sigma_1^2)$ and $g$ is $\SLC(\sigma_2^2)$, 
+    their convolution $f \star g$ is $\SLC(\sigma_1^2+\sigma_2^2)$. 
+    Therefore, $e^{-V_\eps}$ is $\SLC(1 + \eps)$, which implies (since $V_\eps$ is smooth) 
+    that $V_\eps''(x) \geq (1+\eps)^{-1}$ for all $x \in \bbR$. Since $V_\eps$ is even,
+    and 
+    \begin{equation*}
+        V_\eps(0) \geq - \log \int_{-\kappa}^\kappa \rd y \, \phi_\eps(y) \geq 0,
+    \end{equation*}
+    we get that $V_\eps(x) \geq x^2/[2(1+\eps)]$ for all $x \in \bbR$.
+    We define $\mu_\eps$ as:
+    \begin{align}\label{eq:def_mueps}
+    \mu_\eps(\rd \bY, \rd \bW) &\coloneqq \frac{e^{-\frac{d}{2(1-q^2)} (\Tr V_\eps(\bW) + \Tr V_\eps(\bY)) + \frac{dq}{2(1-q^2)} \Tr[\bY \bW]} \rd \bY \rd \bW}{\int e^{-\frac{d}{2(1-q^2)} (\Tr V_\eps(\bW) + \Tr V_\eps(\bY)) + \frac{dq}{2(1-q^2)} \Tr[\bY \bW]} \rd \bY \rd \bW}.
+    \end{align} 
+    Recall $\mcS_d$ is the set of symmetric $d \times d$ matrices.
+    Since $x \mapsto V_\eps(x) - x^2/(2[1+\eps])$ is convex, by Klein's lemma (cf.\ Lemma~4.4.12 of \cite{anderson2010introduction} or Lemma~6.4 of \cite{guionnet2009large}), the function 
+    $\bW \mapsto \Tr V_\eps(\bW) - \Tr[\bW^2]/(2[1+\eps])$ is also convex. 
+    Thus, for all $\bW \in \mcS_d$: 
+    \begin{align*}
+        \Hess \, V_\eps(\bW) \succeq \frac{1}{1+\eps} \Id_{\mcS_d}.
+    \end{align*}
+    All in all we get for any $\bW$ and $\bY$:
+    \begin{align*}
+       \Hess \left[\frac{d}{2(1-q^2)} (\Tr V_\eps(\bW) + \Tr V_\eps(\bY)) - \frac{dq}{2(1-q^2)} \Tr[\bY \bW]\right]  
+       \succeq \frac{d}{2(1-q^2)} 
+       \begin{pmatrix}
+         \frac{\Id_{\mcS_d}}{1+\eps} & - q \Id_{\mcS_d} \\ 
+         -q \Id_{\mcS_d} & \frac{\Id_{\mcS_d}}{1+\eps}
+       \end{pmatrix},
+    \end{align*}
+    which means
+    \begin{align*}
+        \lambda_\mathrm{min} \left(\Hess \left[\frac{d}{2(1-q^2)} (\Tr V_\eps(\bW) + \Tr V_\eps(\bY)) - \frac{dq}{2(1-q^2)} \Tr[\bY \bW]\right]\right) 
+        &\geq \frac{d(1-q-\eps q)}{2(1+\eps)(1-q^2)}.
+    \end{align*}
+    Therefore, by Theorem~\ref{thm:be_implies_lsi}, $\mu_\eps$ satisfies the LSI with constant 
+    \begin{equation*}
+        \frac{2(1+\eps)(1-q^2)}{d(1-q-\eps q)} =  \frac{2(1+q)}{d} + \smallO_{\eps \to 0}(1).
+    \end{equation*}
+    Finally, notice that
+    we have $V_\eps(x) \to_{\eps \to 0} V(x)$ pointwise, with $V(x)$ defined as: 
+    \begin{align*}
+        V(x) &\coloneqq 
+        \begin{dcases}
+            \frac{x^2}{2} &\textrm{ if } |x| < \kappa, \\
+            \frac{\kappa^2}{2} + \log 2 &\textrm{ if } |x| = \kappa, \\
+            +\infty &\textrm{ if } |x| > \kappa.
+        \end{dcases}
+    \end{align*}
+    Since $V_\eps(x) \geq x^2/4$ for $\eps \leq 1/2$, we get by dominated convergence and the Portmanteau theorem 
+    that $\mu_\eps \to_{\eps\to 0} \mu_0$ weakly, where $\mu_0$ is defined as in eq.~\eqref{eq:def_mueps}, replacing $V_\eps$ by $V$. 
+    Because the set $\{\|\bW\|_\op = \kappa\}$ has Lebesgue measure zero, we further have that
+    $\mu_0 = \langle \cdot \rangle_{q,\kappa}$.
+    Since $\mu_\eps$ satisfies the LSI with constant $2(1+q)/d + \smallO_{\eps \to 0}(1)$, and weakly converges to $\langle \cdot \rangle_{q,\kappa}$ as $\eps \downarrow 0$, we deduce that $\langle \cdot \rangle_{q,\kappa}$ satisfies the LSI\footnote{
+    By taking the limit of eq.~\eqref{eq:lsi} for well-behaved functions $f$ using weak convergence, and extending to all differentiable and square integrable functions by density. See e.g.\ the proof of Theorem~4.4.17 in \cite{anderson2010introduction} for details.}
+    with constant $2(1+q)/d$.
+\end{proof}
+
+\subsubsection{Proof of Lemma~\ref{lemma:conc_moments_Pqkappa}}\label{subsubsec:proof_conc_moments_Pqkappa}
+
+Let $P(X_1, X_2) = \sum_{p\geq 0}\sum_{i_1, \cdots, i_p \in \{1,2\}} a_{i_1 \cdots i_p} X_{i_1} \cdots X_{i_p}$.
+We make use of the following elementary result.
+\begin{lemma}[Lemma~6.2 of \cite{guionnet2009large}]\label{lemma:poly_lipschitz_Bop}
+    Let $Q$ be a polynomial in two non-commutative variables.  
+    Then, for any $\kappa > 0$, the function 
+    \begin{equation*}
+        (\bW , \bY) \in B_\op(\kappa) \times B_\op(\kappa) \mapsto \Tr[Q(\bW, \bY)]
+    \end{equation*}
+    is Lipschitz with respect to the Euclidean norm, with Lipschitz norm bounded by $\sqrt{d} C(Q, \kappa)$ for some constant $C(Q, \kappa) > 0$. 
+    If $Q$ is a monomial of degree $p$, one can take $C(Q, \kappa) = p \kappa^{p-1}$.
+\end{lemma}
+\noindent
+Notice that $\supp(\langle \cdot \rangle_{q,\kappa}) \subseteq B_\op(\kappa) \times B_\op(\kappa)$.
+By Lemma~\ref{lemma:poly_lipschitz_Bop}, $f:(\bW, \bY) \mapsto \Tr P(\bW, \bY)$ is thus Lipschitz on the support of $\langle \cdot \rangle_{q,\kappa}$, 
+with Lipschitz constant
+\begin{equation*}
+    \|f\|_L \leq \sqrt{d} \sum_{p \geq 0} p \cdot \kappa^{p-1} \sum_{i_1, \cdots, i_p \in \{1,2\}} |a_{i_1 \cdots i_p}|.
+\end{equation*}
+Combining Lemmas~\ref{lemma:lsi_Pqkappa} and \ref{lemma:herbst} finishes the proof of Lemma~\ref{lemma:conc_moments_Pqkappa}.
+$\qed$
